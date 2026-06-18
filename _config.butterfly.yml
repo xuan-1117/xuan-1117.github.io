@@ -1,0 +1,117 @@
+# Butterfly site-level configuration
+# This file overrides themes/butterfly/_config.yml
+
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  分类: /categories/ || fas fa-folder-open
+  标签: /tags/ || fas fa-tags
+  关于: /about/ || fas fa-user
+
+subtitle:
+  enable: true
+  effect: true
+  source: false
+  sub:
+    - 网络安全学习记录
+
+avatar:
+  img: /img/avatar.jpg
+  effect: false
+
+# Background and banner images
+disable_top_img: false
+default_top_img: /img/backgrounds/bg-01.png
+index_img: /img/backgrounds/bg-02.png
+archive_img: /img/backgrounds/bg-03.png
+tag_img: /img/backgrounds/bg-04.png
+category_img: /img/backgrounds/bg-05.png
+footer_img: false
+background: /img/backgrounds/bg-06.png
+
+cover:
+  index_enable: true
+  aside_enable: true
+  archives_enable: true
+  default_cover:
+    - /img/backgrounds/bg-01.png
+    - /img/backgrounds/bg-02.png
+    - /img/backgrounds/bg-03.png
+    - /img/backgrounds/bg-04.png
+    - /img/backgrounds/bg-05.png
+    - /img/backgrounds/bg-06.png
+    - /img/backgrounds/bg-07.png
+    - /img/backgrounds/bg-08.png
+    - /img/backgrounds/bg-09.png
+    - /img/backgrounds/bg-10.png
+    - /img/backgrounds/bg-11.png
+    - /img/backgrounds/bg-12.png
+    - /img/backgrounds/bg-13.png
+    - /img/backgrounds/bg-14.png
+    - /img/backgrounds/bg-15.png
+    - /img/backgrounds/bg-16.png
+    - /img/backgrounds/bg-17.png
+    - /img/backgrounds/bg-18.png
+    - /img/backgrounds/bg-19.jpg
+    - /img/backgrounds/bg-20.png
+    - /img/backgrounds/bg-21.png
+    - /img/backgrounds/bg-22.png
+    - /img/backgrounds/bg-23.png
+
+mask:
+  header: true
+  footer: true
+
+index_top_img_height: 70vh
+
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+  style_simple: false
+  scroll_percent: true
+
+code_blocks:
+  theme: light
+  macStyle: false
+  height_limit: false
+  word_wrap: false
+  copy: true
+  language: true
+  shrink: false
+  fullpage: false
+
+copy:
+  enable: true
+  copyright:
+    enable: false
+    limit_count: 150
+
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+  start:
+  end:
+
+rightside_scroll_percent: true
+
+aside:
+  enable: true
+  hide: false
+  button: true
+  mobile: true
+  position: right
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_announcement:
+    enable: true
+    content: 欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。
+
+inject:
+  head:
+    - <link rel="stylesheet" href="/css/custom.css">
+  bottom:
