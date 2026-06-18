@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>取证 | XUAN Blog</title><meta name="author" content="xuan23"><meta name="copyright" content="xuan23"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="WINDOWS取证Windows 事件日志 （.evtx）关键事件编号：    事件ID 描述    1001 错误检查&#x2F;重启   41 不洁关闭   4720 创建的用户账户   4722 启用用户账户   4724 尝试重设密码   4726 用户账户已删除   4738 用户账户更改   4781 账户名称更改（更名）   用 python-evtx 解析： 12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="取证">
+<meta property="og:url" content="https://xuan-1117.github.io/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%8F%96%E8%AF%81/index.html">
+<meta property="og:site_name" content="XUAN Blog">
+<meta property="og:description" content="WINDOWS取证Windows 事件日志 （.evtx）关键事件编号：    事件ID 描述    1001 错误检查&#x2F;重启   41 不洁关闭   4720 创建的用户账户   4722 启用用户账户   4724 尝试重设密码   4726 用户账户已删除   4738 用户账户更改   4781 账户名称更改（更名）   用 python-evtx 解析： 12345678910">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuan-1117.github.io/img/backgrounds/bg-11.png">
+<meta property="article:published_time" content="2026-03-21T14:32:13.000Z">
+<meta property="article:modified_time" content="2026-06-06T14:26:49.936Z">
+<meta property="article:author" content="xuan23">
+<meta property="article:tag" content="应急总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuan-1117.github.io/img/backgrounds/bg-11.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "取证",
+  "url": "https://xuan-1117.github.io/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%8F%96%E8%AF%81/",
+  "image": "https://xuan-1117.github.io/img/backgrounds/bg-11.png",
+  "datePublished": "2026-03-21T14:32:13.000Z",
+  "dateModified": "2026-06-06T14:26:49.936Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xuan23",
+      "url": "https://xuan-1117.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xuan-1117.github.io/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%8F%96%E8%AF%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '取证',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/backgrounds/bg-06.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/backgrounds/bg-11.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">XUAN Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">取证</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">取证</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-21T14:32:13.000Z" title="发表于 2026-03-21 22:32:13">2026-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-06T14:26:49.936Z" title="更新于 2026-06-06 22:26:49">2026-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/">应急总结</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="WINDOWS取证"><a href="#WINDOWS取证" class="headerlink" title="WINDOWS取证"></a>WINDOWS取证</h1><h2 id="Windows-事件日志-（-evtx）"><a href="#Windows-事件日志-（-evtx）" class="headerlink" title="Windows 事件日志 （.evtx）"></a><font style="color:rgb(31, 35, 40);">Windows 事件日志 （.evtx）</font></h2><p><strong><font style="color:rgb(31, 35, 40);">关键事件编号：</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(31, 35, 40);">事件ID</font></strong></th>
+<th><strong><font style="color:rgb(31, 35, 40);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(31, 35, 40);">1001</font></td>
+<td><font style="color:rgb(31, 35, 40);">错误检查&#x2F;重启</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">41</font></td>
+<td><font style="color:rgb(31, 35, 40);">不洁关闭</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4720</font></td>
+<td><font style="color:rgb(31, 35, 40);">创建的用户账户</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4722</font></td>
+<td><font style="color:rgb(31, 35, 40);">启用用户账户</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4724</font></td>
+<td><font style="color:rgb(31, 35, 40);">尝试重设密码</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4726</font></td>
+<td><font style="color:rgb(31, 35, 40);">用户账户已删除</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4738</font></td>
+<td><font style="color:rgb(31, 35, 40);">用户账户更改</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">4781</font></td>
+<td><font style="color:rgb(31, 35, 40);">账户名称更改（更名）</font></td>
+</tr>
+</tbody></table>
+<p><strong><font style="color:rgb(31, 35, 40);">用 python-evtx 解析：</font></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import Evtx.Evtx as evtx</span><br><span class="line">import xml.etree.ElementTree as ET</span><br><span class="line"></span><br><span class="line">with evtx.Evtx(&quot;Security.evtx&quot;) as log:</span><br><span class="line">    for record in log.records():</span><br><span class="line">        xml_str = record.xml()</span><br><span class="line">        root = ET.fromstring(xml_str)</span><br><span class="line">        ns = &#123;&#x27;ns&#x27;: &#x27;http://schemas.microsoft.com/win/2004/08/events/event&#x27;&#125;</span><br><span class="line"></span><br><span class="line">        event_id = root.find(&#x27;.//ns:EventID&#x27;, ns).text</span><br><span class="line">        if event_id == &#x27;4720&#x27;:</span><br><span class="line">            data = &#123;&#125;</span><br><span class="line">            for d in root.findall(&#x27;.//ns:Data&#x27;, ns):</span><br><span class="line">                data[d.get(&#x27;Name&#x27;)] = d.text</span><br><span class="line">            print(f&quot;User created: &#123;data.get(&#x27;TargetUserName&#x27;)&#125;&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="注册分析"><a href="#注册分析" class="headerlink" title="注册分析"></a><font style="color:rgb(31, 35, 40);">注册分析</font></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># RegRipper</span><br><span class="line">rip.pl -r NTUSER.DAT -p all</span><br><span class="line"></span><br><span class="line"># Key hives</span><br><span class="line">NTUSER.DAT   # User settings</span><br><span class="line">SAM          # User accounts</span><br><span class="line">SYSTEM       # System config</span><br><span class="line">SOFTWARE     # Installed software</span><br></pre></td></tr></table></figure>
+
+<h3 id="OEMInformation-后门检测"><a href="#OEMInformation-后门检测" class="headerlink" title="OEMInformation 后门检测"></a><font style="color:rgb(31, 35, 40);">OEMInformation 后门检测</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from Registry import Registry</span><br><span class="line"></span><br><span class="line">reg = Registry.Registry(&quot;SOFTWARE&quot;)</span><br><span class="line">key = reg.open(&quot;Microsoft\\Windows\\CurrentVersion\\OEMInformation&quot;)</span><br><span class="line">for val in key.values():</span><br><span class="line">    print(f&quot;&#123;val.name()&#125;: &#123;val.value()&#125;&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="SAM-数据库分析"><a href="#SAM-数据库分析" class="headerlink" title="SAM 数据库分析"></a><font style="color:rgb(31, 35, 40);">SAM 数据库分析</font></h2><p><strong><font style="color:rgb(31, 35, 40);">必备文件：</font></strong></p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(31, 35, 40);background-color:rgba(129, 139, 152, 0.12);&quot;&gt;Windows/System32/config/SAM&lt;/font&gt;</code><font style="color:rgb(31, 35, 40);">- 密码哈希</font></li>
+<li><code>&lt;font style=&quot;color:rgb(31, 35, 40);background-color:rgba(129, 139, 152, 0.12);&quot;&gt;Windows/System32/config/SYSTEM&lt;/font&gt;</code><font style="color:rgb(31, 35, 40);">- 启动密钥</font></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from impacket.examples.secretsdump import LocalOperations, SAMHashes</span><br><span class="line"></span><br><span class="line">localOps = LocalOperations(&#x27;SYSTEM&#x27;)</span><br><span class="line">bootKey = localOps.getBootKey()</span><br><span class="line">sam = SAMHashes(&#x27;SAM&#x27;, bootKey)</span><br><span class="line">sam.dump()  # username:RID:LM:NTLM:::</span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(31, 35, 40);">验证&#x2F;破解NTLM：</font></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Hash import MD4</span><br><span class="line"></span><br><span class="line">def ntlm_hash(password):</span><br><span class="line">    h = MD4.new()</span><br><span class="line">    h.update(password.encode(&#x27;utf-16-le&#x27;))</span><br><span class="line">    return h.hexdigest()</span><br><span class="line"></span><br><span class="line"># Crack with hashcat</span><br><span class="line"># hashcat -m 1000 hashes.txt wordlist.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(31, 35, 40);">常见的RIDs：</font></strong></p>
+<ul>
+<li><font style="color:rgb(31, 35, 40);">500 &#x3D; 管理员</font></li>
+<li><font style="color:rgb(31, 35, 40);">501 &#x3D; 客人</font></li>
+<li><font style="color:rgb(31, 35, 40);">1000+ &#x3D; 用户账户</font></li>
+</ul>
+<h2 id="主机文件隐藏数据"><a href="#主机文件隐藏数据" class="headerlink" title="主机文件隐藏数据"></a><font style="color:rgb(31, 35, 40);">主机文件隐藏数据</font></h2><p>地点： Windows&#x2F;System32&#x2F;drivers&#x2F;etc&#x2F;hosts</p>
+<p><font style="color:rgb(31, 35, 40);">攻击者会用过多空白隐藏数据：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Detect hidden content</span><br><span class="line">xxd hosts | tail -20</span><br></pre></td></tr></table></figure>
+
+<h2 id="联系人文件（-contact）"><a href="#联系人文件（-contact）" class="headerlink" title="联系人文件（.contact）"></a><font style="color:rgb(31, 35, 40);">联系人文件（.contact）</font></h2><p>地点： Users&#x2F;<user>&#x2F;Contacts&#x2F;*.contact</p>
+<p><strong><font style="color:rgb(31, 35, 40);">笔记中的隐藏数据：</font></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:Notes&gt;h1dden_c0ntr4ct5&lt;/c:Notes&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RDP-会话事件-ID"><a href="#RDP-会话事件-ID" class="headerlink" title="RDP 会话事件 ID"></a><font style="color:rgb(31, 35, 40);">RDP 会话事件 ID</font></h2><p><strong><font style="color:rgb(31, 35, 40);">TerminalServices-LocalSessionManager\Operational：</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(31, 35, 40);">事件ID</font></strong></th>
+<th><strong><font style="color:rgb(31, 35, 40);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(31, 35, 40);">21</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话登录成功</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">22</font></td>
+<td><font style="color:rgb(31, 35, 40);">收到壳启动通知</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">23</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话注销成功</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">24</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话断开连接</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">25</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话重连成功</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">40</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话创建</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">41</font></td>
+<td><font style="color:rgb(31, 35, 40);">会话开始（用户通知）</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">42</font></td>
+<td><font style="color:rgb(31, 35, 40);">Shell 启动（用户通知）</font></td>
+</tr>
+</tbody></table>
+<p><strong><font style="color:rgb(31, 35, 40);">TerminalServices-RemoteConnectionManager\Operational：</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(31, 35, 40);">事件ID</font></strong></th>
+<th><strong><font style="color:rgb(31, 35, 40);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(31, 35, 40);">261</font></td>
+<td><font style="color:rgb(31, 35, 40);">听众接收连接</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">1149</font></td>
+<td><font style="color:rgb(31, 35, 40);">RDP用户认证成功（包含源IP）</font></td>
+</tr>
+</tbody></table>
+<p><strong><font style="color:rgb(31, 35, 40);">RemoteDesktopServices-RdpCoreTS\Operational：</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(31, 35, 40);">事件ID</font></strong></th>
+<th><strong><font style="color:rgb(31, 35, 40);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(31, 35, 40);">131</font></td>
+<td><font style="color:rgb(31, 35, 40);">连接已接受（TCP，包含ClientIP：port）</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">102</font></td>
+<td><font style="color:rgb(31, 35, 40);">客户端连接</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(31, 35, 40);">103</font></td>
+<td><font style="color:rgb(31, 35, 40);">断线（检查ReasonCode）</font></td>
+</tr>
+</tbody></table>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a><font style="color:rgb(31, 35, 40);">网络</font></h1><h2 id="tcpdump-快速引用"><a href="#tcpdump-快速引用" class="headerlink" title="tcpdump 快速引用"></a><font style="color:rgb(31, 35, 40);">tcpdump 快速引用</font></h2><p><font style="color:rgb(31, 35, 40);">命令行数据包捕获工具，用于快速网络取证分流。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># Basic capture on interface</span><br><span class="line">sudo tcpdump -i eth0</span><br><span class="line"></span><br><span class="line"># Capture to file</span><br><span class="line">sudo tcpdump -i eth0 -w capture.pcap</span><br><span class="line"></span><br><span class="line"># Filter by source IP</span><br><span class="line">sudo tcpdump -i eth0 src 192.168.1.100</span><br><span class="line"></span><br><span class="line"># Filter by destination port</span><br><span class="line">sudo tcpdump -i eth0 dst port 80</span><br><span class="line"></span><br><span class="line"># Combined filter with file output</span><br><span class="line">sudo tcpdump -i eth0 -w packets.pcap &#x27;src 172.22.206.250 and port 443&#x27;</span><br><span class="line"></span><br><span class="line"># Read from file with verbose output</span><br><span class="line">tcpdump -r capture.pcap -v</span><br><span class="line"></span><br><span class="line"># Show packet contents in ASCII</span><br><span class="line">tcpdump -r capture.pcap -A</span><br><span class="line"></span><br><span class="line"># Show hex + ASCII dump</span><br><span class="line">tcpdump -r capture.pcap -X</span><br><span class="line"></span><br><span class="line"># Count total packets</span><br><span class="line">tcpdump -r capture.pcap -q | wc -l</span><br></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(31, 35, 40);">常见过滤器：</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(31, 35, 40);">滤波器</font></strong></th>
+<th><strong><font style="color:rgb(31, 35, 40);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>host 10.0.0.1</code></td>
+<td><font style="color:rgb(31, 35, 40);">IP的流量</font></td>
+</tr>
+<tr>
+<td><code>net 192.168.1.0/24</code></td>
+<td><font style="color:rgb(31, 35, 40);">整个子网</font></td>
+</tr>
+<tr>
+<td><code>port 80</code></td>
+<td><font style="color:rgb(31, 35, 40);">HTTP 流量</font></td>
+</tr>
+<tr>
+<td><code>tcp</code> &#x2F; <code>udp</code>&#x2F; <code>icmp</code></td>
+<td><font style="color:rgb(31, 35, 40);">协议过滤器</font></td>
+</tr>
+<tr>
+<td><code>src host X and dst port Y</code></td>
+<td><font style="color:rgb(31, 35, 40);">综合</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings grep tcpdump -r capture.pcap -A | grep -i flag</span><br></pre></td></tr></table></figure>
+
+<h2 id="从PCAP提取USB音频"><a href="#从PCAP提取USB音频" class="headerlink" title="从PCAP提取USB音频"></a><font style="color:rgb(31, 35, 40);">从PCAP提取USB音频</font></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Export ISO data with tshark</span><br><span class="line">tshark -r capture.pcap -T fields -e usb.iso.data &gt; audio_data.txt</span><br><span class="line"></span><br><span class="line"># Convert to raw audio and import into Audacity</span><br><span class="line"># Settings: signed 16-bit PCM, mono, appropriate sample rate</span><br><span class="line"># Listen for spoken flag characters</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io">xuan23</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%8F%96%E8%AF%81/">https://xuan-1117.github.io/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%8F%96%E8%AF%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xuan-1117.github.io" target="_blank">XUAN Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/">应急总结</a></div><div class="post-share"><div class="social-share" data-image="/img/backgrounds/bg-11.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E7%AC%AC%E4%B8%80%E5%B1%8Asolar%E6%9D%AF%C2%B7%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E6%8C%91%E6%88%98%E8%B5%9B%E5%AE%98%E6%96%B9%E9%A2%98%E8%A7%A3/" title="第一届solar杯·应急响应挑战赛官方题解"><img class="cover" src="/img/backgrounds/bg-13.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">第一届solar杯·应急响应挑战赛官方题解</div></div><div class="info-2"><div class="info-item-1">【官方WP】第一届solar杯·应急响应挑战赛官方题解 就在几天前，第一届Solar杯·应急响应挑战赛圆满落下帷幕。这场比赛汇聚了来自全国的网络安全精英，选手们在激烈的技术较量中展现了非凡的能力和智慧。为延续比赛的技术交流与分享精神，我们很高兴向大家呈现本次比赛的官方WP（Writeup）。本篇官方WP将深入解析比赛中的关键赛题，从流量分析到勒索病毒破解，逐步还原真实案例中的技术细节与解决思路。 需要特别说明的是，文中所呈现的这些方法和思路，均基于真实应急响应场景设计，虽然可能并非所有情况下的最优解，但我们希望它们能够为您提供有价值的参考，助力您在未来的应急响应中更加高效地应对复杂多变的安全挑战。让我们一同走进这场技术盛宴，探索网络安全应急响应的更多可能！ 1.流量分析1.1 文件排查新手运维小王的Geoserver遭到了攻击： 黑客疑似删除了webshell后门，小王找到了可能是攻击痕迹的文件但不一定是正确的，请帮他排查一下。 从日志分析得知攻击者ip为10.0.100.22对该站点有目录扫描行为与b.jsp交互频繁疑似为上传webshell   当访问 JSP 页面时，Tom...</div></div></div></a><a class="pagination-related" href="/2026/03/20/WEB/ssti%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" title="ssti模板注入"><img class="cover" src="/img/backgrounds/bg-14.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ssti模板注入</div></div><div class="info-2"><div class="info-item-1">fengjin用法1python -m fenjing webui  通用payload1&#123;&#123;request|attr(&#x27;application&#x27;)|attr(&#x27;\x5f\x5fglobals\x5f\x5f&#x27;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fbuiltins\x5f\x5f&#x27;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fimport\x5f\x5f&#x27;)(&#x27;os&#x27;)|attr(&#x27;popen&#x27;)(&#x27;id&#x27;)|attr(&#x27;read&#x27;)()&#125;&#125;  1user_input=&#123;&#123;request|attr(&#x27;application&#x27;)|attr(&#x27;\x5f\x5fglobals\x5f\x5f&#x27;)|attr...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E7%AC%AC%E4%B8%80%E5%B1%8Asolar%E6%9D%AF%C2%B7%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E6%8C%91%E6%88%98%E8%B5%9B%E5%AE%98%E6%96%B9%E9%A2%98%E8%A7%A3/" title="第一届solar杯·应急响应挑战赛官方题解"><img class="cover" src="/img/backgrounds/bg-13.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-21</div><div class="info-item-2">第一届solar杯·应急响应挑战赛官方题解</div></div><div class="info-2"><div class="info-item-1">【官方WP】第一届solar杯·应急响应挑战赛官方题解 就在几天前，第一届Solar杯·应急响应挑战赛圆满落下帷幕。这场比赛汇聚了来自全国的网络安全精英，选手们在激烈的技术较量中展现了非凡的能力和智慧。为延续比赛的技术交流与分享精神，我们很高兴向大家呈现本次比赛的官方WP（Writeup）。本篇官方WP将深入解析比赛中的关键赛题，从流量分析到勒索病毒破解，逐步还原真实案例中的技术细节与解决思路。 需要特别说明的是，文中所呈现的这些方法和思路，均基于真实应急响应场景设计，虽然可能并非所有情况下的最优解，但我们希望它们能够为您提供有价值的参考，助力您在未来的应急响应中更加高效地应对复杂多变的安全挑战。让我们一同走进这场技术盛宴，探索网络安全应急响应的更多可能！ 1.流量分析1.1 文件排查新手运维小王的Geoserver遭到了攻击： 黑客疑似删除了webshell后门，小王找到了可能是攻击痕迹的文件但不一定是正确的，请帮他排查一下。 从日志分析得知攻击者ip为10.0.100.22对该站点有目录扫描行为与b.jsp交互频繁疑似为上传webshell   当访问 JSP 页面时，Tom...</div></div></div></a><a class="pagination-related" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img class="cover" src="/img/backgrounds/bg-10.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-21</div><div class="info-item-2">修复</div></div><div class="info-2"><div class="info-item-1">用 find &#x2F; -name “flag” &amp;2&gt;&#x2F;dev&#x2F;null 找文件名带 flag 的文件 用 find &#x2F; -type f | xargs grep -H -l ‘flag’ &amp;2&gt;&#x2F;dev&#x2F;null 找文件内容中含 flag 的文件（慎用，全盘搜索速度会很慢）最好能缩小查找范围，例如确定 flag 在 &#x2F;var 目录里，那就不要从根目录开始搜索 使用 find &#x2F;var -type f | xargs grep -H -l ‘flag’ &amp;2&gt;&#x2F;dev&#x2F;null 会更好 1grep -iE &quot;(flag|part|piece|fragment)&quot; server.log  msf 1234567891011121314151617181920212223242526272829303132meterpreter &gt; shellchcp 65001  //转换一下编码 要不然会乱码ipconfig  #查看...</div></div></div></a><a class="pagination-related" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img class="cover" src="/img/backgrounds/bg-12.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-21</div><div class="info-item-2">应急响应</div></div><div class="info-2"><div class="info-item-1">hydra枚举ssh用户 hydra -L 字典 -p ‘密码’ ip ssh hydra -L usernames.txt -p ‘funnel123#!#’ 10.129.4.91 ssh windows文件排查（1）查看开机启动有无异常文件【开始】➜【运行】➜【msconfig】   任务管理器中也可进行查看   （2）各个盘下的temp( tmp)相关目录下查看有无异常文件 ：Windows产生的临时文件   （3）浏览器浏览痕迹、浏览器 下载文件、浏览器cookie信息，根据不同浏览器进行排查；例如：IE浏览器，打开IE浏览器点击【查看】➜【浏览器栏】➜【历史记录】（快捷键是Ctrl+Shift+H）   （4）Recent是系统文件夹，里面存放着你最近使用的文档的快捷方式，查看用户recent相关文件，通过分析最近打开分析可疑文件： 【开始】➜【运行】➜【%UserProfile%\Recent】 （5）根据文件夹内文件列表时间 进行排序，查找可疑文件。当然也可以搜索指定日期范围的文件及文件 1.了解应急的时间轴，以及确定攻击ip 2.根据发生安全事件的时间轴梳理事件...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xuan23</div><div class="author-info-description">一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WINDOWS%E5%8F%96%E8%AF%81"><span class="toc-number">1.</span> <span class="toc-text">WINDOWS取证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-%E4%BA%8B%E4%BB%B6%E6%97%A5%E5%BF%97-%EF%BC%88-evtx%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">Windows 事件日志 （.evtx）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">注册分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OEMInformation-%E5%90%8E%E9%97%A8%E6%A3%80%E6%B5%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">OEMInformation 后门检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAM-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">SAM 数据库分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E6%96%87%E4%BB%B6%E9%9A%90%E8%97%8F%E6%95%B0%E6%8D%AE"><span class="toc-number">1.4.</span> <span class="toc-text">主机文件隐藏数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E4%BA%BA%E6%96%87%E4%BB%B6%EF%BC%88-contact%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">联系人文件（.contact）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDP-%E4%BC%9A%E8%AF%9D%E4%BA%8B%E4%BB%B6-ID"><span class="toc-number">1.6.</span> <span class="toc-text">RDP 会话事件 ID</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-number">2.</span> <span class="toc-text">网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tcpdump-%E5%BF%AB%E9%80%9F%E5%BC%95%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">tcpdump 快速引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8EPCAP%E6%8F%90%E5%8F%96USB%E9%9F%B3%E9%A2%91"><span class="toc-number">2.2.</span> <span class="toc-text">从PCAP提取USB音频</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/php/" title="php"><img src="/img/backgrounds/bg-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="php"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/php/" title="php">php</a><time datetime="2026-03-22T03:14:48.000Z" title="发表于 2026-03-22 11:14:48">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img src="/img/backgrounds/bg-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应">应急响应</a><time datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-22T00:38:10.000Z" title="发表于 2026-03-22 08:38:10">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-21T15:00:08.000Z" title="发表于 2026-03-21 23:00:08">2026-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"><img src="/img/backgrounds/bg-04.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"/></a><div class="content"><a class="title" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP">第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP</a><time datetime="2026-03-21T14:58:25.000Z" title="发表于 2026-03-21 22:58:25">2026-03-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By xuan23</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
