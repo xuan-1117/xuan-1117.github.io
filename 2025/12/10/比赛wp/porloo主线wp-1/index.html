@@ -1,0 +1,919 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>porloo主线wp-1 | XUAN Blog</title><meta name="author" content="xuan23"><meta name="copyright" content="xuan23"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="应急响应2-1 http:&#x2F;&#x2F;192.168.20.100 admin Skills@2020 登录jumpserver堡垒机：标签列表中可以看到flag  palu{2025_qiandao_flag} 应急响应 2-2  ubuntu&#x2F;Skills@waf https:&#x2F;&#x2F;192.168.20.102:9443&#x2F; admin&#x2F;VF6NXMs7 点击waf的身份认证功能模块中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="porloo主线wp-1">
+<meta property="og:url" content="https://xuan-1117.github.io/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/index.html">
+<meta property="og:site_name" content="XUAN Blog">
+<meta property="og:description" content="应急响应2-1 http:&#x2F;&#x2F;192.168.20.100 admin Skills@2020 登录jumpserver堡垒机：标签列表中可以看到flag  palu{2025_qiandao_flag} 应急响应 2-2  ubuntu&#x2F;Skills@waf https:&#x2F;&#x2F;192.168.20.102:9443&#x2F; admin&#x2F;VF6NXMs7 点击waf的身份认证功能模块中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuan-1117.github.io/img/backgrounds/bg-19.jpg">
+<meta property="article:published_time" content="2025-12-10T01:16:46.000Z">
+<meta property="article:modified_time" content="2026-06-06T14:26:49.951Z">
+<meta property="article:author" content="xuan23">
+<meta property="article:tag" content="比赛wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuan-1117.github.io/img/backgrounds/bg-19.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "porloo主线wp-1",
+  "url": "https://xuan-1117.github.io/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/",
+  "image": "https://xuan-1117.github.io/img/backgrounds/bg-19.jpg",
+  "datePublished": "2025-12-10T01:16:46.000Z",
+  "dateModified": "2026-06-06T14:26:49.951Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xuan23",
+      "url": "https://xuan-1117.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xuan-1117.github.io/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'porloo主线wp-1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/backgrounds/bg-06.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/backgrounds/bg-19.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">XUAN Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">porloo主线wp-1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">porloo主线wp-1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-10T01:16:46.000Z" title="发表于 2025-12-10 09:16:46">2025-12-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-06T14:26:49.951Z" title="更新于 2026-06-06 22:26:49">2026-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%AF%94%E8%B5%9Bwp/">比赛wp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="应急响应2-1"><a href="#应急响应2-1" class="headerlink" title="应急响应2-1"></a>应急响应2-1</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-001.jpeg"></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.100/"><font style="color:#0366D6;">http://192.168.20.100 </font></a>admin Skills@2020</p>
+<p>登录jumpserver<sub>堡垒机：</sub>标签列表中可以看到flag</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-002.jpeg"></p>
+<p>palu{2025_qiandao_flag}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-2</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-003.jpeg"></p>
+<p>ubuntu&#x2F;Skills@waf</p>
+<p><a target="_blank" rel="noopener" href="https://192.168.20.102:9443/"><font style="color:#0366D6;">https://192.168.20.102:9443/</font> </a>admin&#x2F;VF6NXMs7</p>
+<p>点击waf的身份认证功能模块中的配置按钮</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-004.jpeg"></p>
+<p>可以看到flag</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-005.jpeg"></p>
+<p>palu{2025_waf}</p>
+<h1 id="应急响应2-3"><a href="#应急响应2-3" class="headerlink" title="应急响应2-3"></a>应急响应2-3</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-006.jpeg"></p>
+<p>ubuntu&#x2F;Skills@mysql <a target="_blank" rel="noopener" href="http://192.168.20.101:20221/4a883f0c56"><font style="color:#0366D6;">http://192.168.20.101:20221/4a883f0c56</font></a> 64a44f8137&#x2F;f8941f8eb7 root&#x2F;mysql_QPiS8y</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-007.jpeg"></p>
+<p>连接上数据库就可以看到flag</p>
+<p>palu{Mysql_@2025}</p>
+<h1 id="应急响应2-4"><a href="#应急响应2-4" class="headerlink" title="应急响应2-4"></a>应急响应2-4</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-008.jpeg"></p>
+<p>有waf，我们可以在waf中看攻击防护：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-009.jpeg"></p>
+<p>palu{192.168.20.107}</p>
+<h1 id="应急响应2-5"><a href="#应急响应2-5" class="headerlink" title="应急响应2-5"></a>应急响应2-5</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-010.jpeg"></p>
+<p>还是刚刚的waf就能看到：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-011.jpeg"></p>
+<p>2025-05-05-00:04:40</p>
+<p>比较坑的一个地方就是题目给的flag格式为palu{xxxx-xx-xx-xx-xx-xx}，误导了好多师傅，我看到</p>
+<p>这个地方也以为是提交的攻击时间有问题，而没去怀疑格式， 后快结束的半个小时才在群里发出来提示公告(当时已经无心做题了) palu{2025-05-05-00:04:40}</p>
+<h1 id="应急响应2-6"><a href="#应急响应2-6" class="headerlink" title="应急响应2-6"></a>应急响应2-6</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-012.jpeg"></p>
+<p>一开始的思路是看waf中的未拦截攻击有无线索，结果发现没啥线索，想了一下，可能waf都没有</p>
+<p>侦测到，于是直接登上了waf的服务器查看web服务器的日志有无记录</p>
+<p>ps -aux    发现开启了nginx服务器，那就直接先找nginx的日志 sudo find &#x2F; -name nginx</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-013.jpeg"></p>
+<p>可以把nginx的日志下载到桌面然后逐个分析</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-014.jpeg"></p>
+<p>发现了泄露了这个敏感文件&#x2F;bak&#x2F;key.txt</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-015.jpeg"></p>
+<p>可以访问看一下：<a target="_blank" rel="noopener" href="http://192.168.20.102/bak/key.txt"> <font style="color:#0366D6;">http://192.168.20.102/bak/key.txt</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-016.jpeg"></p>
+<p>palu{key.txt}</p>
+<p>记录一下ssh密钥登录的一些知识点：</p>
+<p>在远程登录服务器或访问其他需要 SSH 认证的服务时，可使用该密钥对进行身份验证。将公钥配</p>
+<p>置在服务器上，私钥保留在本地。当本地客户端尝试连接服务器时，服务器会向客户端发送一个</p>
+<p>加密的随机字符串，客户端使用私钥对其进行解密，然后将解密后的数据发送给服务器进行验</p>
+<p>证。如果验证成功，客户端就可以无需输入密码而直接登录到服务器，这种方式比传统的密码验</p>
+<p>证更为安全和便捷。</p>
+<p>在企业业务服务器使用密钥认证的场景中，A 刚入职主管问 A 要的通常是公钥。具体过程如下：</p>
+<ol>
+<li>A 在自己的设备上生成密钥对，包括公钥和私钥。</li>
+<li>A 将生成的公钥提供给主管，主管把公钥配置到业务服务器的授权文件中</li>
+</ol>
+<p>（如 ~&#x2F;.ssh&#x2F;authorized_keys）。</p>
+<ol>
+<li>A 使用自己的私钥通过客户端发起登录请求，服务端会通过公钥加密一个随机字符串，客户</li>
+</ol>
+<p>端再通过私钥解密该字符串返回给服务端，通过对比两个字符串是否一致来认证身份。</p>
+<p>业务服务器上会有很多公钥，每个需要登录服务器的用户都有自己的公钥被存储在服务器上，以</p>
+<p>此来实现基于密钥的身份认证，这种方式比传统的账号密码认证更安全，可避免密码在网络上传</p>
+<p>输带来的安全风险</p>
+<p>这里想写一些关于雷池waf的东西：</p>
+<p>关于我们拿到题目进行应急的时候，waf是非常需要关注的东西，因为雷池waf可以看到有哪些地</p>
+<p>址经过了waf防护，并且访问日志也保存到了waf中。</p>
+<p>在雷池waf的防护应用中可以看到有哪些应用被接入了雷池waf中</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-017.jpeg"></p>
+<p>我们 好查看每个应用的详情按钮查看这个应用对应的地址是什么，方便了解服务</p>
+<p>比如这个题，其实解法就在192.168.20.102这个应用中</p>
+<p>点击详情后，应用的访问日志和错误日志都能查看</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-018.jpeg"></p>
+<p>好点击下载到本地查看(不清楚为啥下载的日志比实时查看的内容要全很多，可能是日志太大的缘故，网页显示不全)</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-019.jpeg"></p>
+<p>从waf中也能看到本题的答案，而且更加直观且有逻辑性</p>
+<p>除此之外还要看看是否代理了其他服务器中的应用，比如现在这个192.168.20.103:9999<sub>这个应用</sub></p>
+<p>的访问日志就在这里看</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-020.jpeg"></p>
+<h1 id="应急响应2-7"><a href="#应急响应2-7" class="headerlink" title="应急响应2-7"></a>应急响应2-7</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-021.jpeg"></p>
+<p>也是刚刚那个</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.102/bak/key.txt"><font style="color:#0366D6;">http://192.168.20.102/bak/key.txt</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-022.jpeg"></p>
+<p>palu{<a href="mailto:&#x70;&#97;&#x72;&#108;&#x6f;&#111;&#64;&#112;&#97;&#114;&#108;&#x6f;&#x6f;&#x2e;&#99;&#x6f;&#x6d;">parloo@parloo.com</a>}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-8</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-023.jpeg"></p>
+<p><strong>立足点</strong>（Footprint）在网络安全领域通常指： </p>
+<p>攻击者通过渗透测试或攻击手段，在目标网络中成功控制的<strong>第一台主机或服务器</strong>。这台服务器成</p>
+<p>为攻击者进一步渗透内部网络的<strong>跳板或基地</strong>，因此被称为 “立足点服务器”。</p>
+<p>其实内网几台主机的ip，试试就能出来，看了很多wp，估计都是试出来的</p>
+<p>我强行解释一波</p>
+<p>在雷池waf中，192.168.20.108是资产表中的sshServer主机的地址，这个主机是我们的资产，且在 waf中留下了它很多次攻击，所以它就是立足点服务器ip地址</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-024.jpeg"></p>
+<p>palu{192.168.20.108}</p>
+<h1 id="应急响应2-9"><a href="#应急响应2-9" class="headerlink" title="应急响应2-9"></a>应急响应2-9</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-025.jpeg"></p>
+<p>前面已经判断出立足点服务器是192.168.20.108了，所以需要登录上192.168.20.108查看攻击者创</p>
+<p>建的用户名，再利用查出来的&#x2F;etc&#x2F;shadow破解出密码来</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-026.jpeg"></p>
+<p>palu{parloo&#x2F;parloo}</p>
+<p>但是我这里有点问题，就是shell工具就是连接不上192.168.20.108，直接在虚拟机中连接，速度</p>
+<p>也超级慢，输入密码后一直卡着，我ctrl+c了一下，卡进去了，但是没有交互页面，做一些操作就</p>
+<p>会不舒服，但我看有的师傅的wp，好像并没有受到影响</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-027.jpeg"></p>
+<p>可能是只允许密钥登录的问题，给他改一下配置：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-028.jpeg"></p>
+<p>更改配置后重启，发现shell工具依旧远程连接不了，就连接上之后一直这样卡着</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-029.jpeg"></p>
+<p>就算得使用虚拟机连接都需要卡出去一下才能连接成功</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-030.jpeg"></p>
+<h1 id="应急响应2-10"><a href="#应急响应2-10" class="headerlink" title="应急响应2-10"></a>应急响应2-10</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-031.jpeg"></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-032.jpeg"></p>
+<p>顺手发现了flag</p>
+<p>palu{hi_2025_parloo_is_hack}</p>
+<h1 id="应急响应2-11"><a href="#应急响应2-11" class="headerlink" title="应急响应2-11"></a>应急响应2-11</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-033.jpeg"></p>
+<p>我们知道了提权后的账号parloo&#x2F;parloo，其实可以直接su parloo使用它的高权限去操作，更舒服</p>
+<p>一些，可以输入下history看看黑客有没有留下什么日志</p>
+<p>一般的维权手段就是木马，netstat -anplt查看一下服务器的外联地址，发现了</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-034.jpeg"></p>
+<p>原本我只是没有看到pid，想用ubuntu权限看一下是否能看到pid，结果发现两个权限使用netstat</p>
+<h2 id="anplt得到的回显是不同的"><a href="#anplt得到的回显是不同的" class="headerlink" title="-anplt得到的回显是不同的"></a>-anplt得到的回显是不同的</h2><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-035.jpeg"></p>
+<p>我们直接使用sudo netstat -anplt查看下运行结果</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-036.jpeg"></p>
+<p>发现了外联ip启动恶意程序为b4b40c4ws，使用</p>
+<p>但是题目问的是维权方法服务的名称，需要找服务名称</p>
+<p>我们先看看b4b40c4ws在哪？</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-037.jpeg"></p>
+<p>&#x2F;usr&#x2F;bin&#x2F;b4b40c44ws 因为考虑到我们的sshserver机器是重启之后的，重启之后还有这个恶意外联，所以可能存在定时</p>
+<p>任务或服务自启动项，因为题目问的是维权方法服务的名称，所以大概率就是使用的服务自启动</p>
+<p>项</p>
+<p>查看 PID 对应的 systemd 服务有两种方法</p>
+<p>直接使用命令查看：</p>
+<p>systemctl status pid<sub>号，可以发现两个维权服务</sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-038.jpeg"></p>
+<p>我们可以简单分析下这个服务：</p>
+<p>使用命令：systemctl cat &lt;<sub>服务名</sub>&gt;    <sub>或者是</sub>cat &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;xxx.service 如果配置了 Restart&#x3D;always，那该服务就会在退出后<strong>一直重启</strong>。</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-039.jpeg"></p>
+<p>palu{rootset}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-12</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-040.jpeg"></p>
+<p>上一题详细分析了</p>
+<p>palu{47.101.213.153} 我在复现过程中发现了一个问题，就是有时候netstat -anplt发现不了恶意外联，有时候又可以发</p>
+<p>现，于是这道题我就想用分析维权木马的方式来找出恶意服务器连接地址。</p>
+<p>因为sshserver机器的问题，不能直接导出恶意木马来丢到微步或者自己用ida分析，于是我想着将 b4b40c44ws<sub>搞到桌面来分析</sub>现在20.108机器中开启python的http服务，然后再用物理机下载</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-041.jpeg"></p>
+<p>下载后直接将b4b40c44ws拖入ida分析，反汇编后直接可以看到ip地址</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-042.jpeg"></p>
+<p>于是这样也可以得到flag:</p>
+<p>palu{47.101.213.153} 丢到微步也是一样的：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-043.jpeg"></p>
+<p>果然，有师傅上周六都打到这里了，tql</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-044.jpeg"></p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-13</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-045.jpeg"></p>
+<p>终使用这条命令排查出系统中被劫持的程序 ls -alh &#x2F;usr&#x2F;bin &#x2F;bin &#x2F;usr&#x2F;sbin &#x2F;sbin | grep -vE ‘root|staff|bin’</p>
+<p>这条命令的意思是：在系统核心可执行目录中，找出“文件属主不是常规系统用户”的可疑程序。</p>
+<p>这些目录包含绝大多数的系统命令：</p>
+<p>在 &#x2F;bin、&#x2F;usr&#x2F;bin 等系统命令目录中，<strong>绝大部分程序都应该属于 root（或者极少数属于 bin、 staff</strong><sub><strong>）</strong></sub><sub>。</sub></p>
+<p>&#x2F;bin</p>
+<p>：基础命令，如</p>
+<p>ls、cp、mv…</p>
+<p>&#x2F;usr&#x2F;bin</p>
+<p>：扩展命令，如</p>
+<p>vim、nano、</p>
+<p>python3</p>
+<p>…</p>
+<p>&#x2F;sbin</p>
+<p>：系统管理命令，如</p>
+<p>ifconfig</p>
+<p>、</p>
+<p>reboot</p>
+<p>&#x2F;usr&#x2F;sbin</p>
+<p>：更多的管理命令，如</p>
+<p>sshd</p>
+<p>、</p>
+<p>apache2</p>
+<p>⚠</p>
+<p>如果你看到有文件的拥有者是：</p>
+<p>ubuntu、www-data、nobody某个普通用户UID 不是0（非 root）</p>
+<p>那说明这个程序<strong>不是由系统正常安装的</strong>，可能是攻击者放进去的伪装程序、后门、木马。</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-046.jpeg"></p>
+<p>palu{id}</p>
+<h1 id="应急响应2-14"><a href="#应急响应2-14" class="headerlink" title="应急响应2-14"></a>应急响应2-14</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-047.jpeg"></p>
+<p>因为牵扯到服务，所以又得把实现转回到server<sub>服务器，即</sub>192.168.20.103<sub>这台服务器，使用</sub>fscan 直接扫，看一下开启了哪些服务</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-048.jpeg"></p>
+<p>访问web服务器时，发现8081端口开启的服务： <a target="_blank" rel="noopener" href="http://192.168.20.103:8081/"><font style="color:#0366D6;">http://192.168.20.103:8081/</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-049.jpeg"></p>
+<p>泄露了员工的的身份证号跟手机号，110，woc，京✌</p>
+<p>本来做到这里还想着是不是还能泄露其他人的额信息，用bp抓包发现根本没有其他路由，F12发现，这玩意竟然时写死进去的，6</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-050.jpeg"></p>
+<p>palu{8081}</p>
+<h1 id="应急响应2-15"><a href="#应急响应2-15" class="headerlink" title="应急响应2-15"></a>应急响应2-15</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-051.jpeg"></p>
+<p>上一题可以得到：</p>
+<p>palu{310105198512123456}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-16</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-052.jpeg"></p>
+<p><font style="color:#000000;">	</font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">http://192.168.20.102:3000/</font></a><font style="color:#0366D6;">	</font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">504</font></a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0">去访问</a>	<a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">直接</font></a><font style="color:#0366D6;"> </font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">了，给我吓一跳，我寻思是我漏扫给服务打崩了呢，</font></a></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">504</font></a><font style="color:#0366D6;">	</font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">mysql 又重新导入了下虚拟机后发现还是</font></a><font style="color:#0366D6;"> </font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">，我一想，原来是</font></a><font style="color:#0366D6;"> </font><a target="_blank" rel="noopener" href="http://192.168.20.102:3000/%E7%9B%B4%E6%8E%A5504%E4%BA%86%EF%BC%8C%E7%BB%99%E6%88%91%E5%90%93%E4%B8%80%E8%B7%B3%EF%BC%8C%E6%88%91%E5%AF%BB%E6%80%9D%E6%98%AF%E6%88%91%E6%BC%8F%E6%89%AB%E7%BB%99%E6%9C%8D%E5%8A%A1%E6%89%93%E5%B4%A9%E4%BA%86%E5%91%A2%EF%BC%8C%E5%8F%88%E9%87%8D%E6%96%B0%E5%AF%BC%E5%85%A5%E4%BA%86%E4%B8%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E5%8F%91%E7%8E%B0%E8%BF%98%E6%98%AF504%EF%BC%8C%E6%88%91%E4%B8%80%E6%83%B3%EF%BC%8C%E5%8E%9F%E6%9D%A5%E6%98%AFmysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B2%A1%E5%BC%80%E5%90%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><font style="color:#0366D6;">服务器没开启的原因</font></a></p>
+<p>gitea	mysql 因为 的数据库用的 服务器</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-053.jpeg"></p>
+<p>看到题目后一脸懵，不知道问的啥，看了wp，提到了gitee，突然想起前几天看到的马 <a target="_blank" rel="noopener" href="http://192.168.20.102:3000/"><font style="color:#0366D6;">http://192.168.20.102:3000/</font></a></p>
+<p>gitea，老熟人了，很多打集团的思路，遇到gitea就是翻代码，代码中藏了很多敏感信息，有时候翻完，啥都有了</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-054.jpeg"></p>
+<p>发现gitea只有这一个项目</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-055.jpeg"></p>
+<p>是一个</p>
+<p>go</p>
+<p>写的代码，简单看一下代码逻辑：通过</p>
+<p>&#x2F;admin&#x2F;parloo</p>
+<p>路径提供</p>
+<p> Web </p>
+<p>界面，支持</p>
+<p> GET</p>
+<p>（显示表单）和</p>
+<p> POST</p>
+<p>（执行命令）请求。</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-056.jpeg"></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.103:8080/admin/parloo%E8%BF%99%E4%B8%AA%E8%B7%AF%E5%BE%84%E5%B0%B1%E5%AD%98%E5%9C%A8%E5%8D%B1%E9%99%A9%E5%8A%9F%E8%83%BD(%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C)"><font style="color:#0366D6;">http://192.168.20.103:8080/admin/parloo</font><sub><font style="color:#0366D6;">这个路径就存在危险功能</font></sub><font style="color:#0366D6;">(</font><sub><font style="color:#0366D6;">可以进行命令执行</font></sub><font style="color:#0366D6;">)</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-057.jpeg"></p>
+<p>palu{&#x2F;admin&#x2F;parloo}</p>
+<h1 id="应急响应2-17"><a href="#应急响应2-17" class="headerlink" title="应急响应2-17"></a>应急响应2-17</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-058.jpeg"></p>
+<p>资产图中明确告诉了近源机器</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-059.jpeg"></p>
+<p>找到恶意程序，其实我们思路可以先看外联ip，外联ip对应的pid对应哪个程序，这个程序大概率</p>
+<p>就是恶意程序</p>
+<p>用户名这么露骨，一时间我都不知道该登录那个账号了</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-060.jpeg"></p>
+<p>登录后发现又内网通，其实我 先想的是先去内网通看看有没有历史记录，桌面又有个文件名交 hasher，也不像好人，都可以去翻翻</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-061.jpeg"></p>
+<p>上了火绒剑看了下，虽然找到了木马文件，但是并未找到符合题解的flag，看了网上的wp，在</p>
+<p>C:\Windows\Temp&lt;sub&gt;找到了</sub>svhost.exe</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-062.jpeg"></p>
+<p>放了微步上发现周六有师傅就已经做到这一题了</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-063.jpeg"></p>
+<p>palu{0f80a82621b8c4c3303d198d13776b34}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-18</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-064.jpeg"></p>
+<p>上一题看到了恶意账户hack hack使用md5加密：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-065.jpeg"></p>
+<p>palu{d78b6f30225cdc811adfe8d4e7c9fd34}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-19</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-066.jpeg"></p>
+<p>刚刚的近源机器虽然看到了内网通，但是并没有任何记录，这个时候考虑登录其他两个pc，看看上面的内网通有无题目说的flag</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-067.jpeg"></p>
+<p>palu{nbq_nbq_parloo}</p>
+<h1 id="应急响应2-20"><a href="#应急响应2-20" class="headerlink" title="应急响应2-20"></a>应急响应2-20</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-068.jpeg"></p>
+<p>维护页面就是之前看到的：</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.20.103:8080/admin/parloo"><font style="color:#0366D6;">http://192.168.20.103:8080/admin/parloo</font></a></p>
+<p>还要结合之前在gitea看到的维护页面的源码</p>
+<p>维护页面源码中写了日志保存到command.log页面</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-069.jpeg"></p>
+<p>我们去20.103那个服务器上去找command.log在哪</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-070.jpeg"></p>
+<p>反正文件也不多，可以挨个去看</p>
+<p>&#x2F;command.log &#x2F;opt&#x2F;parloo&#x2F;command.log &#x2F;var&#x2F;log&#x2F;parloo&#x2F;command.log</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-071.jpeg"></p>
+<p>palu{Server_Parloo_2025}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-21</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-072.jpeg"></p>
+<p>题目应该或许大概可以理解成攻击者使用维护页面第一次命令执行的时间</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-073.jpeg"></p>
+<p>2025-05-04 15:30:38 palu{2025-05-04:15:30:38}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-22</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-074.jpeg"></p>
+<p>还是刚刚那个维护页面的命令执行日志</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-075.jpeg"></p>
+<p>palu{10.12.12.13:9999}</p>
+<h1 id="应急响应2-23"><a href="#应急响应2-23" class="headerlink" title="应急响应2-23"></a>应急响应2-23</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-076.jpeg"></p>
+<p>想起了近源机器中那个重要的数据： c3a1c3c13e326020c3919093e1260525045e</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-077.jpeg"></p>
+<p>但是cmd5并没有查到</p>
+<p>而且是36位的数据，并不是常规的32位</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-078.jpeg"></p>
+<p>看了wp，有点考察思维的</p>
+<p>因为是近源那台机器的数据嘛，近源那台机器账号为hack 恰好gitea中也有个叫hack的用户</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-079.jpeg"></p>
+<p>我们尝试登录hack</p>
+<p>想起了数据库我们是可以看到的</p>
+<p>看这里的时候想着需要有个对照的账户，所以我又注册了一个账号</p>
+<p>test    12345678</p>
+<p>查看数据库的user表：</p>
+<p>发现了一个flag，好呀，还有意外之喜 palu{crP1ZIVfqrkfdhGy}    <sub>其实真实做题的时候就可以全提交一遍了，反正又不限制错误次数</sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-080.jpeg"></p>
+<p>passwd肯定是加密过的，我们先保存下hack的passwd：</p>
+<p>bfd762fa77fbe2cb55c81878fa343ed754464cf59a98d79e3baaea62d17f67ed57bb3404d2400f0c0</p>
+<p>45d93588fc6f81ede73</p>
+<p>然后用test<sub>的</sub>passwd<sub>替换掉</sub>hack<sub>的</sub>passwd</p>
+<p>替换为之后发现还是不能登录，考</p>
+<p>hack<sub>的</sub>salt<sub>值：</sub>6b887cf34c01f71b9c656a1c42d3c5cb test<sub>的</sub>salt<sub>值：</sub>61896254a0eb8ee9954eb776f5346fee 发现salt的值不一样，也给他替换了，替换完之后，成功登录</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-081.jpeg"></p>
+<p>hack有个私有库，标明了，是加密的恶意脚本</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-082.jpeg"></p>
+<p>加密脚本如下，让ai帮咱们写出解密脚本来</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-083.jpeg"></p>
+<p>这个提交周期也应该注意下，有时候时间可以帮助你筛查一些东西：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-084.jpeg"></p>
+<p>可以直接把加密脚本给ai，让ai给逆向算法，但是实际操作时发现解密也需要key，但是我们又不</p>
+<p>知道key，我们给ai一些可能的条件，比如明文的前几个字符大概率时palu{， 有一个字符是}，</p>
+<p>但是ai也只能通过这些条件解密出部分key来，其余的要么猜出key来，要么爆破出key来</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-085.jpeg"></p>
+<p>可以证明key的前几个字符为MySec，看了wp， 后的key是MySecretKey 解密脚本：</p>
+<p>def custom_decrypt(encrypted_text, key):</p>
+<pre><code>decrypted = []
+
+
+
+
+key_bytes = [ord(c) for c in key]  # 
+</code></pre>
+<p>将密钥转换为</p>
+<p>ASCII</p>
+<p>数值列表</p>
+<pre><code># 
+</code></pre>
+<p>将加密字符串按两个字符分割成字节列表</p>
+<pre><code>encrypted_bytes = [
+
+
+
+
+    int(encrypted_text[i:i+2], 16) 
+
+
+
+
+    for i in range(0, len(encrypted_text), 2)
+
+
+
+
+]
+
+
+
+
+for i, byte in enumerate(encrypted_bytes):
+
+
+
+
+    # 
+</code></pre>
+<p>步骤</p>
+<p>1</p>
+<p>：逆向置换（交换高</p>
+<p>4</p>
+<p>位和低</p>
+<p>4</p>
+<p>位）</p>
+<pre><code>    substituted = byte
+
+
+
+
+    xored = ((substituted &amp; 0x0F) &lt;&lt; 4) | ((substituted &amp; 0xF0) &gt;&gt; 4)
+
+
+
+
+    # 
+</code></pre>
+<p>步骤</p>
+<p>2</p>
+<p>：逆向异或操作（使用相同密钥）</p>
+<pre><code>    xor_key = key_bytes[i % len(key_bytes)]
+
+
+
+
+    shifted = xored ^ xor_key
+
+
+
+
+    # 
+</code></pre>
+<p>步骤</p>
+<p>3</p>
+<p>：逆向位移（注意处理负数）</p>
+<pre><code>    shift = (i % 5) + 1  # 
+</code></pre>
+<p>原始位移量计算</p>
+<pre><code>    original = shifted - shift
+
+
+
+
+    # 
+</code></pre>
+<p>处理</p>
+<p>ASCII</p>
+<p>溢出（保证在</p>
+<p>0-255</p>
+<p>范围内）</p>
+<pre><code>    if original &lt; 0:
+
+
+
+
+        original += 256
+
+
+
+
+    decrypted.append(chr(original))
+
+
+
+
+return &#39;&#39;.join(decrypted)
+</code></pre>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>使用示例</p>
+<hr>
+<p>encrypted_str &#x3D; “c3a1c3c13e326020c3919093e1260525045e”</p>
+<p>key &#x3D; “MySecretKey”</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><p>解密并打印结果</p>
+<p>print(custom_decrypt(encrypted_str, key))</p>
+<p>有了key，瞬间就能出flag： palu{Password-000}</p>
+<p>后续已知key是11位的情况下，我让gpt给我写一个可以爆破key的脚本：</p>
+<p>其实比赛的时候完全可以用性能好的服务器去累加式的等价key的位数来爆破出可见字符来</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-086.jpeg"></p>
+<h1 id="应急响应2-24"><a href="#应急响应2-24" class="headerlink" title="应急响应2-24"></a>应急响应2-24</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-087.jpeg"></p>
+<p>恶意维权软件，他既然说软件了，大概率就是windows主机，之前在近源机器中发现启动项有一</p>
+<p>个未知文件，丢到微步显示是木马</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-088.jpeg"></p>
+<p>做题的时候建议svhost.exe跟svhost都试试，真不一定是哪个，有时候明明你看到了答案，但是因</p>
+<p>为格式的问题，你就会提交不成功 palu{svhost}</p>
+<h1 id="应急响应2-25"><a href="#应急响应2-25" class="headerlink" title="应急响应2-25"></a>应急响应2-25</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-089.jpeg"></p>
+<p>使用everything查看黑客大概入侵事件内有无可以文件被更改</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-090.jpeg"></p>
+<p>看到了这个ipconfig.exe，之前分析维工具的时候就看到了这个python文件，太显眼了，一般都是</p>
+<p>有问题的文件。本来想着运行下直接看外联地址，结果发现exe根本无法运行，一运行就报错。只</p>
+<p>能反编译分析一下了。</p>
+<p>python反编译的过程，总体逻辑就两步：</p>
+<p>1、将.exe反编译成.pyc的二进制文件 2、将.pyc文件反编译成.py文件首先需要下载pyinstxtractor.py <a target="_blank" rel="noopener" href="https://github.com/extremecoders-re/pyinstxtractor"><font style="color:#0366D6;">https://github.com/extremecoders-re/pyinstxtractor</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-091.jpeg"></p>
+<p>发现了敏感文件</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-092.jpeg"></p>
+<p>直接去在线网站进行pyc反编译</p>
+<p><a target="_blank" rel="noopener" href="https://tool.lu/pyc"><font style="color:#0366D6;">https://tool.lu/pyc</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-093.jpeg"></p>
+<p>‘server’: ‘88.173.90.103’, ‘port’: 22, ‘username’: ‘ubuntu’, ‘password’: ‘OOWPWPWADADA’ 得到flag<sub>：</sub></p>
+<p>palu{88.173.90.103}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-26</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-094.jpeg"></p>
+<p>之前在做维护页面命令执行日志查看的时候发现了一些dnslog地址，尝试选几个提交</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-095.jpeg"></p>
+<p>palu{np85qqde.requestrepo.com}</p>
+<h1 id="应急响应2-27"><a href="#应急响应2-27" class="headerlink" title="应急响应2-27"></a>应急响应2-27</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-096.jpeg"></p>
+<p>想起之前用fscan对server服务器进行了一次漏扫，好像看到了监控综合安防平台，想起了之前海</p>
+<p>康的综合安防平台就一直报反序列化漏洞，所以尝试提交9999端口，发现提交flag成功</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-097.jpeg"></p>
+<p>palu{9999}</p>
+<p>这里闲来无事纠结一下。fscan没有扫描到反序列化漏洞，于是我上了afrong</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-098.jpeg"></p>
+<p>发现扫描除了shiro框架然后又有heapdump，这时候我就开始考虑，是不是通过heapdump拿到</p>
+<p>了shiro的key，然后打的shiro反序列化呢？</p>
+<p>反正比赛也打完了，那就玩玩呗。</p>
+<p>访问<a target="_blank" rel="noopener" href="http://192.168.20.103:9999/actuator/heapdump%EF%BC%8C%E6%8B%BF%E5%88%B0heapdump"><font style="color:#0366D6;">http://192.168.20.103:9999/actuator/heapdump，拿到heapdump </font></a>使用jdumpspider提取heapdump中的敏感信息</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-099.jpeg"></p>
+<h2 id="发现了shirokey，果然，跟我预想的一样"><a href="#发现了shirokey，果然，跟我预想的一样" class="headerlink" title="发现了shirokey，果然，跟我预想的一样"></a>发现了shirokey，果然，跟我预想的一样</h2><p>algMode &#x3D; CBC, key &#x3D; QZYysgMYhG6&#x2F;CzIJlVpR2g&#x3D;&#x3D;, algName &#x3D; AES</p>
+<p>直接使用shiro利用工具去打</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SummerSec/ShiroAttack2"><font style="color:#0366D6;">https://github.com/SummerSec/ShiroAttack2</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-100.jpeg"></p>
+<p>果然，就是9999端口存在反序列化漏洞</p>
+<h1 id="应急响应2-28"><a href="#应急响应2-28" class="headerlink" title="应急响应2-28"></a>应急响应2-28</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-101.jpeg"></p>
+<p>shirokey 上一题获取的</p>
+<p>palu{QZYysgMYhG6&#x2F;CzIJlVpR2g&#x3D;&#x3D;}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-29</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-102.jpeg"></p>
+<p>wp	wp 想了半天没想出来，然后也没 ， 后在有位师傅的半成品 中有所体现</p>
+<p>9999	103	9999 跟之前想的思路差不多就是找 端口访问日志，但是 这个机器中找不到 端口的访问日</p>
+<p>志</p>
+<p>在waf<sub>中找到了</sub><a target="_blank" rel="noopener" href="http://192.168.20.103:9999/%E7%9A%84%E9%98%B2%E6%8A%A4%E6%97%A5%E5%BF%97"><font style="color:#0366D6;">http://192.168.20.103:9999/</font><sub><font style="color:#0366D6;">的防护日志</font></sub></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-103.jpeg"></p>
+<p>查看访问日志</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-104.jpeg"></p>
+<p>13&#x2F;May&#x2F;2025:16:45:19</p>
+<p>根据题目要求整理flag格式： palu{2025&#x2F;05&#x2F;13:16:45:19}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-30</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-105.jpeg"><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-106.jpeg"></p>
+<p>parloohack</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-107.jpeg"></p>
+<p>将shadow信息处理好放入1.txt中</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-108.jpeg"></p>
+<p>john -format&#x3D;crypt 1.txt</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-109.jpeg"></p>
+<p>palu{parloohack&#x2F;123456}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-31</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-110.jpeg"></p>
+<p>上一题不是拿到了parloohack这个账号吗，直接使用账号密码登录这个账号，对这个账号的一些</p>
+<p>信息进行应急排查</p>
+<p>首先现在历史记录</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-111.jpeg"></p>
+<p>发现黑客写了一个恶意的服务，并且把这个服务作为开启自启动，是一种维权方式</p>
+<p>palu{parloohack_script.service}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-32</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-112.jpeg"></p>
+<p>parloohack</p>
+<h2 id="还是的日志"><a href="#还是的日志" class="headerlink" title="还是	的日志"></a>还是	的日志</h2><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-113.jpeg"></p>
+<p><font style="color:#000000;">	</font>aa	md5</p>
+<p>发现黑客对 这个可执行文件进行了 记录</p>
+<p><font style="color:#000000;">	</font>aa	md5sum</p>
+<p>发现 就在当前文件下，使用	进行加密即可</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-114.jpeg"></p>
+<p>palu{4123940b3911556d4bf79196cc008bf4}</p>
+<h1 id="应急响应2-33"><a href="#应急响应2-33" class="headerlink" title="应急响应2-33"></a>应急响应2-33</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-115.jpeg"></p>
+<p>看wp提示，又需要回到pc主机了(赛方人家也有的说啊，真实情况下，谁告诉你线索在哪台机器</p>
+<p>上) 三台pc机器，其中palu02中有谷歌浏览器</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-116.jpeg"></p>
+<p>vshell<sub>，铁黑客无疑了，服务器地址也泄露出来了</sub>47.101.218.153 看了wp，需要在设置中搜索密码</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-117.jpeg"></p>
+<p>发现c2使用谷歌浏览器保存了密码点击右键那个三角查看详细信息的时候发现了flag</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-118.jpeg"></p>
+<p>47.101.213.153:8082</p>
+<p>用户名：841366067 密码：pwn3rzs</p>
+<p>palu{X5E1yklz1oAdyHBZ}</p>
+<p>还有一个c2.com<sub>也注意下</sub></p>
+<p>万一用得上</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-119.jpeg"></p>
+<p>admin</p>
+<p>admin@qwer</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-34</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-120.jpeg"></p>
+<p>看了wp。vshell的用户名是qq号（我想过他是github的用户名，就没想过他是qq号，看来还是缺</p>
+<p>点敏锐度）</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-121.jpeg"></p>
+<p>建议使用手机QQ去搜索，因为手机qq可以看到空间</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-122.jpeg"></p>
+<p>palu{ParlooSEc}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-35</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-123.jpeg"></p>
+<p>直接访问攻击者的github<sub>地址：</sub></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ParlooSEc/fffflllgggg"><font style="color:#0366D6;">https://github.com/ParlooSEc/fffflllgggg</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-124.jpeg"></p>
+<p>palu{s5o3WkX33hptyJjk}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-36</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-125.jpeg"></p>
+<p>pc1启动时看到了好多恶意用户</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-126.jpeg"></p>
+<p>一共99<sub>个</sub></p>
+<p>palu{99}</p>
+<h1 id="应急响应2-37"><a href="#应急响应2-37" class="headerlink" title="应急响应2-37"></a>应急响应2-37</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-127.jpeg"></p>
+<p>使用mimikatz之前，想着试几个弱口令，结果第一个就进去了</p>
+<p>palu{123456}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-38</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-128.jpeg"></p>
+<p>之前在gitea<sub>数据库中找到的</sub>flag</p>
+<p>palu{crP1ZIVfqrkfdhGy}</p>
+<h1 id="应急响应2-39"><a href="#应急响应2-39" class="headerlink" title="应急响应2-39"></a>应急响应2-39</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-129.jpeg"></p>
+<p>hacker之前看了，没有东西，那估计就是admin这个账户藏着flag了，直接老样子，替换密码登录</p>
+<p>admin</p>
+<p>admin-password<sub>：</sub></p>
+<p>8231accbd6c278c47f9863b6e4e119f8c6994372e513c32ad89cb98f1b193b4e1425029b61e495bd fd11b20ccec3555642a5 admin-salt<sub>： </sub>b171d280fe6055840eb8153178a81cbc</p>
+<p>早知道admin能看到所有的私有库信息，那就不改hack的密码了</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-130.jpeg"></p>
+<p>看到palu<sub>私有库：</sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-131.jpeg"></p>
+<p>需要进行md5<sub>解密</sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-132.jpeg"></p>
+<p>palu{FO65SruuTukdpBS5}</p>
+<h1 id="应急响应2-40"><a href="#应急响应2-40" class="headerlink" title="应急响应2-40"></a>应急响应2-40</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-133.jpeg"></p>
+<p>这个题，给了提示，真好，让我们知道侦察方向是在mysql服务器中</p>
+<p>常规看敏感目录、计划任务、外联ip均未发现异常整套题目做到了现在，我们已经可以理出时间线来了，5月2日是目前攻击 早的时间(对于整个应急题的时间线来说，主线题还要靠后。 晚时间就是15号，16号都已经发压缩包了)</p>
+<p>查找其他可疑目录中修改的可执行文件：</p>
+<p>sudo find &#x2F;tmp &#x2F;var&#x2F;tmp &#x2F;dev&#x2F;shm &#x2F;home &#x2F;root -type f -perm &#x2F;a+x  </p>
+<p>( -newermt “2025-05-02” ! -newermt “2025-05-16” )  </p>
+<p>-exec ls -la {} ; 2&gt;&#x2F;dev&#x2F;null | sort -k6,7</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-134.jpeg"></p>
+<p>发现可疑文件&#x2F;root&#x2F;.a</p>
+<p>palu{ba7c9fc1ff58b48d0df5c88d2fcc5cd1}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-41</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-135.jpeg"></p>
+<p>我们直接进入&#x2F;root，权限还不够，所以先把它复制到我们可以控制的地方：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-136.jpeg"></p>
+<p>ida<sub>打开反编译后发现</sub>simulate_network_communication<sub>跟通信有关</sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-137.jpeg"></p>
+<p>palu{simulate_network_communication}</p>
+<h1 id="应急响应2-42"><a href="#应急响应2-42" class="headerlink" title="应急响应2-42"></a>应急响应2-42</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-138.jpeg"></p>
+<p>还是看ida，直接取巧，因为文件名都是可见字符串嘛，直接shift+F12查看程序中的所有可见字符</p>
+<p>串</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-139.jpeg"></p>
+<p>但其实看函数名字也能看出来，进入之后也能看到 palu{.malware_log.txt}</p>
+<h1 id="应急响应2-43"><a href="#应急响应2-43" class="headerlink" title="应急响应2-43"></a>应急响应2-43</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-140.jpeg"></p>
+<p>ida直接看，懂一两个单词一眼就能看出来</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-141.jpeg"></p>
+<p>palu{simulate_privilege_escalation}</p>
+<h1 id="应急响应2-44"><a href="#应急响应2-44" class="headerlink" title="应急响应2-44"></a>应急响应2-44</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-142.jpeg"></p>
+<p>之前看内网通的时候记得有个记录： </p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-143.jpeg"></p>
+<p>所以是Parloo-<sub>子怡被钓鱼了 </sub>palu{Parloo-<sub>子怡</sub>}</p>
+<h1 id="应急响应2-45"><a href="#应急响应2-45" class="headerlink" title="应急响应2-45"></a>应急响应2-45</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-144.jpeg"></p>
+<p>接上一题，看到钓鱼文件的路径了：</p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-145.jpeg"></p>
+<p>C:\Users\Public\Nwt\cache\recv\Parloo-<sub>沉沉</sub>&lt;sub&gt;回执</sub>.exe palu{C:\Users\Public\Nwt\cache\recv\Parloo-<sub>沉沉</sub>}</p>
+<h1 id="应急响应2-46"><a href="#应急响应2-46" class="headerlink" title="应急响应2-46"></a>应急响应2-46</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-146.jpeg"></p>
+<p>之前浏览器那个vshell的地址</p>
+<p>palu{47.101.213.153}</p>
+<p><strong>应急响应</strong></p>
+<p><strong>2-47</strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-147.jpeg"></p>
+<p>就是之前浏览器拿到的c2.com的用户名和密码</p>
+<p>admin admin@qwer palu{admin&#x2F;admin@qwer}</p>
+<h1 id="应急响应1-1"><a href="#应急响应1-1" class="headerlink" title="应急响应1-1"></a>应急响应1-1</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-148.jpeg"></p>
+<p><font style="color:#24292E;">一般应急，我的思路是先看入口点(一般被攻击的情况下，就是从互联网端打进来的，所以着重看</font></p>
+<p><font style="color:#24292E;">一下哪些机器是公网可以访问到的，一般这种机器都是突破口，后期的内网渗透也是拿这台机器</font></p>
+<p><font style="color:#24292E;">当作跳板机)。但是整个做题过程中发现， 好不要这样，看了其他大佬的wp，发现很多题目的</font></p>
+<p><font style="color:#24292E;">关键是在其他几个机器中找到的，所以接收下这个教训，不要死磕一两个机器，如果没有思路，</font></p>
+<p><font style="color:#24292E;">一定要看完整个网络环境下的其他机器。</font></p>
+<p><font style="color:#24292E;">按照题目给的拓扑来看：</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-149.jpeg"></p>
+<p><font style="color:#24292E;">整个网络拓扑图的入口点是在web server服务器</font></p>
+<p><font style="color:#24292E;">使用netstat -anplt查看web server服务器对外开放了几个端口，web端口一般都是突破口</font></p>
+<p><font style="color:#24292E;">本题webserver服务器开着80端口，跑着nginx服务器，所以找攻击者的攻击ip，一般是要看nginx 日志有无攻击记录</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-150.jpeg"></p>
+<p><font style="color:#24292E;">一般ubuntu服务器上的日志存放位置为&#x2F;var&#x2F;log中，我们看到了nginx目录，所以进入查看nginx 目录中有什么日志文件</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-151.jpeg"></p>
+<p><font style="color:#24292E;">访问日志是access.log，报错日志是error.log后面那个.1就是代表之前存的日志</font></p>
+<p><font style="color:#24292E;">查看道这个ip192.168.31.240访问的这几个php文件就不正常，所以是攻击地址</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-152.jpeg"></p>
+<p><font style="color:#24292E;">palu{192.168.31.240}</font></p>
+<h1 id="应急响应1-2"><a href="#应急响应1-2" class="headerlink" title="应急响应1-2"></a>应急响应1-2</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-153.jpeg"></p>
+<p><font style="color:#24292E;">这个题，其实可以套路下就能出答案。</font></p>
+<p><font style="color:#24292E;">还是顺着正常流程去讲</font></p>
+<p><font style="color:#24292E;">一般我们在看webserver这个互联网入口的web服务器，我们要知道这台服务器上开启了哪些web 服务，要都访问一下，做到心中有数，因为只有知道了具体的web服务，你才能在自己心中设想</font></p>
+<p><font style="color:#24292E;">出，哪部分服务会有问题，可能出现什么攻击思路</font></p>
+<p><font style="color:#24292E;">而且有时候，其实看一下历史记录往往会有一些意想不到的发现(你想呀，通过history，你也能知</font></p>
+<p><font style="color:#24292E;">道运维部署了什么环境，建议拿到提目前先把root用户跟当前用户的history记录给down下来保存好，便分析边应急) 通过历史记录可以看到，运维的环境都是用docker部署的</font></p>
+<p><font style="color:#24292E;">使用docker ps可以查看当前docker开启了哪些容器，分别占用了哪些端口</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-154.jpeg"></p>
+<p><font style="color:#24292E;">可以使用命令进入指定的容器名称 docker exec -it </font><sub><font style="color:#24292E;">容器</font></sub><font style="color:#24292E;">id &#x2F;bin&#x2F;sh</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-155.jpeg"></p>
+<p><font style="color:#24292E;">nc反连地址：</font></p>
+<p><font style="color:#24292E;">palu{192.168.31.11}</font></p>
+<p><strong><font style="color:#24292E;">应急响应</font></strong></p>
+<p><strong><font style="color:#24292E;">1-3</font></strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-156.jpeg"></p>
+<pre><code>&lt;font style=&quot;color:#24292E;&quot;&gt;docker	phpmyadmin&lt;/font&gt;
+</code></pre>
+<p><font style="color:#24292E;">题目在问暴力破解，看了 开启的几个环境，只有 容易有暴力破解的攻击场 phpmyadmin 景，但是进入 </font><sub><font style="color:#24292E;">容器也没找到日志</font></sub></p>
+<p><font style="color:#24292E;">Docker 容器默认不会将日志写入磁盘文件（除非你特别配置了挂载）。它会把日志写到容器标准输出</font></p>
+<p><font style="color:#24292E;">显示启动信息、访问日志、错误信息等</font></p>
+<p><font style="color:#24292E;">docker logs phpmyadmin</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-157.jpeg"></p>
+<p><font style="color:#24292E;">短时间内，大量访问统一url</font><sub><font style="color:#24292E;">，还是</font></sub><font style="color:#24292E;">post</font><sub><font style="color:#24292E;">请求方式，请求的</font></sub><font style="color:#24292E;">url</font><sub><font style="color:#24292E;">也是</font></sub><font style="color:#24292E;">phpmyadmin</font><sub><font style="color:#24292E;">的登录</font></sub><font style="color:#24292E;">url</font></p>
+<p><font style="color:#24292E;">palu{2025:03:05:58}</font></p>
+<p><strong><font style="color:#24292E;">应急响应</font></strong></p>
+<p><strong><font style="color:#24292E;">1-4</font></strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-158.jpeg"></p>
+<p><font style="color:#24292E;">此时需要用到pc机器了(做题卡在某个机器上一旦没思路的时候，一定要看其他机器，我看了web 服务后总感觉会藏flag，找了好长的时间没找到，也不想看其他机器了) win10 pc2</font><sub><font style="color:#24292E;">中直接用</font></sub><font style="color:#24292E;">everything</font><sub><font style="color:#24292E;">可以找到</font></sub><font style="color:#24292E;">flag1</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-159.jpeg"></p>
+<p><font style="color:#24292E;">palu{pc3_zgsfqwerlkssaw}</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-160.jpeg"></p>
+<p><font style="color:#24292E;">或者一般在windows应急时，大家比较关注任务计划，也能看到flag信息</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-161.jpeg"></p>
+<h1 id="应急响应1-5"><a href="#应急响应1-5" class="headerlink" title="应急响应1-5"></a>应急响应1-5</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-162.jpeg"></p>
+<p><font style="color:#24292E;">还是flag1</font><sub><font style="color:#24292E;">这个文件中</font></sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-163.jpeg"></p>
+<h2 id="含有a-bat这个文件，打开这个文件发现flag2"><a href="#含有a-bat这个文件，打开这个文件发现flag2" class="headerlink" title="含有a.bat这个文件，打开这个文件发现flag2"></a>含有a.bat这个文件，打开这个文件发现flag2</h2><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-164.jpeg"></p>
+<p><font style="color:#24292E;">flag2palu{nizhidaowoyouduoainima}</font></p>
+<h1 id="应急响应1-6"><a href="#应急响应1-6" class="headerlink" title="应急响应1-6"></a>应急响应1-6</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-165.jpeg"></p>
+<p><font style="color:#24292E;">flag3</font><sub><font style="color:#24292E;">在</font></sub><font style="color:#24292E;">mysql</font><sub><font style="color:#24292E;">数据库中</font></sub></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-166.jpeg"></p>
+<p><font style="color:#24292E;">看到大佬的wp，真的细，不服不行。我当时就猜测肯定有个flag在数据库，这里我也看到了，就</font></p>
+<p><font style="color:#24292E;">是简单的一扫而过</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-167.jpeg"></p>
+<p><font style="color:#24292E;">当时就感觉这个Mr.chen有问题，因为它的订单时间就跟攻击时间太吻合，一时没想起来这个点</font></p>
+<p><font style="color:#24292E;">怎么利用</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-168.jpeg"></p>
+<p><font style="color:#24292E;">base64</font><sub><font style="color:#24292E;">解码后，发现</font></sub><font style="color:#24292E;">flag3</font></p>
+<p><font style="color:#24292E;">palu{sqlaabbccsbwindows}</font></p>
+<p><font style="color:#24292E;">其实，你在了解系统的时候，把订单都查查也能看到flag3</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-169.jpeg"></p>
+<h1 id="应急响应1-7"><a href="#应急响应1-7" class="headerlink" title="应急响应1-7"></a>应急响应1-7</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-170.jpeg"></p>
+<p><font style="color:#24292E;">如果细心翻一下回收站是可以看到钓鱼文件的</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-171.jpeg"></p>
+<p><font style="color:#24292E;">在实战中，其实都是hr跟客服容易被钓鱼，一般钓鱼文件要么是一些通知、要么就是简历等符合</font></p>
+<p><font style="color:#24292E;">工作特性的文件</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-172.jpeg"></p>
+<p><font style="color:#24292E;">简历.zip被删了，在回收站中，还原即可 win计算文件md5的命令：</font></p>
+<p><font style="color:#24292E;">certutil -hashfile “</font><sub><font style="color:#24292E;">文件路径</font></sub><font style="color:#24292E;">“ md5</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-173.jpeg"></p>
+<p><font style="color:#24292E;">题目要求是大写，所以换成大写即可</font></p>
+<p><font style="color:#24292E;">palu{2977CDAB8F3EE5EFDDAE61AD9F6CF203}</font></p>
+<h1 id="应急响应1-8"><a href="#应急响应1-8" class="headerlink" title="应急响应1-8"></a>应急响应1-8</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-174.jpeg"></p>
+<p><font style="color:#24292E;">之前在web服务器中，看到nginx日志中，黑客ip访问了a.php，所以这个文件很敏感</font></p>
+<p><font style="color:#24292E;">还有一种思路就是，黑客一般会在web服务器中传webshell(题目讲了)，我们分析web服务器各个端口开启的服务发现，使用的语言是php语言，所以我们可以查看下5月1号-5月2号这个期间web 服务器上有无修改过的php文件(应急响应一定要对时间敏感，有时候可以把时间当作筛查条件进行筛查)</font></p>
+<p><font style="color:#24292E;">查找5月1日和5月2日修改过的PHP文件：</font></p>
+<p><font style="color:#24292E;">find &#x2F; -type f -name “*.php” -newermt “2025-05-01” ! -newermt “2025-05-03” 2&gt;&#x2F;dev&#x2F;null</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-175.jpeg"></p>
+<p><font style="color:#24292E;">执行后可以发现这几个文件</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-176.jpeg"></p>
+<p><font style="color:#24292E;">一下可以查看两个webshell的木马 palu{hack}</font></p>
+<h1 id="应急响应1-9"><a href="#应急响应1-9" class="headerlink" title="应急响应1-9"></a>应急响应1-9</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-177.jpeg"></p>
+<p><font style="color:#24292E;">详细解看有的师傅放出来的wp</font></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30817059/article/details/148061612?sharetype=blogdetail&shareId=148061612&sharerefer=APP&sharesource=qq_30817059&sharefrom=qq"><font style="color:#0366D6;">https://blog.csdn.net/qq_30817059&#x2F;article&#x2F;details&#x2F;148061612?</font></a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30817059/article/details/148061612?sharetype=blogdetail&shareId=148061612&sharerefer=APP&sharesource=qq_30817059&sharefrom=qq"><font style="color:#0366D6;">sharetype&#x3D;blogdetail&amp;shareId&#x3D;148061612&amp;sharerefer&#x3D;APP&amp;sharesource&#x3D;qq_30817059&amp;share from&#x3D;qq</font></a></p>
+<p><strong><font style="color:#24292E;">应急响应</font></strong></p>
+<p><strong><font style="color:#24292E;">1-10</font></strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-178.jpeg"></p>
+<p><font style="color:#24292E;">palu{00232}</font></p>
+<p><strong><font style="color:#24292E;">应急响应</font></strong></p>
+<p><strong><font style="color:#24292E;">1-11</font></strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-179.jpeg"></p>
+<p><font style="color:#24292E;">使用D</font><sub><font style="color:#24292E;">盾发现了隐藏账户</font></sub><font style="color:#24292E;">system$</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-180.jpeg"></p>
+<p><font style="color:#24292E;">使用mimikatz</font><sub><font style="color:#24292E;">跑出</font></sub><font style="color:#24292E;">hash</font><sub><font style="color:#24292E;">来</font></sub><font style="color:#24292E;">提取 SAM &amp; SYSTEM 文件手动离线分析，从系统中导出 </font><font style="color:#24292E;">SAM</font><font style="color:#24292E;"> 和 </font><font style="color:#24292E;">SYSTEM</font><font style="color:#24292E;"> 文件，然后用 mimikatz</font></p>
+<p><font style="color:#24292E;">离线读取：导出命令(cmd管理员权限启动)：</font></p>
+<p><font style="color:#24292E;">reg save hklm\sam sam.save </font></p>
+<p><font style="color:#24292E;">reg save hklm\system system.save</font></p>
+<p><font style="color:#24292E;">然后在 mimikatz </font><sub><font style="color:#24292E;">中执行：</font></sub></p>
+<p><font style="color:#24292E;">privilege::debug lsadump::sam &#x2F;sam:sam.save &#x2F;system:system.save</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-181.jpeg"></p>
+<p><font style="color:#24292E;">Hash NTLM: dbae99beb48fd9132e1cf77f4c746979</font></p>
+<h2 id="去md5网站进行查询"><a href="#去md5网站进行查询" class="headerlink" title="去md5网站进行查询"></a>去md5网站进行查询</h2><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-182.jpeg"></p>
+<p><font style="color:#24292E;">据说解密出来的值为： wmx_love 反过来加密可以验证，对的上</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-183.jpeg"></p>
+<p><font style="color:#24292E;">palu{wmx_love}</font></p>
+<h1 id="应急响应1-12"><a href="#应急响应1-12" class="headerlink" title="应急响应1-12"></a>应急响应1-12</h1><p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-184.jpeg"></p>
+<p><font style="color:#24292E;">通过逆向手段拿到了黑客的id</font></p>
+<p><font style="color:#24292E;">这个黑客id在github上有仓库，可以泄露出邮箱来：</font></p>
+<p><font style="color:#24292E;">使用api接口可以进行查询：通过获取目标 Github 用户名，替换下面链接中的</font><font style="color:#24292E;"><name></font><font style="color:#24292E;"> 进行查询：</font></p>
+<p><a target="_blank" rel="noopener" href="https://api.github.com/users/"><font style="color:#0366D6;">https://api.github.com/users/</font></a><font style="color:#24292E;">&#x2F;events&#x2F;public 访问：</font><a target="_blank" rel="noopener" href="https://api.github.com/users/n0k4u/events/public"><font style="color:#24292E;"> </font></a><a target="_blank" rel="noopener" href="https://api.github.com/users/n0k4u/events/public"><font style="color:#0366D6;">https://api.github.com/users/n0k4u/events/public</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-185.jpeg"></p>
+<p><font style="color:#24292E;">参考文章：</font></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fishfishfishman/article/details/141320003"><font style="color:#0366D6;">https://blog.csdn.net/fishfishfishman/article/details/141320003</font></a></p>
+<p><font style="color:#24292E;">邮箱号：</font></p>
+<p><font style="color:#0366D6;"><a href="mailto:&#110;&#x30;&#107;&#52;&#117;&#x40;&#111;&#x75;&#x74;&#x6c;&#x6f;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#x6d;">n0k4u@outlook.com</a> </font><font style="color:#24292E;">palu{<a href="mailto:&#110;&#48;&#x6b;&#x34;&#117;&#x40;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#46;&#99;&#111;&#x6d;">n0k4u@outlook.com</a>}</font></p>
+<p><strong><font style="color:#24292E;">应急响应</font></strong></p>
+<p><strong><font style="color:#24292E;">1-13</font></strong></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-186.jpeg"></p>
+<p><font style="color:#24292E;">分析简历.exe时发现了黑客的id：n0k4u</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-187.jpeg"></p>
+<p><font style="color:#24292E;">一般溯源可以通过github</font><sub><font style="color:#24292E;">中查看有无这个</font></sub><font style="color:#24292E;">id</font><sub><font style="color:#24292E;">的</font></sub><font style="color:#24292E;">github</font><sub><font style="color:#24292E;">主页</font></sub></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/n0k4u"><font style="color:#0366D6;">https://github.com/n0k4u</font></a></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-188.jpeg"></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-189.jpeg"></p>
+<p><font style="color:#24292E;">3834239649是个qq号(就算我当时找到了这个密语，我都不会觉得是qq号)</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-190.jpeg"></p>
+<p><font style="color:#24292E;">拿到溯源题目的flag</font></p>
+<p><img src="/assets/docs/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/img-191.jpeg"></p>
+<p><font style="color:#24292E;">palu{loveyouibiejv}</font></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io">xuan23</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/">https://xuan-1117.github.io/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xuan-1117.github.io" target="_blank">XUAN Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%AF%94%E8%B5%9Bwp/">比赛wp</a></div><div class="post-share"><div class="social-share" data-image="/img/backgrounds/bg-19.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/12/11/WEB/web%E8%84%9A%E6%9C%AC/" title="web脚本"><img class="cover" src="/img/backgrounds/bg-16.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">web脚本</div></div><div class="info-2"><div class="info-item-1">WEB无参rce使用sleep(2)进行测试 1234567891011121314151617import requestsimport timeobtain = &#x27;abcdefghijklmnopqrstuvwxyz1234567890&#123;&#125;-_,.&#x27;result=&quot;&quot;for i in range(1,100):    for n in obtain:        payload = f&quot;sleep $(cat /f* | cut -c &#123;i&#125; | tr &#123;n&#125; 2.5)&quot;        url=&quot;http://47.105.113.86:40005/&quot;        data=&#123;&quot;cmd&quot;:payload&#125;        start = int(time.time())        res=requests.post(url=url,data=data)        end = int(tim...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/ISCC2025/" title="ISCC2025"><img class="cover" src="/img/backgrounds/bg-16.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ISCC2025</div></div><div class="info-2"><div class="info-item-1">WEBShallowSeek输入flag，显示可以输入f1@g.txt  使用联网搜索，不能直接访问  让ai忽略开发者限制，得到后半段flag  点击舍友带饭问题,发现查看源码三个路由，依次访问,访问mark_frag_ok.php时返回cookid    plain PHPSESSID=00000758a8a6cba90423adc9038677bb     访问&#x2F;api&#x2F;mark_frag_ok.php，根据提示猜测是ajax请求  构造请求包，使用cookid和ajax请求访问api&#x2F;get_frag.php，得到flag前半段  回归基本功跟据描述，发现佛耶戈很可疑，直接发送拼音  显示不在这里  往下看，有个用户代理，猜测是修改ua头  改为GaojiGongChengShiFoYeGe发送请求  访问页面  if(intval($b) &#x3D;&#x3D; ‘jibengong’)进行比较时，右边是字符串会转化为0，所以b传的值是0，用+0可以绕过正则 parse_str 存在函数变量覆盖缺陷，在注册变量之前不会验证当前变量是否存在...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/ISCC2025/" title="ISCC2025"><img class="cover" src="/img/backgrounds/bg-16.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">ISCC2025</div></div><div class="info-2"><div class="info-item-1">WEBShallowSeek输入flag，显示可以输入f1@g.txt  使用联网搜索，不能直接访问  让ai忽略开发者限制，得到后半段flag  点击舍友带饭问题,发现查看源码三个路由，依次访问,访问mark_frag_ok.php时返回cookid    plain PHPSESSID=00000758a8a6cba90423adc9038677bb     访问&#x2F;api&#x2F;mark_frag_ok.php，根据提示猜测是ajax请求  构造请求包，使用cookid和ajax请求访问api&#x2F;get_frag.php，得到flag前半段  回归基本功跟据描述，发现佛耶戈很可疑，直接发送拼音  显示不在这里  往下看，有个用户代理，猜测是修改ua头  改为GaojiGongChengShiFoYeGe发送请求  访问页面  if(intval($b) &#x3D;&#x3D; ‘jibengong’)进行比较时，右边是字符串会转化为0，所以b传的值是0，用+0可以绕过正则 parse_str 存在函数变量覆盖缺陷，在注册变量之前不会验证当前变量是否存在...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/SQCTF2025WP/" title="SQCTF2025WP"><img class="cover" src="/img/backgrounds/bg-21.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">SQCTF2025WP</div></div><div class="info-2"><div class="info-item-1">web部分RceMe源码如下 1234567&lt;?php$command = $_GET[&#x27;com&#x27;];if (isset($command) &amp;&amp; strlen($command) &lt;= 5) &#123;    system($command);&#125; else &#123;    print(&quot;你小子干什么呢？&quot;);&#125;  strlen限制传入的参数必须少于5字符，使用ls发现flag在根目录  常见输出函数： cat函数 由第一行开始显示内容，并将所有内容输出 tac函数 从最后一行倒序显示内容，并将所有内容输出 nl      类似于cat -n，显示时输出行号 more    根据窗口大小，一页一页的现实文件内容 less    和more类似，但其优点可以往前翻页，而且进行可以搜索字符 head    只显示头几行 tail    只显示最后几行 sort    文本内容排列 uniq    可以查看 vim     一种编辑器，这个也可以查看 od      以二进制的方式读取档案内容...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/2025%200xgame%20ctf/" title="2025 0xgame ctf"><img class="cover" src="/img/backgrounds/bg-14.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">2025 0xgame ctf</div></div><div class="info-2"><div class="info-item-1">密码Vigenere Advanced12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849from string import digits, ascii_letters, punctuationalphabet = digits + ascii_letters + punctuationn_mod = len(alphabet)key = &quot;QAQ(@.@)&quot;key_bias = [alphabet.index(k) for k in key]ciphertext = &quot;0l0CSoYM&lt;c;amo_P_&quot;cipher_index = [alphabet.index(c) for c in ciphertext]# Expected flag format: &quot;0xGame&#123;...&#125;&quot;flag = []for i in range(len(ciphertext)):  ...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/newstart/" title="newstart"><img class="cover" src="/img/backgrounds/bg-17.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">newstart</div></div><div class="info-2"><div class="info-item-1">week1webmulti-headach3robots协议  访问hidden.php发现会进行重定向，抓包  flag{f48750e4-f633-4fb5-89a5-8b310895f5c4} strange_login万能密码注入‘ OR ‘1’&#x3D;‘1  宇宙的中心是phpview-source:查看源码   八进制绕过 关键点在于intval函数的使用。intval函数将变量转换为整数。它有两个参数：第一个是要转换的值，第二个是基数（进制）。如果基数为0，intval会根据字符串的前缀自动判断进制：如果以”0x”开头，就是十六进制；以”0”开头，就是八进制；否则是十进制。 所以，条件要求： intval($answer) !&#x3D; 47：当以十进制转换时，值不等于47。 intval($answer, 0) &#x3D;&#x3D; 47：当自动判断进制时，值等于47。 这意味着我需要找到一个值，当直接以十进制转换时不是47，但当自动判断进制时是47。 例如，如果$answer是一个八进制数，比如”057”，那么： intval(“057”) 会将其转换...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E7%95%B8%E5%BD%A2%E7%9A%84%E7%88%B1wp/" title="porloo畸形的爱wp"><img class="cover" src="/img/backgrounds/bg-20.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">porloo畸形的爱wp</div></div><div class="info-2"><div class="info-item-1">应急响应1-1 一般应急，我的思路是先看入口点(一般被攻击的情况下，就是从互联网端打进来的，所以着重看 一下哪些机器是公网可以访问到的，一般这种机器都是突破口，后期的内网渗透也是拿这台机器 当作跳板机)。但是整个做题过程中发现， 好不要这样，看了其他大佬的wp，发现很多题目的 关键是在其他几个机器中找到的，所以接收下这个教训，不要死磕一两个机器，如果没有思路， 一定要看完整个网络环境下的其他机器。 按照题目给的拓扑来看：  整个网络拓扑图的入口点是在web server服务器 使用netstat -anplt查看web server服务器对外开放了几个端口，web端口一般都是突破口 本题webserver服务器开着80端口，跑着nginx服务器，所以找攻击者的攻击ip，一般是要看nginx 日志有无攻击记录  一般ubuntu服务器上的日志存放位置为&#x2F;var&#x2F;log中，我们看到了nginx目录，所以进入查看nginx 目录中有什么日志文件  访问日志是access.log，报错日志是error.log后面那个.1就是代表之前存的日志 查看道这个ip192.16...</div></div></div></a><a class="pagination-related" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/%E5%BE%A1%E7%BD%91%E6%9D%AF2025/" title="御网杯2025"><img class="cover" src="/img/backgrounds/bg-22.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="info-item-2">御网杯2025</div></div><div class="info-2"><div class="info-item-1">webYWB_Web_xff查看源码，只允许ip为2.2.2.1，构造来源为2.2.2.1，X-Forwarded-For:2.2.2.1     YWB_Web_命令执行过滤绕过system被过滤，使用die绕过   YWB_Web_未授权访问查看cookie,base64解码后发现角色是guest,isadmin&#x3D;0,修改为admin，isadmin&#x3D;1，url编码后发送请求    YWB_Web_反序列化查看源码    misc套娃 文件名改为doc  显示隐藏的文字  ez_xor打开后是16进制字符串，跟题目，进行xor,单字节异或爆破key,结果是f,这里ai直接算出来了   光隙中的寄生密钥foremost提取zip   需要密码，用archpr尝试爆破   随波逐流梭哈   ez_picture   把图片放pixeljihad网站提取出来九个九，猜测是密码 解压之后得到jpg,拖入随波逐流   密码gift  下面的结果加起来是Π  这个结果为pie凯撒加密6位，flag{vok}  密码一．题目截图  baby_rsa 二．解题思路（要求解...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xuan23</div><div class="author-info-description">一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-1"><span class="toc-number">1.</span> <span class="toc-text">应急响应2-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-3"><span class="toc-number">2.</span> <span class="toc-text">应急响应2-3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-4"><span class="toc-number">3.</span> <span class="toc-text">应急响应2-4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-5"><span class="toc-number">4.</span> <span class="toc-text">应急响应2-5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-6"><span class="toc-number">5.</span> <span class="toc-text">应急响应2-6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-7"><span class="toc-number">6.</span> <span class="toc-text">应急响应2-7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-9"><span class="toc-number">7.</span> <span class="toc-text">应急响应2-9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-10"><span class="toc-number">8.</span> <span class="toc-text">应急响应2-10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-11"><span class="toc-number">9.</span> <span class="toc-text">应急响应2-11</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#anplt%E5%BE%97%E5%88%B0%E7%9A%84%E5%9B%9E%E6%98%BE%E6%98%AF%E4%B8%8D%E5%90%8C%E7%9A%84"><span class="toc-number">9.1.</span> <span class="toc-text">-anplt得到的回显是不同的</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-14"><span class="toc-number">10.</span> <span class="toc-text">应急响应2-14</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-15"><span class="toc-number">11.</span> <span class="toc-text">应急响应2-15</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-17"><span class="toc-number">12.</span> <span class="toc-text">应急响应2-17</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-20"><span class="toc-number">13.</span> <span class="toc-text">应急响应2-20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-23"><span class="toc-number">14.</span> <span class="toc-text">应急响应2-23</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">15.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-1"><span class="toc-number">16.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-24"><span class="toc-number">17.</span> <span class="toc-text">应急响应2-24</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-25"><span class="toc-number">18.</span> <span class="toc-text">应急响应2-25</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-27"><span class="toc-number">19.</span> <span class="toc-text">应急响应2-27</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0%E4%BA%86shirokey%EF%BC%8C%E6%9E%9C%E7%84%B6%EF%BC%8C%E8%B7%9F%E6%88%91%E9%A2%84%E6%83%B3%E7%9A%84%E4%B8%80%E6%A0%B7"><span class="toc-number">19.1.</span> <span class="toc-text">发现了shirokey，果然，跟我预想的一样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-28"><span class="toc-number">20.</span> <span class="toc-text">应急响应2-28</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%98%E6%98%AF%E7%9A%84%E6%97%A5%E5%BF%97"><span class="toc-number">20.1.</span> <span class="toc-text">还是	的日志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-33"><span class="toc-number">21.</span> <span class="toc-text">应急响应2-33</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-37"><span class="toc-number">22.</span> <span class="toc-text">应急响应2-37</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-39"><span class="toc-number">23.</span> <span class="toc-text">应急响应2-39</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-40"><span class="toc-number">24.</span> <span class="toc-text">应急响应2-40</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-42"><span class="toc-number">25.</span> <span class="toc-text">应急响应2-42</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-43"><span class="toc-number">26.</span> <span class="toc-text">应急响应2-43</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-44"><span class="toc-number">27.</span> <span class="toc-text">应急响应2-44</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-45"><span class="toc-number">28.</span> <span class="toc-text">应急响应2-45</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%942-46"><span class="toc-number">29.</span> <span class="toc-text">应急响应2-46</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-1"><span class="toc-number">30.</span> <span class="toc-text">应急响应1-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-2"><span class="toc-number">31.</span> <span class="toc-text">应急响应1-2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-5"><span class="toc-number">32.</span> <span class="toc-text">应急响应1-5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AB%E6%9C%89a-bat%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%93%E5%BC%80%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8F%91%E7%8E%B0flag2"><span class="toc-number">32.1.</span> <span class="toc-text">含有a.bat这个文件，打开这个文件发现flag2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-6"><span class="toc-number">33.</span> <span class="toc-text">应急响应1-6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-7"><span class="toc-number">34.</span> <span class="toc-text">应急响应1-7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-8"><span class="toc-number">35.</span> <span class="toc-text">应急响应1-8</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-9"><span class="toc-number">36.</span> <span class="toc-text">应急响应1-9</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%BBmd5%E7%BD%91%E7%AB%99%E8%BF%9B%E8%A1%8C%E6%9F%A5%E8%AF%A2"><span class="toc-number">36.1.</span> <span class="toc-text">去md5网站进行查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%941-12"><span class="toc-number">37.</span> <span class="toc-text">应急响应1-12</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/php/" title="php"><img src="/img/backgrounds/bg-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="php"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/php/" title="php">php</a><time datetime="2026-03-22T03:14:48.000Z" title="发表于 2026-03-22 11:14:48">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img src="/img/backgrounds/bg-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应">应急响应</a><time datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-22T00:38:10.000Z" title="发表于 2026-03-22 08:38:10">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-21T15:00:08.000Z" title="发表于 2026-03-21 23:00:08">2026-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"><img src="/img/backgrounds/bg-04.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"/></a><div class="content"><a class="title" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP">第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP</a><time datetime="2026-03-21T14:58:25.000Z" title="发表于 2026-03-21 22:58:25">2026-03-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By xuan23</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

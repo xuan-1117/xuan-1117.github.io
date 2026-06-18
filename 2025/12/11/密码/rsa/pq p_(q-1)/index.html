@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>pq p_(q-1) | XUAN Blog</title><meta name="author" content="xuan23"><meta name="copyright" content="xuan23"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1234567891011121314151617181920212223242526272829from Crypto.Util.number import bytes_to_long,inverse,getPrimefrom flag import flagm &#x3D; bytes_to_long(flag)p &#x3D; getPrime(1024)q &#x3D; getPrime(1024)n &#x3D; p*qpri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pq p_(q-1)">
+<meta property="og:url" content="https://xuan-1117.github.io/2025/12/11/%E5%AF%86%E7%A0%81/rsa/pq%20p_(q-1)/index.html">
+<meta property="og:site_name" content="XUAN Blog">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829from Crypto.Util.number import bytes_to_long,inverse,getPrimefrom flag import flagm &#x3D; bytes_to_long(flag)p &#x3D; getPrime(1024)q &#x3D; getPrime(1024)n &#x3D; p*qpri">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuan-1117.github.io/img/backgrounds/bg-05.png">
+<meta property="article:published_time" content="2025-12-11T07:33:22.000Z">
+<meta property="article:modified_time" content="2026-06-06T14:26:49.926Z">
+<meta property="article:author" content="xuan23">
+<meta property="article:tag" content="rsa">
+<meta property="article:tag" content="密码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuan-1117.github.io/img/backgrounds/bg-05.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "pq p_(q-1)",
+  "url": "https://xuan-1117.github.io/2025/12/11/%E5%AF%86%E7%A0%81/rsa/pq%20p_(q-1)/",
+  "image": "https://xuan-1117.github.io/img/backgrounds/bg-05.png",
+  "datePublished": "2025-12-11T07:33:22.000Z",
+  "dateModified": "2026-06-06T14:26:49.926Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "xuan23",
+      "url": "https://xuan-1117.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xuan-1117.github.io/2025/12/11/%E5%AF%86%E7%A0%81/rsa/pq%20p_(q-1)/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pq p_(q-1)',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/backgrounds/bg-06.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/backgrounds/bg-05.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">XUAN Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">pq p_(q-1)</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">pq p_(q-1)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-11T07:33:22.000Z" title="发表于 2025-12-11 15:33:22">2025-12-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-06T14:26:49.926Z" title="更新于 2026-06-06 22:26:49">2026-06-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AF%86%E7%A0%81/">密码</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import bytes_to_long,inverse,getPrime</span><br><span class="line">from flag import flag</span><br><span class="line"></span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line"></span><br><span class="line">p = getPrime(1024)</span><br><span class="line">q = getPrime(1024)</span><br><span class="line">n = p*q</span><br><span class="line">print(n)</span><br><span class="line">e = 65537</span><br><span class="line"></span><br><span class="line">c = pow(m,e,n)</span><br><span class="line"></span><br><span class="line">pq = p*(q-1)</span><br><span class="line">qp = q*(p-1)</span><br><span class="line"></span><br><span class="line">print(&quot;c=&quot;,c)</span><br><span class="line">print(&quot;n=&quot;,n)</span><br><span class="line">print(&quot;pq=&quot;,pq)</span><br><span class="line">print(&quot;qp=&quot;,qp)</span><br><span class="line"></span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">c= 8722269075970644434253339592758512788160408912707387632591552130175707843950684315083250494010055435391879036285103810263591951437829414438640307561645721347859659807138051841516634704123100270651976676182059252251162982609391666023674158274992400910869692389001622774140191223807887675081808561012755545464977015973615407965906513878979919700065923364884766974187303774330319143647840846354404070430118235352622445115153298578370521811697710289716188726587743282814946239856766713516166990341116198180068191759095913957606379780234116317390622824096667107736103270907349927467971817639795094030622157581511033950777</span><br><span class="line">n= 10466186506773626671397261081802640650185744558208505628349249045496105597268556020207175016523119333667851114848452038431498926527983706092607207796937431312520131882751891731564121558651246025754915145600686076505962750195353958781726515647847167067621799990588328894365930423844435964506372428647802381074584935050067254029262890188260006596141011807724688556673520261743199388391094490191001701011230322653422314758778116196105077883955436582364267530633358016652912054880813710531145973799193443828969535902856467548523653920307742364119002349899553478815101092655897400295925170383678499125295006364960124859003</span><br><span class="line">pq= 10466186506773626671397261081802640650185744558208505628349249045496105597268556020207175016523119333667851114848452038431498926527983706092607207796937431312520131882751891731564121558651246025754915145600686076505962750195353958781726515647847167067621799990588328894365930423844435964506372428647802381074488896197029704465200125337817646702009123916866455067019234171839614862660036737875747177391796376553159880972782837853473250804807544086701088829096838316550146794766718580877976153967582795248676367265069623900208276878140709691073369415161936376086988069213820933152601453587292943483693378833664901178324</span><br><span class="line">qp= 10466186506773626671397261081802640650185744558208505628349249045496105597268556020207175016523119333667851114848452038431498926527983706092607207796937431312520131882751891731564121558651246025754915145600686076505962750195353958781726515647847167067621799990588328894365930423844435964506372428647802381074475956379708898904933143429835002718457573266164923043251954374464149976302585916538814746811455883837138715445492053610047383292461097590195481556557381952895539341802954749542143253491617052100969586396996063822508764438280468492894012685918249843558593322831683872737943676955669923498182824352081785243246</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io">xuan23</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xuan-1117.github.io/2025/12/11/%E5%AF%86%E7%A0%81/rsa/pq%20p_(q-1)/">https://xuan-1117.github.io/2025/12/11/%E5%AF%86%E7%A0%81/rsa/pq%20p_(q-1)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xuan-1117.github.io" target="_blank">XUAN Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AF%86%E7%A0%81/">密码</a><a class="post-meta__tags" href="/tags/rsa/">rsa</a></div><div class="post-share"><div class="social-share" data-image="/img/backgrounds/bg-05.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/(p+q)_2/" title="(p+q)_2"><img class="cover" src="/img/backgrounds/bg-22.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">(p+q)_2</div></div><div class="info-2"><div class="info-item-1">12345678910111213141516171819import libnumfrom Crypto.Util import numberfrom secret import flagsize = 256e = 65537p = number.getPrime(size)q = number.getPrime(size)avg = (p+q)/2n = p*qm = libnum.s2n(flag)c = pow(m, e, n)print(&#x27;n = %d&#x27; % n)print(&#x27;avg = %d&#x27; % avg)print(&#x27;c = %d&#x27; % c)    123n = 5700102857084805454304483466349768960970728516788155745115335016563400814300152521175777999545445613444815936222559357974566843756936687078467221979584601avg = 756358929135897...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/%E8%BD%AC%E8%BD%AE/" title="转轮"><img class="cover" src="/img/backgrounds/bg-07.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">转轮</div></div><div class="info-2"><div class="info-item-1">12345678910111213141516171:  &lt; ZWAXJGDLUBVIQHKYPNTCRMOSFE &lt;2:  &lt; KPBELNACZDTRXMJQOYHGVSFUWI &lt;3:  &lt; BDMAIZVRNSJUWFHTEQGYXPLOCK &lt;4:  &lt; RPLNDVHGFCUKTEBSXQYIZMJWAO &lt;5:  &lt; IHFRLABEUOTSGJVDKCPMNZQWXY &lt;6:  &lt; AMKGHIWPNYCJBFZDRUSLOQXVET &lt;7:  &lt; GWTHSPYBXIZULVKMRAFDCEONJQ &lt;8:  &lt; NOZUTWDCVRJLXKISEFAPMYGHBQ &lt;9:  &lt; XPLTDSRFHENYVUBMCQWAOIKZGJ &lt;10: &lt; UDNAJFBOWTGVRSCZQKELMXYIHP &lt;11： &lt; MNBVCXZQWERTPOIUYALSKDJFHG &lt;12： &lt; LVNCMXZPQOWEIURYTASBKJD...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/e=2/" title="e&#x3D;2"><img class="cover" src="/img/backgrounds/bg-23.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">e&#x3D;2</div></div><div class="info-2"><div class="info-item-1">12e=2c=9217979941366220275377875095861710925207028551771520610387238734819759256223080175603032167658086669886661302962985046348865181740591251321966682848536331583243529    12345678910111213141516171819202122232425262728import gmpy2from Crypto.Util.number import long_to_bytes# 给定的密文c = 9217979941366220275377875095861710925207028551771520610387238734819759256223080175603032167658086669886661302962985046348865181740591251321966682848536331583243529# 对c开平方m_int, is_square = gmpy2.iroot(c, 2)if ...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/e==2/" title="e&#x3D;&#x3D;2"><img class="cover" src="/img/backgrounds/bg-02.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">e&#x3D;&#x3D;2</div></div><div class="info-2"><div class="info-item-1">1234567891011121314151617181920212223#!/usr/bin/python#coding:utf-8import codecs,binasciiimport gmpy2,libnumn=87924348264132406875276140514499937145050893665602592992418171647042491658461p=275127860351348928173285174381581152299q=319576316814478949870590164193048041239e=2c=int(&#x27;39DE036DE3132757E819F769EAD64BB487EE3F47E67843AFB73748FD9E979BE0&#x27;,16)mp=pow(c,(p+1)/4,p)mq=pow(c,(q+1)/4,q)yp=gmpy2.invert(p,q)yq=gmpy2.invert(q,p)r=(yp*p*mq+yq*q*mp)%nrr=n-rs=(yp*p*mq-yq*q*mp)%nss=n-sdef sss...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/%E8%BD%AC%E8%BD%AE/" title="转轮"><img class="cover" src="/img/backgrounds/bg-07.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">转轮</div></div><div class="info-2"><div class="info-item-1">12345678910111213141516171:  &lt; ZWAXJGDLUBVIQHKYPNTCRMOSFE &lt;2:  &lt; KPBELNACZDTRXMJQOYHGVSFUWI &lt;3:  &lt; BDMAIZVRNSJUWFHTEQGYXPLOCK &lt;4:  &lt; RPLNDVHGFCUKTEBSXQYIZMJWAO &lt;5:  &lt; IHFRLABEUOTSGJVDKCPMNZQWXY &lt;6:  &lt; AMKGHIWPNYCJBFZDRUSLOQXVET &lt;7:  &lt; GWTHSPYBXIZULVKMRAFDCEONJQ &lt;8:  &lt; NOZUTWDCVRJLXKISEFAPMYGHBQ &lt;9:  &lt; XPLTDSRFHENYVUBMCQWAOIKZGJ &lt;10: &lt; UDNAJFBOWTGVRSCZQKELMXYIHP &lt;11： &lt; MNBVCXZQWERTPOIUYALSKDJFHG &lt;12： &lt; LVNCMXZPQOWEIURYTASBKJD...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/e=3/" title="e&#x3D;3"><img class="cover" src="/img/backgrounds/bg-01.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">e&#x3D;3</div></div><div class="info-2"><div class="info-item-1">123456789101112131415161718192021#!/usr/bin/python#coding:utf-8import codecsimport gmpy2,binascii,libnum,timen=0xB0BEE5E3E9E5A7E8D00B493355C618FC8C7D7D03B82E409951C182F398DEE3104580E7BA70D383AE5311475656E8A964D380CB157F48C951ADFA65DB0B122CA40E42FA709189B719A4F0D746E2F6069BAF11CEBD650F14B93C977352FD13B1EEA6D6E1DA775502ABFF89D3A8B3615FD0DB49B88A976BC20568489284E181F6F11E270891C8EF80017BAD238E363039A458470F1749101BC29949D3A4F4038D463938851579C7525A69984F15B5667F34209B70EB261136947FA123E549DFFF00...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" title="共模攻击"><img class="cover" src="/img/backgrounds/bg-06.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">共模攻击</div></div><div class="info-2"><div class="info-item-1">共模攻击变形 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152from Crypto.Util.number import *from secret import flagimport randomimport gmpy2def generate_Key1(ebits):    e = [getPrime(ebits) for _ in range(4)]    return edef encrypt1(message,e):    n = gmpy2.next_prime(bytes_to_long(message) &lt;&lt; 300)    m = getPrime(256)    c = [int(pow(m,e[i],n)) for i in range(len(e))]    return cdef generate_Key2(nbits):    p = getPrime(nbits // 2)    q = getPr...</div></div></div></a><a class="pagination-related" href="/2025/12/11/%E5%AF%86%E7%A0%81/rsa/p+q,(p+1)(q+1)/" title="p+q,(p+1)(q+1)"><img class="cover" src="/img/backgrounds/bg-03.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="info-item-2">p+q,(p+1)(q+1)</div></div><div class="info-2"><div class="info-item-1">12345p+q:0x1232fecb92adead91613e7d9ae5e36fe6bb765317d6ed38ad890b4073539a6231a6620584cea5730b5af83a3e80cf30141282c97be4400e33307573af6b25e2ea(p+1)(q+1) : 0x5248becef1d925d45705a7302700d6a0ffe5877fddf9451a9c1181c4d82365806085fd86fbaab08b6fc66a967b2566d743c626547203b34ea3fdb1bc06dd3bb765fd8b919e3bd2cb15bc175c9498f9d9a0e216c2dde64d81255fa4c05a1ee619fc1fc505285a239e7bc655ec6605d9693078b800ee80931a7a0c84f33c851740e : 0xe6b1bee47bd63f615c7d0a43c529d219d : 0x2dde7fbaed477f6d62838d55b0d0964868cf6efb2c...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xuan23</div><div class="author-info-description">一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/php/" title="php"><img src="/img/backgrounds/bg-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="php"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/php/" title="php">php</a><time datetime="2026-03-22T03:14:48.000Z" title="发表于 2026-03-22 11:14:48">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img src="/img/backgrounds/bg-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应">应急响应</a><time datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-22T00:38:10.000Z" title="发表于 2026-03-22 08:38:10">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-21T15:00:08.000Z" title="发表于 2026-03-21 23:00:08">2026-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"><img src="/img/backgrounds/bg-04.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"/></a><div class="content"><a class="title" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP">第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP</a><time datetime="2026-03-21T14:58:25.000Z" title="发表于 2026-03-21 22:58:25">2026-03-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By xuan23</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
