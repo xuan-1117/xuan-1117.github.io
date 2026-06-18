@@ -1,0 +1,13 @@
+#web_bg {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -999 !important;
+  background-attachment: fixed !important;
+  background-position: center top !important;
+  background-repeat: repeat !important;
+  background-size: auto !important;
+}
+
+#web_bg.bg-animation {
+  animation: none !important;
+}
